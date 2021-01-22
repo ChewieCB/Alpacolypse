@@ -6,7 +6,8 @@ extends CameraState
 onready var tween := $Tween
 
 export var fov := 60.0
-export var offset_camera := Vector3(0, -0.8, 0)
+export var charge_translation := Vector3(0, 2, 2)
+export var charge_rotation := Vector3(-10, 0, 0)
 
 
 func unhandled_input(event: InputEvent):
@@ -29,7 +30,9 @@ func process(delta: float):
 
 
 func enter(msg: Dictionary = {}):
-	camera_rig.spring_arm.translation = camera_rig._position_start + offset_camera
+	# SpringArm sets height, CameraTarget sets angle
+	camera_rig.spring_arm.translation = charge_translation
+	camera_rig.spring_arm.rotation_degrees = charge_rotation
 	tween.interpolate_property(
 		camera_rig.camera, 'fov', camera_rig.camera.fov, fov, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT
 	)
@@ -38,6 +41,7 @@ func enter(msg: Dictionary = {}):
 
 func exit():
 	camera_rig.spring_arm.translation = camera_rig.spring_arm._position_start
+	camera_rig.spring_arm.rotation_degrees = camera_rig._rotation_start
 	tween.interpolate_property(
 		camera_rig.camera,
 		'fov',

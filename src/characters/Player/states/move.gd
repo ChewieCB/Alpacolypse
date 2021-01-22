@@ -10,6 +10,8 @@ export var gravity = -80.0
 export var jump_impulse = 25
 export (float, 0.1, 20.0, 0.1) var rotation_speed_factor := 10.0
 
+export (int, 0, 200) var inertia = 0
+
 var velocity := Vector3.ZERO
 
 
@@ -40,7 +42,9 @@ func physics_process(delta: float):
 	
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)
-	velocity = player.move_and_slide(velocity, Vector3.UP)
+	velocity = player.move_and_slide(velocity, Vector3.UP, false, 4, 0.785398, false)
+	
+	handle_rigid_collisions(inertia)
 
 
 func enter(msg: Dictionary = {}):
@@ -69,3 +73,9 @@ func calculate_velocity(velocity_current: Vector3, move_direction: Vector3, delt
 	
 	return velocity_new
 
+
+func handle_rigid_collisions(inertia):
+	for index in player.get_slide_count():
+		var collision = player.get_slide_collision(index)
+		if collision.collider is RigidBody:
+			collision.collider.apply_central_impulse(-collision.normal * inertia)
