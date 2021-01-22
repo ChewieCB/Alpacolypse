@@ -1,31 +1,13 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/characters/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/tests/Test0_Basic/pit_test.gd" type="Script" id=2]
 
-[sub_resource type="CubeMesh" id=1]
-size = Vector3( 100, 1, 100 )
-
-[sub_resource type="OpenSimplexNoise" id=2]
-seed = 1
-octaves = 4
-period = 89.9
-
-[sub_resource type="NoiseTexture" id=3]
-seamless = true
-as_normalmap = true
-noise = SubResource( 2 )
-
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=28]
 albedo_color = Color( 0.643137, 0.843137, 0.584314, 1 )
-depth_enabled = true
-depth_scale = 1.0
-depth_deep_parallax = false
-depth_flip_tangent = false
-depth_flip_binormal = false
-depth_texture = SubResource( 3 )
 
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 50, 0.5, 50 )
+[sub_resource type="SpatialMaterial" id=29]
+albedo_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="CubeMesh" id=22]
 
@@ -98,21 +80,46 @@ size = Vector3( 100, 25, 1 )
 [sub_resource type="BoxShape" id=21]
 extents = Vector3( 50, 12.5, 0.5 )
 
+[sub_resource type="CylinderShape" id=26]
+radius = 15.0
+height = 50.0
+
+[sub_resource type="CylinderShape" id=27]
+radius = 15.0
+height = 1.0
+
+[sub_resource type="SpatialMaterial" id=30]
+albedo_color = Color( 0, 0, 0, 1 )
+
 [node name="TestLevel" type="Spatial"]
 
-[node name="Floor" type="StaticBody" parent="."]
-collision_mask = 6
+[node name="Floor" type="CSGBox" parent="."]
+use_collision = true
+collision_mask = 15
+invert_faces = true
+width = 100.0
+height = 0.5
+depth = 100.0
+material = SubResource( 28 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Floor"]
-mesh = SubResource( 1 )
-material/0 = SubResource( 4 )
+[node name="PitCutout" type="CSGCylinder" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20 )
+operation = 2
+radius = 15.0
+height = 2.0
+sides = 32
+material = SubResource( 29 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Floor"]
-shape = SubResource( 5 )
+[node name="PitCutout2" type="CSGCylinder" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20 )
+operation = 2
+radius = 15.0
+height = 2.0
+sides = 32
+material = SubResource( 29 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, 1, 0 )
-collision_mask = 5
+transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, 0, 0 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.0848403, -0.960201, 0.266112, 0.291661, 0.279309, 0.914833, -0.952752, -1.95147e-07, 0.30375, 98.5496, 108.405, 0 )
@@ -121,8 +128,8 @@ shadow_enabled = true
 
 [node name="ChargeableBoxes" type="Node" parent="."]
 
-[node name="RigidBody" type="RigidBody" parent="ChargeableBoxes"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.48452, 11, 0 )
+[node name="Box1" type="RigidBody" parent="ChargeableBoxes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3103, 11, 0 )
 collision_layer = 4
 collision_mask = 7
 mass = 500.0
@@ -130,11 +137,107 @@ contact_monitor = true
 linear_damp = 1.0
 angular_damp = 5.0
 
-[node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/RigidBody"]
+[node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box1"]
 mesh = SubResource( 22 )
 material/0 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box1"]
+shape = SubResource( 23 )
+
+[node name="Box5" type="RigidBody" parent="ChargeableBoxes"]
+transform = Transform( 0.844496, 0, -0.535562, 0, 1, 0, 0.535562, 0, 0.844496, -15.2828, 2.05086, -12.2198 )
+collision_layer = 4
+collision_mask = 7
+mass = 500.0
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 5.0
+
+[node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box5"]
+mesh = SubResource( 22 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box5"]
+shape = SubResource( 23 )
+
+[node name="Box6" type="RigidBody" parent="ChargeableBoxes"]
+transform = Transform( 0.0936044, 0, -0.995609, 0, 1, 0, 0.995609, 0, 0.0936044, -10.117, 2.05086, -16.1695 )
+collision_layer = 4
+collision_mask = 7
+mass = 500.0
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 5.0
+
+[node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box6"]
+mesh = SubResource( 22 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box6"]
+shape = SubResource( 23 )
+
+[node name="Box7" type="RigidBody" parent="ChargeableBoxes"]
+transform = Transform( -0.519743, 0, -0.854323, 0, 1, 0, 0.854323, 0, -0.519743, 1.52833, 1.68415, -12.0175 )
+collision_layer = 4
+collision_mask = 7
+mass = 500.0
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 5.0
+
+[node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box7"]
+mesh = SubResource( 22 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box7"]
+shape = SubResource( 23 )
+
+[node name="Box2" type="RigidBody" parent="ChargeableBoxes"]
+transform = Transform( 0.666506, 0, -0.745499, 0, 1, 0, 0.745499, 0, 0.666506, 12.9158, 11, -1.50492 )
+collision_layer = 4
+collision_mask = 7
+mass = 500.0
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 5.0
+
+[node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box2"]
+mesh = SubResource( 22 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box2"]
+shape = SubResource( 23 )
+
+[node name="Box3" type="RigidBody" parent="ChargeableBoxes"]
+transform = Transform( -0.49508, 0, -0.868848, 0, 1, 0, 0.868848, 0, -0.49508, 18.4836, 11, -7.59563 )
+collision_layer = 4
+collision_mask = 7
+mass = 500.0
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 5.0
+
+[node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box3"]
+mesh = SubResource( 22 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box3"]
+shape = SubResource( 23 )
+
+[node name="Box4" type="RigidBody" parent="ChargeableBoxes"]
+transform = Transform( -0.952879, 0, -0.303351, 0, 1, 0, 0.303351, 0, -0.952879, 18.4836, 13.1247, -7.59563 )
+collision_layer = 4
+collision_mask = 7
+mass = 500.0
+contact_monitor = true
+linear_damp = 1.0
+angular_damp = 5.0
+
+[node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box4"]
+mesh = SubResource( 22 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box4"]
 shape = SubResource( 23 )
 
 [node name="Cylinders" type="Node" parent="."]
@@ -335,6 +438,7 @@ shape = SubResource( 19 )
 
 [node name="Wall1" type="StaticBody" parent="Bounds"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, -50 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Bounds/Wall1"]
 mesh = SubResource( 20 )
@@ -345,6 +449,7 @@ shape = SubResource( 21 )
 
 [node name="Wall2" type="StaticBody" parent="Bounds"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 50 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Bounds/Wall2"]
 mesh = SubResource( 20 )
@@ -355,6 +460,7 @@ shape = SubResource( 21 )
 
 [node name="Wall3" type="StaticBody" parent="Bounds"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -50, 13, 1 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Bounds/Wall3"]
 mesh = SubResource( 20 )
@@ -365,6 +471,7 @@ shape = SubResource( 21 )
 
 [node name="Wall4" type="StaticBody" parent="Bounds"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 50, 13, 1 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Bounds/Wall4"]
 mesh = SubResource( 20 )
@@ -372,3 +479,70 @@ material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Bounds/Wall4"]
 shape = SubResource( 21 )
+
+[node name="PIT" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20 )
+collision_layer = 8
+collision_mask = 0
+
+[node name="PlayerBlocker" type="CollisionShape" parent="PIT"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00649643, 0.0480137, -0.0564003 )
+shape = SubResource( 26 )
+
+[node name="GravityWell" type="Area" parent="PIT"]
+
+[node name="PlayerBlocker2" type="CollisionShape" parent="PIT/GravityWell"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00649643, 0.0480137, -0.0564003 )
+shape = SubResource( 26 )
+
+[node name="BodyFrier" type="Area" parent="PIT"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.1188, 0 )
+collision_layer = 8
+collision_mask = 13
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="PIT/BodyFrier"]
+shape = SubResource( 27 )
+
+[node name="PitRim" type="CSGCombiner" parent="PIT"]
+operation = 2
+use_collision = true
+collision_mask = 15
+
+[node name="Rim" type="CSGCylinder" parent="PIT/PitRim"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+operation = 2
+radius = 16.0
+sides = 32
+
+[node name="Hole" type="CSGCylinder" parent="PIT/PitRim"]
+operation = 2
+radius = 15.0
+height = 4.0
+sides = 32
+
+[node name="PitHole" type="CSGCombiner" parent="PIT"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.55486, 0 )
+operation = 2
+use_collision = true
+collision_mask = 15
+
+[node name="Rim" type="CSGCylinder" parent="PIT/PitHole"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6, 0 )
+operation = 2
+radius = 16.0
+height = 15.0
+sides = 32
+material = SubResource( 30 )
+
+[node name="Inner" type="CSGCylinder" parent="PIT/PitHole"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.369781, 0 )
+operation = 2
+radius = 15.0
+height = 15.0
+sides = 32
+material = SubResource( 30 )
+
+[node name="StaticBody" type="StaticBody" parent="PIT"]
+[connection signal="body_entered" from="PIT/GravityWell" to="PIT/BodyFrier" method="_on_GravityWell_body_entered"]
+[connection signal="body_entered" from="PIT/BodyFrier" to="PIT/BodyFrier" method="_on_BodyFrier_body_entered"]
