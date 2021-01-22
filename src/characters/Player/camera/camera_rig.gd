@@ -11,6 +11,7 @@ onready var spring_arm: SpringArm = $SpringArm
 onready var camera_target: Position3D = $SpringArm/CameraTarget
 onready var aim_ray: RayCast = $InterpolatedCamera/AimRay
 onready var aim_target: Sprite3D = $AimTarget
+onready var state_machine: StateMachine = $StateMachine
 
 var player: KinematicBody
 

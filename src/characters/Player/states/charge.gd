@@ -7,18 +7,15 @@ var jump_impulse = 25
 var horizontal_impulse = 25
 var rotation_speed_factor := 6.0
 
+export var charge_inertia = 800
+
 var velocity := Vector3.ZERO
 
 
 func unhandled_input(event: InputEvent):
 	if event.is_action_pressed("p1_jump"):
-		var charge_jump_impulse = Vector3(
-			horizontal_impulse,
-			jump_impulse,
-			horizontal_impulse
-		)
-		
-		_state_machine.transition_to("Move/Air", {velocity = velocity, charge_jump_impulse = charge_jump_impulse})
+		# TODO - create a charge jump state instead of trying to handle this in one air state
+		_state_machine.transition_to("Move/Air", {velocity = velocity, jump_impulse = jump_impulse})
 	elif event.is_action_released("p1_charge"):
 		_state_machine.transition_to("Move/Run")
 
@@ -44,6 +41,8 @@ func physics_process(delta: float):
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)
 	velocity = player.move_and_slide(velocity, Vector3.UP)
+	
+	handle_rigid_collisions(charge_inertia)
 
 
 func enter(msg: Dictionary = {}):
@@ -75,6 +74,24 @@ func calculate_velocity(velocity_current: Vector3, move_direction: Vector3, delt
 	return velocity_new
 
 
-func _on_Player_input_event(camera, event, click_position, click_normal, shape_idx):
-	print("")
-	pass # Replace with function body.
+func handle_rigid_collisions(inertia):
+	for index in player.get_slide_count():
+		var collision = player.get_slide_collision(index)
+		if collision.collider is RigidBody:
+			collision.collider.apply_central_impulse(- collision.normal * inertia)
+
+
+func _on_ChargeHitBox_body_entered(body):
+	if body is RigidBody and _state_machine.state == self:
+		# TODO - Don't let the player juggle things indefinitely, check that the 
+		# body is on the floor before allowing them to charge it
+		#
+		#
+		# Yeet the body
+		var force_direction = velocity.normalized()
+		var force_impulse = force_direction * 10
+		force_impulse.y += 20
+		body.set_axis_velocity(force_impulse)
+		# Kick the player out of the charge state
+		_state_machine.transition_to("Move/Run")
+		player.camera.state_machine.transition_to("Camera/Default")

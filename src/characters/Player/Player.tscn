@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/characters/Player/player.gd" type="Script" id=1]
 [ext_resource path="res://src/characters/StateMachine/state_machine.gd" type="Script" id=2]
@@ -16,6 +16,9 @@ radius = 0.5
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.5
 
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.607016, 1, 1 )
+
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("StateLabel")
 
@@ -32,6 +35,8 @@ material = SubResource( 4 )
 size = Vector2( 2, 0.5 )
 
 [node name="Player" type="KinematicBody"]
+collision_layer = 2
+collision_mask = 7
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -42,6 +47,15 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1, 0 )
 shape = SubResource( 2 )
+
+[node name="ChargeHitBox" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.941214 )
+collision_layer = 2
+collision_mask = 6
+
+[node name="CollisionShape" type="CollisionShape" parent="ChargeHitBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1, 0.539781 )
+shape = SubResource( 6 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -86,4 +100,4 @@ uppercase = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.67746, 0 )
 mesh = SubResource( 5 )
 material/0 = null
-[connection signal="input_event" from="." to="StateMachine/Move/Charge" method="_on_Player_input_event"]
+[connection signal="body_entered" from="ChargeHitBox" to="StateMachine/Move/Charge" method="_on_ChargeHitBox_body_entered"]

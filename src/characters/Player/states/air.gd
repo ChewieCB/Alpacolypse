@@ -12,11 +12,10 @@ func physics_process(delta: float):
 
 
 func enter(msg: Dictionary = {}):
+	# Store the initial velocity
 	match msg:
 		{"velocity": var v, "jump_impulse": var ji}:
 			_parent.velocity = v + Vector3(0, ji, 0)
-		{"velocity": var v, "charge_jump_impulse": var ji}:
-			_parent.velocity = v + Vector3(ji.x, ji.y, ji.z)
 	# skin.transition_to
 	_parent.enter()
 
