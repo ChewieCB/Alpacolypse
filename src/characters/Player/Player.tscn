@@ -63,6 +63,7 @@ script = ExtResource( 6 )
 script = ExtResource( 8 )
 
 [node name="CameraRig" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="StateLabel" type="Viewport" parent="."]
 size = Vector2( 300, 50 )
