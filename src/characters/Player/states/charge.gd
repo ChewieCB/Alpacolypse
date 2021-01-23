@@ -3,22 +3,23 @@ extends PlayerState
 var max_speed = 24.0
 var move_speed = 20.0
 var gravity = -70.0
-var jump_impulse = 25
-var horizontal_impulse = 25
+var jump_impulse = 80
 var rotation_speed_factor := 6.0
+
+onready var tween := $Tween
+
+export var charge_inertia = 800
 
 var velocity := Vector3.ZERO
 
 
 func unhandled_input(event: InputEvent):
 	if event.is_action_pressed("p1_jump"):
-		var charge_jump_impulse = Vector3(
-			horizontal_impulse,
-			jump_impulse,
-			horizontal_impulse
-		)
-		
-		_state_machine.transition_to("Move/Air", {velocity = velocity, charge_jump_impulse = charge_jump_impulse})
+		if Input.is_action_pressed("p1_charge"):
+			# TODO - create a charge jump state instead of trying to handle this in one air state
+			var jump_vector = jump_impulse * velocity.normalized()
+			jump_vector.y += 20
+			_state_machine.transition_to("Move/ChargeJump", {velocity = velocity, jump_impulse = jump_vector})
 	elif event.is_action_released("p1_charge"):
 		_state_machine.transition_to("Move/Run")
 
@@ -44,16 +45,18 @@ func physics_process(delta: float):
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)
 	velocity = player.move_and_slide(velocity, Vector3.UP)
+	
+	handle_rigid_collisions(charge_inertia)
 
 
 func enter(msg: Dictionary = {}):
-	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), -PI/24)
+	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), -PI/12)
 	pass
 #	player.camera.connect("aim_fired", self, "_on_Camera_aim_fired")
 
 
 func exit():
-	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), PI/24)
+	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), PI/12)
 	pass
 #	player.camera.disconnect("aim_fired", self, "_on_Camera_aim_fired")
 
@@ -75,6 +78,32 @@ func calculate_velocity(velocity_current: Vector3, move_direction: Vector3, delt
 	return velocity_new
 
 
-func _on_Player_input_event(camera, event, click_position, click_normal, shape_idx):
-	print("")
-	pass # Replace with function body.
+func handle_rigid_collisions(inertia):
+	for index in player.get_slide_count():
+		var collision = player.get_slide_collision(index)
+		if collision.collider is RigidBody:
+			collision.collider.apply_central_impulse(- collision.normal * inertia)
+
+
+func _on_ChargeHitBox_body_entered(body):
+	var force_direction = velocity.normalized()
+	var force_impulse = force_direction * 10
+	var bounceback_impulse = -force_direction * 4
+	# Chargeable objects
+	if body is RigidBody and _state_machine.state == self:
+		# TODO - Don't let the player juggle things indefinitely, check that the 
+		# body is on the floor before allowing them to charge it
+		#
+		#
+		# Yeet the body
+		force_impulse.y += 20
+		body.set_axis_velocity(force_impulse)
+		# Kick the player out of the charge state
+		_state_machine.transition_to("Move/Run")
+		player.camera.state_machine.transition_to("Camera/Default")
+	
+		# Shove the player away from the body
+		tween.interpolate_property(
+			player, 'translation', player.global_transform.origin, player.global_transform.origin + bounceback_impulse, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT
+		)
+		tween.start()
