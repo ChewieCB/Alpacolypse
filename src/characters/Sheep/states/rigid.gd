@@ -7,7 +7,7 @@ export var gravity = -80.0
 export var jump_impulse = 25
 export (float, 0.1, 20.0, 0.1) var rotation_speed_factor := 10.0
 
-export (float, 0.5, 3.0, 0.1) var exit_threshold := 1.5
+export (float, 0.5, 3.0, 0.1) var exit_threshold := 2.5
 
 export (int, 0, 200) var inertia = 100
 
@@ -16,13 +16,16 @@ var velocity := Vector3.ZERO
 var has_been_hit = false
 
 func physics_process(delta: float):
+	floor_cast.cast_to = Vector3(0, -1, 0)
+	floor_cast.force_raycast_update()
 	if sheep_rigid:
-		if abs(sheep_rigid.linear_velocity.y) < 0.01 and \
-			abs(sheep_rigid.linear_velocity.x) < exit_threshold and \
-			abs(sheep_rigid.linear_velocity.x) < exit_threshold:
-			sheep_rigid.linear_velocity = Vector3.ZERO
-	#		velocity = velocity.linear_interpolate(Vector3.ZERO, 0)
-			_state_machine.transition_to("Move/Idle")
+		if floor_cast.is_colliding():
+			if abs(sheep_rigid.linear_velocity.y) < 0.01 and \
+				abs(sheep_rigid.linear_velocity.x) < exit_threshold and \
+				abs(sheep_rigid.linear_velocity.x) < exit_threshold:
+				_state_machine.transition_to("Move/Idle")
+			else:
+				sheep_rigid.linear_damp = 1.5
 
 
 func enter(msg: Dictionary = {}):
@@ -38,16 +41,19 @@ func enter(msg: Dictionary = {}):
 			sheep_rigid.sleeping = false
 			sheep_rigid.get_node("CollisionShape").disabled = false
 			sheep_rigid.visible = true
+			sheep_rigid.linear_damp = 0.7
 			
 			# Yeet the sheep
-			force_impulse.y += 20
+			force_impulse.y *= 10
 			sheep_rigid.set_axis_velocity(force_impulse)
+			rigid_timer.start()
 	
 	# skin.transition_to
 
 
 func exit():
-	if sheep:
+	rigid_timer.stop()
+	if sheep and sheep_rigid:
 		# Bring the kinematic sheep back to parity with the rigid sheep
 		sheep.global_transform.origin = sheep_rigid.global_transform.origin
 		sheep.rotation_degrees = Vector3.ZERO
@@ -64,3 +70,7 @@ func exit():
 		sheep_rigid.get_node("CollisionShape").disabled = true
 		sheep_rigid.visible = false
 
+
+
+func _on_RigidTimer_timeout():
+	_state_machine.transition_to("Move/Idle")

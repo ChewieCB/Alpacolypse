@@ -8,13 +8,15 @@ var tufts_to_generate
 
 func _ready():
 	randomize()
-	tufts_to_generate = int(rand_range(12, 25))
+	tufts_to_generate = int(rand_range(14, 25))
 	spawn_grass_tufts()
 
 
 func _process(_delta):
 	var num_grass_tufts = get_child_count()
 	if num_grass_tufts == 0:
+		randomize()
+		tufts_to_generate = int(rand_range(14, 25))
 		spawn_grass_tufts()
 
 

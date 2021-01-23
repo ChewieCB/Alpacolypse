@@ -19,7 +19,7 @@ func enter(msg: Dictionary = {}):
 
 
 func exit():
-	_parent.path = []
-	_parent.path_node = 0
+#	_parent.path = []
+#	_parent.path_node = 0
 	# skin.is_moving = false
 	_parent.exit()

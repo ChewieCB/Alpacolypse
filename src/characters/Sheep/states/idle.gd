@@ -18,7 +18,7 @@ func physics_process(delta: float):
 func enter(msg: Dictionary = {}):
 	_parent.velocity = Vector3.ZERO
 	randomize()
-	idle_timer.wait_time = rand_range(1.0, 9.0)
+	idle_timer.wait_time = rand_range(0.5, 7.2)
 	idle_timer.start()
 	# skin.transition_to
 	_parent.enter()

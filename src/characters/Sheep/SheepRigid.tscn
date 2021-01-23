@@ -15,8 +15,10 @@ collision_layer = 8
 collision_mask = 31
 mass = 300.0
 gravity_scale = 2.0
+continuous_cd = true
 contact_monitor = true
 linear_damp = 0.7
+angular_damp = 0.5
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

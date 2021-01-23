@@ -1,14 +1,13 @@
 extends Spatial
 
-var state_machine
-var idle_timer
+var state_machine: StateMachine
+var idle_timer: Timer
 
 
 func _ready():
 	yield(owner, "ready")
 	state_machine = owner.state_machine
-	if owner is Sheep:
-		idle_timer = owner.idle_timer
+	idle_timer = owner.idle_timer
 
 func _process(_delta):
 	if state_machine:
