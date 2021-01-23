@@ -50,13 +50,13 @@ func physics_process(delta: float):
 
 
 func enter(msg: Dictionary = {}):
-	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), -PI/24)
+	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), -PI/12)
 	pass
 #	player.camera.connect("aim_fired", self, "_on_Camera_aim_fired")
 
 
 func exit():
-	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), PI/24)
+	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), PI/12)
 	pass
 #	player.camera.disconnect("aim_fired", self, "_on_Camera_aim_fired")
 
