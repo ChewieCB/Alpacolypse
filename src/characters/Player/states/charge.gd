@@ -6,6 +6,8 @@ var gravity = -70.0
 var jump_impulse = 80
 var rotation_speed_factor := 6.0
 
+onready var tween := $Tween
+
 export var charge_inertia = 800
 
 var velocity := Vector3.ZERO
@@ -84,16 +86,24 @@ func handle_rigid_collisions(inertia):
 
 
 func _on_ChargeHitBox_body_entered(body):
+	var force_direction = velocity.normalized()
+	var force_impulse = force_direction * 10
+	var bounceback_impulse = -force_direction * 4
+	# Chargeable objects
 	if body is RigidBody and _state_machine.state == self:
 		# TODO - Don't let the player juggle things indefinitely, check that the 
 		# body is on the floor before allowing them to charge it
 		#
 		#
 		# Yeet the body
-		var force_direction = velocity.normalized()
-		var force_impulse = force_direction * 10
 		force_impulse.y += 20
 		body.set_axis_velocity(force_impulse)
 		# Kick the player out of the charge state
 		_state_machine.transition_to("Move/Run")
 		player.camera.state_machine.transition_to("Camera/Default")
+	
+		# Shove the player away from the body
+		tween.interpolate_property(
+			player, 'translation', player.global_transform.origin, player.global_transform.origin + bounceback_impulse, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT
+		)
+		tween.start()

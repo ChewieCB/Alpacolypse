@@ -52,7 +52,7 @@ shape = SubResource( 2 )
 [node name="ChargeHitBox" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.941214 )
 collision_layer = 2
-collision_mask = 6
+collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape" parent="ChargeHitBox"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1, 0.539781 )
@@ -76,6 +76,8 @@ script = ExtResource( 6 )
 
 [node name="Charge" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 8 )
+
+[node name="Tween" type="Tween" parent="StateMachine/Move/Charge"]
 
 [node name="ChargeJump" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 10 )
