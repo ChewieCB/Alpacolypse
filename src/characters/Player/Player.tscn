@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/characters/Player/player.gd" type="Script" id=1]
 [ext_resource path="res://src/characters/StateMachine/state_machine.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/characters/Player/states/air.gd" type="Script" id=7]
 [ext_resource path="res://src/characters/Player/states/charge.gd" type="Script" id=8]
 [ext_resource path="res://src/characters/Player/state_label.gd" type="Script" id=9]
+[ext_resource path="res://src/characters/Player/states/charge_jump.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 0.5
@@ -75,6 +76,9 @@ script = ExtResource( 6 )
 
 [node name="Charge" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 8 )
+
+[node name="ChargeJump" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 10 )
 
 [node name="CameraRig" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )

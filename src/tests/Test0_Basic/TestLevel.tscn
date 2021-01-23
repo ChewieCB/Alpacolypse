@@ -3,92 +3,92 @@
 [ext_resource path="res://src/characters/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/tests/Test0_Basic/pit_test.gd" type="Script" id=2]
 
-[sub_resource type="SpatialMaterial" id=28]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.643137, 0.843137, 0.584314, 1 )
 
-[sub_resource type="SpatialMaterial" id=29]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="CubeMesh" id=22]
+[sub_resource type="CubeMesh" id=3]
 
-[sub_resource type="BoxShape" id=23]
+[sub_resource type="BoxShape" id=4]
 
-[sub_resource type="CylinderMesh" id=6]
+[sub_resource type="CylinderMesh" id=5]
 top_radius = 4.0
 bottom_radius = 4.0
 height = 1.0
 
-[sub_resource type="CylinderShape" id=7]
+[sub_resource type="CylinderShape" id=6]
 radius = 4.0
 height = 1.0
 
-[sub_resource type="CylinderMesh" id=8]
+[sub_resource type="CylinderMesh" id=7]
 top_radius = 3.0
 bottom_radius = 3.0
 
-[sub_resource type="CylinderShape" id=9]
+[sub_resource type="CylinderShape" id=8]
 radius = 3.0
 
-[sub_resource type="CylinderMesh" id=10]
+[sub_resource type="CylinderMesh" id=9]
 top_radius = 5.0
 bottom_radius = 5.0
 height = 7.0
 
-[sub_resource type="CylinderShape" id=11]
+[sub_resource type="CylinderShape" id=10]
 radius = 5.0
 height = 7.0
 
-[sub_resource type="CylinderMesh" id=12]
+[sub_resource type="CylinderMesh" id=11]
 top_radius = 10.0
 bottom_radius = 10.0
 height = 10.0
 
-[sub_resource type="CylinderShape" id=13]
+[sub_resource type="CylinderShape" id=12]
 radius = 10.0
 height = 10.0
 
-[sub_resource type="CylinderMesh" id=14]
+[sub_resource type="CylinderMesh" id=13]
 top_radius = 8.0
 bottom_radius = 8.0
 height = 4.0
 
-[sub_resource type="CylinderShape" id=15]
+[sub_resource type="CylinderShape" id=14]
 radius = 8.0
 height = 3.0
 
-[sub_resource type="CylinderMesh" id=16]
+[sub_resource type="CylinderMesh" id=15]
 top_radius = 3.0
 bottom_radius = 3.0
 height = 1.0
 
-[sub_resource type="CylinderShape" id=17]
+[sub_resource type="CylinderShape" id=16]
 radius = 3.0
 height = 1.0
 
-[sub_resource type="CylinderMesh" id=18]
+[sub_resource type="CylinderMesh" id=17]
 top_radius = 2.0
 bottom_radius = 2.0
 height = 9.0
 
-[sub_resource type="CylinderShape" id=19]
+[sub_resource type="CylinderShape" id=18]
 radius = 2.0
 height = 9.0
 
-[sub_resource type="CubeMesh" id=20]
+[sub_resource type="CubeMesh" id=19]
 size = Vector3( 100, 25, 1 )
 
-[sub_resource type="BoxShape" id=21]
+[sub_resource type="BoxShape" id=20]
 extents = Vector3( 50, 12.5, 0.5 )
 
-[sub_resource type="CylinderShape" id=26]
+[sub_resource type="CylinderShape" id=21]
 radius = 15.0
 height = 50.0
 
-[sub_resource type="CylinderShape" id=27]
+[sub_resource type="CylinderShape" id=22]
 radius = 15.0
 height = 1.0
 
-[sub_resource type="SpatialMaterial" id=30]
+[sub_resource type="SpatialMaterial" id=23]
 albedo_color = Color( 0, 0, 0, 1 )
 
 [node name="TestLevel" type="Spatial"]
@@ -100,7 +100,7 @@ invert_faces = true
 width = 100.0
 height = 0.5
 depth = 100.0
-material = SubResource( 28 )
+material = SubResource( 1 )
 
 [node name="PitCutout" type="CSGCylinder" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20 )
@@ -108,7 +108,7 @@ operation = 2
 radius = 15.0
 height = 2.0
 sides = 32
-material = SubResource( 29 )
+material = SubResource( 2 )
 
 [node name="PitCutout2" type="CSGCylinder" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20 )
@@ -116,7 +116,7 @@ operation = 2
 radius = 15.0
 height = 2.0
 sides = 32
-material = SubResource( 29 )
+material = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 0, 0, 0 )
@@ -138,11 +138,11 @@ linear_damp = 1.0
 angular_damp = 5.0
 
 [node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box1"]
-mesh = SubResource( 22 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box1"]
-shape = SubResource( 23 )
+shape = SubResource( 4 )
 
 [node name="Box5" type="RigidBody" parent="ChargeableBoxes"]
 transform = Transform( 0.844496, 0, -0.535562, 0, 1, 0, 0.535562, 0, 0.844496, -15.2828, 2.05086, -12.2198 )
@@ -154,11 +154,11 @@ linear_damp = 1.0
 angular_damp = 5.0
 
 [node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box5"]
-mesh = SubResource( 22 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box5"]
-shape = SubResource( 23 )
+shape = SubResource( 4 )
 
 [node name="Box6" type="RigidBody" parent="ChargeableBoxes"]
 transform = Transform( 0.0936044, 0, -0.995609, 0, 1, 0, 0.995609, 0, 0.0936044, -10.117, 2.05086, -16.1695 )
@@ -170,11 +170,11 @@ linear_damp = 1.0
 angular_damp = 5.0
 
 [node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box6"]
-mesh = SubResource( 22 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box6"]
-shape = SubResource( 23 )
+shape = SubResource( 4 )
 
 [node name="Box7" type="RigidBody" parent="ChargeableBoxes"]
 transform = Transform( -0.519743, 0, -0.854323, 0, 1, 0, 0.854323, 0, -0.519743, 1.52833, 1.68415, -12.0175 )
@@ -186,11 +186,11 @@ linear_damp = 1.0
 angular_damp = 5.0
 
 [node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box7"]
-mesh = SubResource( 22 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box7"]
-shape = SubResource( 23 )
+shape = SubResource( 4 )
 
 [node name="Box2" type="RigidBody" parent="ChargeableBoxes"]
 transform = Transform( 0.666506, 0, -0.745499, 0, 1, 0, 0.745499, 0, 0.666506, 12.9158, 11, -1.50492 )
@@ -202,11 +202,11 @@ linear_damp = 1.0
 angular_damp = 5.0
 
 [node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box2"]
-mesh = SubResource( 22 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box2"]
-shape = SubResource( 23 )
+shape = SubResource( 4 )
 
 [node name="Box3" type="RigidBody" parent="ChargeableBoxes"]
 transform = Transform( -0.49508, 0, -0.868848, 0, 1, 0, 0.868848, 0, -0.49508, 18.4836, 11, -7.59563 )
@@ -218,11 +218,11 @@ linear_damp = 1.0
 angular_damp = 5.0
 
 [node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box3"]
-mesh = SubResource( 22 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box3"]
-shape = SubResource( 23 )
+shape = SubResource( 4 )
 
 [node name="Box4" type="RigidBody" parent="ChargeableBoxes"]
 transform = Transform( -0.952879, 0, -0.303351, 0, 1, 0, 0.303351, 0, -0.952879, 18.4836, 13.1247, -7.59563 )
@@ -234,11 +234,11 @@ linear_damp = 1.0
 angular_damp = 5.0
 
 [node name="MeshInstance" type="MeshInstance" parent="ChargeableBoxes/Box4"]
-mesh = SubResource( 22 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="ChargeableBoxes/Box4"]
-shape = SubResource( 23 )
+shape = SubResource( 4 )
 
 [node name="Cylinders" type="Node" parent="."]
 
@@ -246,193 +246,193 @@ shape = SubResource( 23 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 7 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/Cylinder1"]
-mesh = SubResource( 6 )
+mesh = SubResource( 5 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/Cylinder1"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="Cylinder2" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 11 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/Cylinder2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-mesh = SubResource( 8 )
+mesh = SubResource( 7 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/Cylinder2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 8 )
 
 [node name="Cylinder3" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1, 14 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/Cylinder3"]
-mesh = SubResource( 10 )
+mesh = SubResource( 9 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/Cylinder3"]
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 
 [node name="Cylnder4" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 5, -4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/Cylnder4"]
-mesh = SubResource( 12 )
+mesh = SubResource( 11 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/Cylnder4"]
-shape = SubResource( 13 )
+shape = SubResource( 12 )
 
 [node name="Cylinder5" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 19 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/Cylinder5"]
-mesh = SubResource( 14 )
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/Cylinder5"]
-shape = SubResource( 15 )
+shape = SubResource( 14 )
 
 [node name="Cylinder6" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 1, -21 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/Cylinder6"]
-mesh = SubResource( 14 )
+mesh = SubResource( 13 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/Cylinder6"]
-shape = SubResource( 15 )
+shape = SubResource( 14 )
 
 [node name="LedgeCylinder6" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6, 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/LedgeCylinder6"]
-mesh = SubResource( 16 )
+mesh = SubResource( 15 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/LedgeCylinder6"]
-shape = SubResource( 17 )
+shape = SubResource( 16 )
 
 [node name="LedgeCylinder7" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 7, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/LedgeCylinder7"]
-mesh = SubResource( 16 )
+mesh = SubResource( 15 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/LedgeCylinder7"]
-shape = SubResource( 17 )
+shape = SubResource( 16 )
 
 [node name="LedgeCylinder8" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 8, -4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/LedgeCylinder8"]
-mesh = SubResource( 16 )
+mesh = SubResource( 15 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/LedgeCylinder8"]
-shape = SubResource( 17 )
+shape = SubResource( 16 )
 
 [node name="ColumnCylinder" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, -12 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder2" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -16 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder2"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder2"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder3" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, -23 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder3"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder3"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder4" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 5, -26 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder4"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder4"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder5" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5, -35 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder5"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder5"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder6" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5, -38 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder6"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder6"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder7" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 5, -35 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder7"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder7"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder8" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 5, -29 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder8"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder8"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder9" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 5, -22 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder9"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder9"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="ColumnCylinder10" type="StaticBody" parent="Cylinders"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 5, -14 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Cylinders/ColumnCylinder10"]
-mesh = SubResource( 18 )
+mesh = SubResource( 17 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Cylinders/ColumnCylinder10"]
-shape = SubResource( 19 )
+shape = SubResource( 18 )
 
 [node name="Bounds" type="Node" parent="."]
 
@@ -441,44 +441,44 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, -50 )
 visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Bounds/Wall1"]
-mesh = SubResource( 20 )
+mesh = SubResource( 19 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Bounds/Wall1"]
-shape = SubResource( 21 )
+shape = SubResource( 20 )
 
 [node name="Wall2" type="StaticBody" parent="Bounds"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 50 )
 visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Bounds/Wall2"]
-mesh = SubResource( 20 )
+mesh = SubResource( 19 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Bounds/Wall2"]
-shape = SubResource( 21 )
+shape = SubResource( 20 )
 
 [node name="Wall3" type="StaticBody" parent="Bounds"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -50, 13, 1 )
 visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Bounds/Wall3"]
-mesh = SubResource( 20 )
+mesh = SubResource( 19 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Bounds/Wall3"]
-shape = SubResource( 21 )
+shape = SubResource( 20 )
 
 [node name="Wall4" type="StaticBody" parent="Bounds"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 50, 13, 1 )
 visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Bounds/Wall4"]
-mesh = SubResource( 20 )
+mesh = SubResource( 19 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Bounds/Wall4"]
-shape = SubResource( 21 )
+shape = SubResource( 20 )
 
 [node name="PIT" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20 )
@@ -487,13 +487,13 @@ collision_mask = 0
 
 [node name="PlayerBlocker" type="CollisionShape" parent="PIT"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00649643, 0.0480137, -0.0564003 )
-shape = SubResource( 26 )
+shape = SubResource( 21 )
 
 [node name="GravityWell" type="Area" parent="PIT"]
 
 [node name="PlayerBlocker2" type="CollisionShape" parent="PIT/GravityWell"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00649643, 0.0480137, -0.0564003 )
-shape = SubResource( 26 )
+shape = SubResource( 21 )
 
 [node name="BodyFrier" type="Area" parent="PIT"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.1188, 0 )
@@ -502,7 +502,7 @@ collision_mask = 13
 script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="PIT/BodyFrier"]
-shape = SubResource( 27 )
+shape = SubResource( 22 )
 
 [node name="PitRim" type="CSGCombiner" parent="PIT"]
 operation = 2
@@ -533,7 +533,7 @@ operation = 2
 radius = 16.0
 height = 15.0
 sides = 32
-material = SubResource( 30 )
+material = SubResource( 23 )
 
 [node name="Inner" type="CSGCylinder" parent="PIT/PitHole"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.369781, 0 )
@@ -541,7 +541,7 @@ operation = 2
 radius = 15.0
 height = 15.0
 sides = 32
-material = SubResource( 30 )
+material = SubResource( 23 )
 
 [node name="StaticBody" type="StaticBody" parent="PIT"]
 [connection signal="body_entered" from="PIT/GravityWell" to="PIT/BodyFrier" method="_on_GravityWell_body_entered"]

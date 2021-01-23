@@ -3,8 +3,7 @@ extends PlayerState
 var max_speed = 24.0
 var move_speed = 20.0
 var gravity = -70.0
-var jump_impulse = 25
-var horizontal_impulse = 25
+var jump_impulse = 80
 var rotation_speed_factor := 6.0
 
 export var charge_inertia = 800
@@ -14,8 +13,11 @@ var velocity := Vector3.ZERO
 
 func unhandled_input(event: InputEvent):
 	if event.is_action_pressed("p1_jump"):
-		# TODO - create a charge jump state instead of trying to handle this in one air state
-		_state_machine.transition_to("Move/Air", {velocity = velocity, jump_impulse = jump_impulse})
+		if Input.is_action_pressed("p1_charge"):
+			# TODO - create a charge jump state instead of trying to handle this in one air state
+			var jump_vector = jump_impulse * velocity.normalized()
+			jump_vector.y += 20
+			_state_machine.transition_to("Move/ChargeJump", {velocity = velocity, jump_impulse = jump_vector})
 	elif event.is_action_released("p1_charge"):
 		_state_machine.transition_to("Move/Run")
 

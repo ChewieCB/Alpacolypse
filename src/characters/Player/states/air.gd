@@ -2,6 +2,13 @@ extends PlayerState
 # State for when the player is jumping and falling
 
 
+func unhandled_input(event: InputEvent):
+	if not player.is_on_floor():
+		if event.is_action_pressed("p1_charge"):
+			# TODO - create a charge jump state instead of trying to handle this in one air state
+			_state_machine.transition_to("Move/ChargeJump", {velocity = _parent.velocity, jump_impulse = Vector3(1, 5, 0)})
+
+
 func physics_process(delta: float):
 	_parent.physics_process(delta)
 	
