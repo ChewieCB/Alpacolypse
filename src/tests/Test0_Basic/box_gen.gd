@@ -9,14 +9,14 @@ var boxes_to_generate
 
 func _ready():
 	randomize()
-	boxes_to_generate = int(rand_range(5, 12))
+	boxes_to_generate = int(rand_range(5, 14))
 	generate_boxes()
 
 
 func _process(_delta):
 	if get_child_count() == 0:
 		randomize()
-		boxes_to_generate = int(rand_range(3, 12))
+		boxes_to_generate = int(rand_range(6, 15))
 		generate_boxes()
 
 

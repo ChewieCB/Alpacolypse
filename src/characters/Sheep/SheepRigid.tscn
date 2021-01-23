@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.709804, 0.215686, 0.2, 1 )
+
+[sub_resource type="CapsuleMesh" id=1]
+material = SubResource( 3 )
+radius = 0.5
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.5
+
+[node name="SheepRigid" type="RigidBody"]
+collision_layer = 8
+collision_mask = 31
+mass = 300.0
+gravity_scale = 2.0
+contact_monitor = true
+linear_damp = 0.7
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
