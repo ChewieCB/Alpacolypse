@@ -2,7 +2,8 @@ class_name Sheep
 extends KinematicBody
 # Helper class for the Sheep scene's scripts
 
-onready var skin = $MeshInstance
+onready var skin = $SheepSkin
+onready var rigid_skin = $SheepRigid/SheepSkin
 onready var state_machine: StateMachine = $StateMachine
 onready var nav: Navigation = get_parent()
 onready var player: Player = get_node("../../Player")

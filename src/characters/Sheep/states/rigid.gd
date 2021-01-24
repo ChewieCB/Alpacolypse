@@ -16,15 +16,16 @@ var velocity := Vector3.ZERO
 var has_been_hit = false
 
 func physics_process(delta: float):
-	floor_cast.cast_to = Vector3(0, -1, 0)
-	floor_cast.force_raycast_update()
 	if sheep_rigid:
+		floor_cast.cast_to = Vector3(0, -1, 0)
+		floor_cast.force_raycast_update()
 		if floor_cast.is_colliding():
 			if abs(sheep_rigid.linear_velocity.y) < 0.01 and \
 				abs(sheep_rigid.linear_velocity.x) < exit_threshold and \
 				abs(sheep_rigid.linear_velocity.x) < exit_threshold:
 				_state_machine.transition_to("Move/Idle")
 			else:
+				rigid_timer.start()
 				sheep_rigid.linear_damp = 1.5
 
 
@@ -32,21 +33,22 @@ func enter(msg: Dictionary = {}):
 	match msg:
 		{"impulse": var imp}:
 			# Set the impulse
-			var force_impulse = imp / 10
+			var force_impulse = imp 
 			
 			# Hide/Disable collisions for the kinematic sheep
-			sheep.get_node("MeshInstance").visible = false
+			sheep.skin.visible = false
 			sheep.get_node("CollisionShape").disabled = true
 			# Wake the rigid body version of the sheep
 			sheep_rigid.sleeping = false
 			sheep_rigid.get_node("CollisionShape").disabled = false
 			sheep_rigid.visible = true
-			sheep_rigid.linear_damp = 0.7
+			sheep_rigid.linear_damp = 0.3
 			
 			# Yeet the sheep
-			force_impulse.y *= 10
+			force_impulse.x *= 3
+			force_impulse.z *= 3
+			force_impulse.y *= 1.5
 			sheep_rigid.set_axis_velocity(force_impulse)
-			rigid_timer.start()
 	
 	# skin.transition_to
 
@@ -63,7 +65,7 @@ func exit():
 		sheep_rigid.rotation_degrees = Vector3.ZERO
 		sheep_rigid.rotation_degrees.y = sheep.rotation_degrees.y
 		# Show/Enable collisions for the kinematic sheep
-		sheep.get_node("MeshInstance").visible = true
+		sheep.skin.visible = true
 		sheep.get_node("CollisionShape").disabled = false
 		# Put the rigid body version of the sheep to sleep
 		sheep_rigid.sleeping = true

@@ -17,7 +17,7 @@ func physics_process(delta: float):
 
 func enter(msg: Dictionary = {}):
 	_parent.velocity = Vector3.ZERO
-	# skin.transition_to
+	skin.transition_to(skin.States.IDLE)
 	_parent.enter()
 
 

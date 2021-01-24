@@ -23,9 +23,10 @@ func enter(msg: Dictionary = {}):
 	match msg:
 		{"velocity": var v, "jump_impulse": var ji}:
 			_parent.velocity = v + Vector3(0, ji, 0)
-	# skin.transition_to
+	skin.transition_to(skin.States.JUMP)
 	_parent.enter()
 
 
 func exit():
+	skin.transition_to(skin.States.LAND)
 	_parent.exit()

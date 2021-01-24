@@ -3,6 +3,7 @@ class_name SheepState
 
 var sheep: Sheep
 var skin
+var rigid_skin
 var nav: Navigation
 var player: Player
 var sheep_rigid: RigidBody
@@ -17,6 +18,7 @@ func _ready():
 	yield(owner, "ready")
 	sheep = owner
 	skin = owner.skin
+	rigid_skin = owner.rigid_skin
 	nav = owner.nav
 	player = owner.player
 	sheep_rigid = owner.sheep_rigid

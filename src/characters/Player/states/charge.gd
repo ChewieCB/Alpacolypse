@@ -50,13 +50,12 @@ func physics_process(delta: float):
 
 
 func enter(msg: Dictionary = {}):
-	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), -PI/12)
-	pass
-#	player.camera.connect("aim_fired", self, "_on_Camera_aim_fired")
+#	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), -PI/12)
+	skin.transition_to(skin.States.WALK)
 
 
 func exit():
-	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), PI/12)
+#	skin.transform = skin.transform.rotated(Vector3(1, 0, 0), PI/12)
 	pass
 #	player.camera.disconnect("aim_fired", self, "_on_Camera_aim_fired")
 
@@ -86,7 +85,8 @@ func handle_rigid_collisions(inertia):
 
 
 func _on_ChargeHitBox_body_entered(body):
-	var force_direction = velocity.normalized()
+	# Get the direction the player is facing
+	var force_direction = player.global_transform.origin.normalized()
 	var force_impulse = force_direction * 10
 	force_impulse.y += 20
 	var bounceback_impulse = -force_direction * 4
@@ -107,8 +107,8 @@ func _on_ChargeHitBox_body_entered(body):
 				# Kick the player out of the charge state
 				_state_machine.transition_to("Move/Run")
 				player.camera.state_machine.transition_to("Camera/Default")
-			
 		# Shove the player away from the body
+		skin.transition_to(skin.States.BONK)
 		tween.interpolate_property(
 			player, 'translation', player.global_transform.origin, player.global_transform.origin + bounceback_impulse, 0.5, Tween.TRANS_QUAD, Tween.EASE_OUT
 		)

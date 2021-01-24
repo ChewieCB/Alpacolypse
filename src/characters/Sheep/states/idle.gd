@@ -31,8 +31,10 @@ func exit():
 func _on_IdleTimer_timeout():
 	# Find if there are any grass tufts nearby
 	var grass_tufts = get_tree().get_nodes_in_group("grass_tufts")
-	grass_tufts.sort_custom(self, "sort_closest_to_sheep")
+	grass_tufts.sort_custom(_parent, "sort_closest_to_sheep")
 	var closest_tuft = grass_tufts[0]
+#	var direction_to_tuft = sheep.global_transform.origin.direction_to(closest_tuft.global_transform.origin)
+#	var target_tuft_point = closest_turf - direction_to_tuft
 	if _state_machine.state == self:
 #		if sheep.global_transform.origin.distance_to(closest_tuft.global_transform.origin) < 30:
 		_state_machine.transition_to("Move/Run", {"tuft_pos": closest_tuft.global_transform.origin})

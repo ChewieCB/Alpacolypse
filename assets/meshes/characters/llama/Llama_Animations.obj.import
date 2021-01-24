@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Llama_Animations.obj-27409195c62c738af1de38f3112fe4fa.mesh"
+
+[deps]
+
+files=[ "res://.import/Llama_Animations.obj-27409195c62c738af1de38f3112fe4fa.mesh" ]
+
+source_file="res://assets/meshes/characters/llama/Llama_Animations.obj"
+dest_files=[ "res://.import/Llama_Animations.obj-27409195c62c738af1de38f3112fe4fa.mesh", "res://.import/Llama_Animations.obj-27409195c62c738af1de38f3112fe4fa.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

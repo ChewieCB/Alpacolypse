@@ -47,6 +47,6 @@ func _on_GrazeTimer_timeout():
 	var grass_tufts = get_tree().get_nodes_in_group("grass_tufts")
 	if current_tuft:
 		grass_tufts.erase(current_tuft)
-	grass_tufts.sort_custom(self, "sort_closest_to_sheep")
+	grass_tufts.sort_custom(_parent, "sort_closest_to_sheep")
 	var closest_tuft = grass_tufts[0]
 	_state_machine.transition_to("Move/Run", {"tuft_pos": closest_tuft.global_transform.origin})
