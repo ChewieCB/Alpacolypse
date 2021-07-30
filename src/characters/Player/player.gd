@@ -5,7 +5,7 @@ extends KinematicBody
 # camera and its orientation
 
 onready var camera = $CameraRig
-onready var skin = $MeshInstance
+onready var skin: LlamaSkin = $Llama
 onready var state_machine: StateMachine = $StateMachine
 
 

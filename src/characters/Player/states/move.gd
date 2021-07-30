@@ -36,7 +36,7 @@ func physics_process(delta: float):
 	if move_direction.length() > 1.0:
 		move_direction = move_direction.normalized()
 	move_direction.y = 0
-	# skin.move_direction = move_direction
+	skin.move_direction = move_direction
 	
 	# Rotation
 	if move_direction:

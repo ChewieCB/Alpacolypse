@@ -18,7 +18,7 @@ func physics_process(delta: float):
 
 
 func enter(msg: Dictionary = {}):
-	# skin.transition
+	skin.transition_to(skin.States.WALK)
 	# skin.is_moving = true
 	_parent.enter()
 

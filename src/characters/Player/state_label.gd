@@ -1,12 +1,17 @@
-extends Viewport
+extends Spatial
 
 var state_machine
+var idle_timer
 
 
 func _ready():
 	yield(owner, "ready")
-	state_machine = get_parent().state_machine
+	state_machine = owner.state_machine
+	if owner is Sheep:
+		idle_timer = owner.idle_timer
 
 func _process(_delta):
 	if state_machine:
-		$Label.text = state_machine._state_name
+		$StateLabel/Label.text = state_machine._state_name
+	if idle_timer:
+		$StateLabel/TimerLabel.text = str(idle_timer.time_left)

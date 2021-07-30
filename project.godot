@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/Player/camera/camera_state.gd"
 }, {
+"base": "Spatial",
+"class": "GrassTuft",
+"language": "GDScript",
+"path": "res://src/environment/foliage/Tuft/tuft.gd"
+}, {
+"base": "Spatial",
+"class": "LlamaSkin",
+"language": "GDScript",
+"path": "res://src/characters/Player/llama_skin.gd"
+}, {
 "base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
@@ -28,6 +38,16 @@ _global_script_classes=[ {
 "class": "PlayerState",
 "language": "GDScript",
 "path": "res://src/characters/Player/player_state.gd"
+}, {
+"base": "KinematicBody",
+"class": "Sheep",
+"language": "GDScript",
+"path": "res://src/characters/Sheep/sheep.gd"
+}, {
+"base": "State",
+"class": "SheepState",
+"language": "GDScript",
+"path": "res://src/characters/Sheep/sheep_state.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -42,8 +62,12 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CameraRig": "",
 "CameraState": "",
+"GrassTuft": "",
+"LlamaSkin": "",
 "Player": "",
 "PlayerState": "",
+"Sheep": "",
+"SheepState": "",
 "State": "",
 "StateMachine": ""
 }
@@ -53,6 +77,10 @@ _global_script_class_icons={
 config/name="Alpacolypse"
 run/main_scene="res://src/tests/Test0_Basic/TestLevel.tscn"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "CSGExport" )
 
 [input]
 
@@ -139,7 +167,9 @@ p1_look_down={
 
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Player"
-3d_physics/layer_3="Temp"
+3d_physics/layer_3="Chargeable"
+3d_physics/layer_4="Sheep"
+3d_physics/layer_5="Edible"
 
 [rendering]
 

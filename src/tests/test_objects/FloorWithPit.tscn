@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.643137, 0.843137, 0.584314, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[node name="Floor" type="CSGBox"]
+use_collision = true
+collision_mask = 15
+invert_faces = true
+width = 100.0
+height = 0.5
+depth = 100.0
+material = SubResource( 1 )
+
+[node name="PitCutout" type="CSGCylinder" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20 )
+operation = 2
+radius = 15.0
+height = 2.0
+sides = 32
+material = SubResource( 2 )
+
+[node name="PitCutout2" type="CSGCylinder" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 20 )
+operation = 2
+radius = 15.0
+height = 2.0
+sides = 32
+material = SubResource( 2 )
