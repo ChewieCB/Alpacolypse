@@ -1,0 +1,77 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=23 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "Bonk"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "Charge"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Idle2"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Land"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+auto_advance = true
+
+[resource]
+states/Bonk/node = SubResource( 1 )
+states/Bonk/position = Vector2( 886, 156 )
+states/Charge/node = SubResource( 2 )
+states/Charge/position = Vector2( 703, 156 )
+states/Idle/node = SubResource( 3 )
+states/Idle/position = Vector2( 543, 261 )
+states/Idle2/node = SubResource( 4 )
+states/Idle2/position = Vector2( 543, 345 )
+states/Jump/node = SubResource( 5 )
+states/Jump/position = Vector2( 329, 132 )
+states/Land/node = SubResource( 6 )
+states/Land/position = Vector2( 329, 234 )
+states/Walk/node = SubResource( 7 )
+states/Walk/position = Vector2( 543, 61 )
+transitions = [ "Idle", "Idle2", SubResource( 8 ), "Idle2", "Idle", SubResource( 9 ), "Idle", "Walk", SubResource( 10 ), "Walk", "Idle", SubResource( 11 ), "Walk", "Charge", SubResource( 12 ), "Charge", "Walk", SubResource( 13 ), "Idle", "Charge", SubResource( 14 ), "Charge", "Idle", SubResource( 15 ), "Charge", "Bonk", SubResource( 16 ), "Bonk", "Idle", SubResource( 17 ), "Idle", "Jump", SubResource( 18 ), "Walk", "Jump", SubResource( 19 ), "Charge", "Jump", SubResource( 20 ), "Jump", "Land", SubResource( 21 ), "Land", "Idle", SubResource( 22 ) ]
+start_node = "Idle"
+graph_offset = Vector2( -60, 15.0496 )
