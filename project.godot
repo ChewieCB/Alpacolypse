@@ -12,52 +12,57 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "CameraRig",
 "language": "GDScript",
-"path": "res://src/characters/Player/camera/camera_rig.gd"
+"path": "res://src/OLD/characters/Player/camera/camera_rig.gd"
 }, {
 "base": "State",
 "class": "CameraState",
 "language": "GDScript",
-"path": "res://src/characters/Player/camera/camera_state.gd"
+"path": "res://src/OLD/characters/Player/camera/camera_state.gd"
 }, {
 "base": "Spatial",
 "class": "GrassTuft",
 "language": "GDScript",
-"path": "res://src/environment/foliage/Tuft/tuft.gd"
+"path": "res://src/OLD/environment/foliage/Tuft/tuft.gd"
 }, {
 "base": "Spatial",
 "class": "LlamaSkin",
 "language": "GDScript",
-"path": "res://src/characters/Player/llama_skin.gd"
+"path": "res://src/OLD/characters/Player/llama_skin.gd"
 }, {
-"base": "KinematicBody",
+"base": "Reference",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/characters/Player/player.gd"
+"path": "res://src/OLD/characters/Player/player.gd"
 }, {
 "base": "State",
 "class": "PlayerState",
 "language": "GDScript",
-"path": "res://src/characters/Player/player_state.gd"
+"path": "res://src/OLD/characters/Player/player_state.gd"
 }, {
-"base": "KinematicBody",
+"base": "Reference",
 "class": "Sheep",
 "language": "GDScript",
-"path": "res://src/characters/Sheep/sheep.gd"
+"path": "res://src/OLD/characters/Sheep/sheep.gd"
+}, {
+"base": "Spatial",
+"class": "SheepSkin",
+"language": "GDScript",
+"path": "res://src/OLD/characters/Sheep/sheep_skin.gd"
 }, {
 "base": "State",
 "class": "SheepState",
 "language": "GDScript",
-"path": "res://src/characters/Sheep/sheep_state.gd"
+"path": "res://src/OLD/characters/Sheep/sheep_state.gd"
 }, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://src/characters/StateMachine/state.gd"
+"path": "res://src/player/src/state_machine/state.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://src/characters/StateMachine/state_machine.gd"
+"path": "res://src/player/src/state_machine/state_machine.gd"
 } ]
 _global_script_class_icons={
 "CameraRig": "",
@@ -67,6 +72,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerState": "",
 "Sheep": "",
+"SheepSkin": "",
 "SheepState": "",
 "State": "",
 "StateMachine": ""
@@ -75,8 +81,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Alpacolypse"
-run/main_scene="res://src/tests/Test0_Basic/TestLevel.tscn"
+run/main_scene="res://src/levels/tl_geom_01/TL_Geom_01.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalFlags="*res://src/global/global_flags.gd"
 
 [editor_plugins]
 
@@ -160,6 +170,16 @@ p1_look_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":1.0,"script":null)
+ ]
+}
+reset={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+quit={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
  ]
 }
 

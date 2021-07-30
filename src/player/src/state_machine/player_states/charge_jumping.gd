@@ -4,14 +4,14 @@ extends State
 var max_speed = 25.0
 var move_speed = 30.0
 var gravity = -70.0
-var jump_impulse = 140
+var jump_impulse = 110
 var rotation_speed_factor := 6.0
 
 export var charge_inertia = 800
 
 var velocity := Vector3.ZERO
 
-export var jump_velocity = 30
+export var jump_velocity = 20
 
 
 func enter(msg: Dictionary = {}):
@@ -20,6 +20,8 @@ func enter(msg: Dictionary = {}):
 	_parent.move_speed = move_speed
 	_parent.jump_impulse = jump_impulse
 	_parent.rotation_speed_factor = rotation_speed_factor
+	_parent.velocity.x *= 4
+	_parent.velocity.z *= 4
 	_parent.velocity += Vector3(0, jump_velocity, 0)
 
 

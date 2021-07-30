@@ -34,6 +34,9 @@ func physics_process(delta: float):
 	if Input.is_action_pressed("reset"):
 		GlobalFlags.PLAYER_CONTROLS_ACTIVE = true
 		get_tree().reload_current_scene()
+	elif Input.is_action_pressed("quit"):
+		GlobalFlags.PLAYER_CONTROLS_ACTIVE = true
+		get_tree().quit()
 	
 	if GlobalFlags.PLAYER_CONTROLS_ACTIVE:
 		input_direction = get_input_direction()
