@@ -14,7 +14,7 @@ var velocity := Vector3.ZERO
 export var jump_velocity = 20
 
 
-func enter(msg: Dictionary = {}):
+func enter(_msg: Dictionary = {}):
 	_parent.enter()
 	_parent.max_speed = max_speed
 	_parent.move_speed = move_speed
@@ -25,7 +25,7 @@ func enter(msg: Dictionary = {}):
 	_parent.velocity += Vector3(0, jump_velocity, 0)
 
 
-func unhandled_input(event: InputEvent):
+func unhandled_input(_event: InputEvent):
 	pass
 
 

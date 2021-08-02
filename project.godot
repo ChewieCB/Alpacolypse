@@ -81,12 +81,16 @@ _global_script_class_icons={
 [application]
 
 config/name="Alpacolypse"
-run/main_scene="res://src/levels/tl_geom_01/TL_Geom_01.tscn"
+run/main_scene="res://src/levels/ml_01/ML_01.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GlobalFlags="*res://src/global/global_flags.gd"
+
+[display]
+
+window/size/fullscreen=true
 
 [editor_plugins]
 

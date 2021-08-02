@@ -25,7 +25,7 @@ func enter(_msg: Dictionary = {}):
 #	player.camera.connect("aim_fired", self, "_on_Camera_aim_fired")
 
 
-func unhandled_input(event: InputEvent):
+func unhandled_input(_event: InputEvent):
 	pass
 
 
@@ -73,7 +73,7 @@ static func get_input_direction():
 	)
 
 
-func calculate_velocity(velocity_current: Vector3, move_direction: Vector3, delta: float):
+func calculate_velocity(velocity_current: Vector3, _move_direction: Vector3, delta: float):
 	var velocity_new = move_direction * move_speed
 	if velocity_new.length() > max_speed:
 		velocity_new = velocity_new.normalized() * max_speed

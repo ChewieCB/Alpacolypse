@@ -33,7 +33,7 @@ func enter(msg: Dictionary = {}):
 		coyote_time.start()
 
 
-func unhandled_input(event: InputEvent):
+func unhandled_input(_event: InputEvent):
 	pass
 
 

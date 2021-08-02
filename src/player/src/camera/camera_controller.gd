@@ -1,9 +1,9 @@
-extends Position3D
+extends Spatial
 
 onready var camera = $Camera
 
 var look_sensitivity = 15.0
-var min_look_angle = -20.0
+var min_look_angle = -40.0
 var max_look_angle = 75.0
 
 
@@ -38,4 +38,5 @@ func _process(delta):
 	rotation_degrees.z = clamp(rotation_degrees.z, min_look_angle, max_look_angle)
 	
 	mouse_delta = Vector2.ZERO
+
 
