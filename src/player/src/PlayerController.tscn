@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/player/src/state_machine/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://src/player/src/state_machine/player_states/_movement.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/player/src/state_machine/player_states/charge_falling.gd" type="Script" id=9]
 [ext_resource path="res://src/player/src/state_machine/player_states/charge_jumping.gd" type="Script" id=10]
 [ext_resource path="res://src/player/src/state_machine/player_states/knockback.gd" type="Script" id=11]
+[ext_resource path="res://src/player/src/camera/camera_controller.gd" type="Script" id=12]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -31,6 +32,7 @@ font_data = SubResource( 4 )
 viewport_path = NodePath("StatusLabels/Viewport")
 
 [node name="Player" type="KinematicBody"]
+collision_layer = 2
 script = ExtResource( 4 )
 
 [node name="DefaultCollisionShape" type="CollisionShape" parent="."]
@@ -78,10 +80,6 @@ script = ExtResource( 9 )
 [node name="Knockback" type="Node" parent="StateMachine/Movement"]
 script = ExtResource( 11 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 20, 20, 0 )
-current = true
-
 [node name="StatusLabels" type="Spatial" parent="."]
 
 [node name="Viewport" type="Viewport" parent="StatusLabels"]
@@ -104,3 +102,15 @@ transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0 )
 flip_v = true
 billboard = 1
 texture = SubResource( 6 )
+
+[node name="CameraPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+script = ExtResource( 12 )
+
+[node name="Camera" type="ClippedCamera" parent="CameraPivot"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -3.49691e-07 )
+current = true
+near = 0.01
+far = 1000.0
+margin = 1.6
+clip_to_areas = true
