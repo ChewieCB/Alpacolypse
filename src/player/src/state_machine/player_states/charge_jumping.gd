@@ -1,8 +1,8 @@
 extends State
 # State for when the player is jumping AND charging
 
-var max_speed = 25.0
-var move_speed = 30.0
+var max_speed = 40.0
+var move_speed = 40.0
 var gravity = -70.0
 var jump_impulse = 110
 var rotation_speed_factor := 6.0

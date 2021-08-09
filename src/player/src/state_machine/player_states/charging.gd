@@ -1,7 +1,7 @@
 extends State
 
-var max_speed = 24.0
-var move_speed = 20.0
+var max_speed = 40.0
+var move_speed = 40.0
 var gravity = -70.0
 var jump_impulse = 140
 var rotation_speed_factor := 6.0
