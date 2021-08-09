@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://src/player/src/PlayerController.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/levels/neon_hellscape_testenv.tres" type="Environment" id=2]
 
 [node name="TL_01" type="Spatial"]
 
@@ -18,10 +17,11 @@ omni_range = 59.9
 [node name="Floor" type="CSGBox" parent="LevelGeometry"]
 transform = Transform( 40, 0, 0, 0, 0.2, 0, 0, 0, 40, 4.408, 0, -9.334 )
 use_collision = true
-collision_mask = 0
+collision_mask = 3
 
 [node name="Platforms1" type="CSGCombiner" parent="LevelGeometry"]
 use_collision = true
+collision_mask = 3
 
 [node name="CSGBox" type="CSGBox" parent="LevelGeometry/Platforms1"]
 transform = Transform( 5, 0, 0, 0, 2, 0, 0, 0, 5, -13, 2, -8 )
@@ -32,10 +32,12 @@ transform = Transform( 3.53553, 0, -3.53553, 0, 4, 0, 3.53553, 0, 3.53553, -10, 
 [node name="CSGBox3" type="CSGBox" parent="LevelGeometry"]
 transform = Transform( 4.9196, 0, 0.26792, 0, 0.2, 0, 0.893067, 0, -1.47588, 2, 8.2, -16 )
 use_collision = true
+collision_mask = 3
 width = 4.0
 
 [node name="Platforms2" type="CSGCombiner" parent="LevelGeometry"]
 use_collision = true
+collision_mask = 3
 
 [node name="CSGBox4" type="CSGBox" parent="LevelGeometry/Platforms2"]
 transform = Transform( 5.19615, 0, 5, 0, 4, 0, -3, 0, 8.66025, 15, 4, -13 )
@@ -48,6 +50,7 @@ transform = Transform( 3.01992e-07, 0, -4, 0, 8, 0, 4, 0, 3.01992e-07, 22, 8, -7
 
 [node name="BridgePlatforms" type="CSGCombiner" parent="LevelGeometry"]
 use_collision = true
+collision_mask = 3
 
 [node name="CSGBox8" type="CSGBox" parent="LevelGeometry/BridgePlatforms"]
 transform = Transform( -6.55651e-08, 0, -13.2671, 0, 0.5, 0, 3.91674, 0, 0, -1.85967, 15.5, -22.7483 )
@@ -58,12 +61,15 @@ transform = Transform( -1.03528, 0, -6.95467, 0, 8, 0, 3.8637, 0, -1.8635, 17, 8
 [node name="CSGBox11" type="CSGBox" parent="LevelGeometry"]
 transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2.739, -11.226, 18, -3 )
 use_collision = true
+collision_mask = 3
 
 [node name="CSGBox10" type="CSGBox" parent="LevelGeometry"]
 transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2.739, -11.2259, 16, -13 )
 use_collision = true
+collision_mask = 3
 
 [node name="BuildingWalls" type="CSGCombiner" parent="LevelGeometry"]
+layers = 3
 use_collision = true
 
 [node name="CSGBox9" type="CSGBox" parent="LevelGeometry/BuildingWalls"]
@@ -79,6 +85,7 @@ visible = false
 [node name="Pillar1" type="CSGCylinder" parent="LevelGeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.81395, 4, 10.4998 )
 use_collision = true
+collision_mask = 3
 radius = 3.0
 height = 8.0
 sides = 16
@@ -86,6 +93,7 @@ sides = 16
 [node name="Pillar2" type="CSGCylinder" parent="LevelGeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17567, 5, 15.8792 )
 use_collision = true
+collision_mask = 3
 radius = 3.0
 height = 10.0
 sides = 16
@@ -93,6 +101,7 @@ sides = 16
 [node name="Pillar3" type="CSGCylinder" parent="LevelGeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.749, 6, 18.511 )
 use_collision = true
+collision_mask = 3
 radius = 3.0
 height = 12.0
 sides = 16
@@ -100,21 +109,24 @@ sides = 16
 [node name="Ramp5" type="CSGBox" parent="LevelGeometry"]
 transform = Transform( 11.5318, 1.47878, -1.62354, -3.99732, 6.96127, -0.422053, 5.86306, 1.8375, 2.90552, 30.2659, -3.69943, 19.6985 )
 use_collision = true
+collision_mask = 3
 
 [node name="Ramp1" type="CSGBox" parent="LevelGeometry"]
 transform = Transform( -12.4868, -2.80916, 0.197222, -5.18952, 6.7885, -0.0258807, -0.695238, -0.217888, -3.3491, -16.3373, -1.43112, 22.7326 )
 use_collision = true
+collision_mask = 3
 
 [node name="CSGBox" type="CSGBox" parent="LevelGeometry"]
 transform = Transform( 8.78693, 0, 0, 0, -6.99071, 0, -2.38419e-07, 0, 3.32806, 0.502274, 5.40269, 23.2436 )
 use_collision = true
+collision_mask = 3
 
 [node name="Ramp4" type="CSGBox" parent="LevelGeometry"]
 transform = Transform( -0.249883, -0.0783128, -3.35424, 2.64442, 7.20772, -0.0471554, 13.2771, -1.43706, -0.0537326, -0.636814, -4.9927, -33.4469 )
 use_collision = true
+collision_mask = 3
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0.2, 0 )
