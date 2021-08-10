@@ -6,15 +6,15 @@
 [ext_resource path="res://src/characters/sheep/src/state_machine/states/sheep_walking.gd" type="Script" id=4]
 [ext_resource path="res://src/ui/debug/StatusLabels.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/characters/sheep/src/sheep.gd" type="Script" id=6]
+[ext_resource path="res://src/OLD/characters/Sheep/SheepSkin.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 
 [sub_resource type="CapsuleMesh" id=2]
 
-[sub_resource type="ViewportTexture" id=5]
-viewport_path = NodePath("StatusLabels/Viewport")
-
 [node name="Sheep" type="KinematicBody"]
+collision_layer = 8
+collision_mask = 3
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -22,6 +22,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CollisionShape"]
+visible = false
 mesh = SubResource( 2 )
 material/0 = null
 
@@ -42,7 +43,7 @@ script = ExtResource( 4 )
 
 [node name="StatusLabels" parent="." instance=ExtResource( 5 )]
 
-[node name="Sprite3D" parent="StatusLabels" index="1"]
-texture = SubResource( 5 )
+[node name="MeshInstance" type="MeshInstance" parent="."]
 
-[editable path="StatusLabels"]
+[node name="SheepSkin" parent="." instance=ExtResource( 7 )]
+transform = Transform( -0.01, 0, -1.50996e-09, 0, 0.01, 0, 1.50996e-09, 0, -0.01, 0, 0, 0 )

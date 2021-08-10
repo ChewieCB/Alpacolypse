@@ -3,12 +3,16 @@ extends State
 # Supports triggering jump after the Sheep has started to fall
 
 var idle_timer = null
+var skin
 
 
 func enter(_msg: Dictionary = {}):
+	skin = _actor.skin
 	_parent.velocity = Vector3.ZERO
 	_parent.path = null
 	_parent.enter()
+	
+	skin.transition_to(skin.States.IDLE)
 	
 	idle_timer = Timer.new()
 	idle_timer.wait_time = rand_range(1.5, 5.0)
