@@ -7,15 +7,15 @@ extends State
 # These should be fallback defaults
 # TODO: Make these null and raise an exception to indicate bad State extension
 #       to better separate movement vars.
-export var max_speed = 10
-export var move_speed = 10
+export var max_speed = 5
+export var move_speed = 5
 export var gravity = -80.0
 export var jump_impulse = 35
 export (float, 0.1, 20.0, 0.1) var rotation_speed_factor := 10.0
 
 export (int, 0, 200) var inertia = 0
 
-export (int, 2, 100) var wander_range = 25
+export var show_debug_spheres = false
 
 var velocity := Vector3.ZERO
 var input_direction = Vector3.ZERO
@@ -30,10 +30,6 @@ var path_node = 1
 var debug_spheres = []
 
 
-func enter(_msg: Dictionary = {}):
-	pass
-
-
 func physics_process(delta: float):
 	var move_direction = Vector3.ZERO
 	
@@ -44,8 +40,9 @@ func physics_process(delta: float):
 			move_direction = next_point  - _actor.global_transform.origin
 			if move_direction.length() < 1:
 				path_node += 1
-				if debug_spheres[path_node - 1]:
-					debug_spheres[path_node - 1].queue_free()
+				if show_debug_spheres:
+					if debug_spheres[path_node - 1]:
+						debug_spheres[path_node - 1].queue_free()
 					
 			else:
 				move_direction = move_direction.normalized()
@@ -76,12 +73,18 @@ func calculate_velocity(velocity_current: Vector3, move_direction: Vector3, delt
 
 func get_random_target_in_range():
 	randomize()
-	var random_point = Vector3(
-		rand_range(2, wander_range), 
-		0, 
-		rand_range(2, wander_range)
-	)
-	return nav.get_closest_point(random_point)
+	var closest_navmesh = nav.get_closest_point_owner(_actor.global_transform.origin).navmesh
+	var nav_vertices = closest_navmesh.get_vertices()
+	
+	var search_range = rand_range(_actor.wander_range - 8, _actor.wander_range + 8)
+	var points_within_range = []
+	for vert in nav_vertices:
+		if vert.distance_to(_actor.global_transform.origin) <= search_range:
+			points_within_range.append(vert)
+	
+	var random_point_in_range = points_within_range[randi() % points_within_range.size()]
+	
+	return random_point_in_range
 
 
 func move_to_point(target_position):
@@ -90,12 +93,16 @@ func move_to_point(target_position):
 	# Work out a path to the point
 	path = nav.get_simple_path(_actor.global_transform.origin, target_position)
 	path_node = 1
-	for _point in path:
-		generate_debug_sphere(_point, 0.25)
-	debug_spheres[0].queue_free()
+	if show_debug_spheres:
+		for _point in path:
+			debug_spheres.append(
+				generate_debug_sphere(_point, 0.25)
+			)
+		if debug_spheres:
+			debug_spheres[0].queue_free()
 
 
-func generate_debug_sphere(target_position, size):
+func generate_debug_sphere(target_position, size, color=Color(1, 0, 0)):
 	# Get scene root
 	var scene_root = get_tree().root.get_children()[0]
 	# Create sphere with low detail of size.
@@ -106,7 +113,7 @@ func generate_debug_sphere(target_position, size):
 	sphere.height = size * 2
 	# Bright red material (unshaded).
 	var material = SpatialMaterial.new()
-	material.albedo_color = Color(1, 0, 0)
+	material.albedo_color = color
 	material.flags_unshaded = true
 	sphere.surface_set_material(0, material)
 	
@@ -115,7 +122,7 @@ func generate_debug_sphere(target_position, size):
 	node.mesh = sphere
 	node.global_transform.origin = target_position
 	scene_root.add_child(node)
-	debug_spheres.append(node)
+	return node
 
 
 func clear_debug_spheres():
