@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=23 format=2]
+[gd_resource type="AnimationNodeStateMachine" load_steps=24 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=1]
 animation = "Bonk"
@@ -57,6 +57,10 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+switch_mode = 2
+auto_advance = true
+
 [resource]
 states/Bonk/node = SubResource( 1 )
 states/Bonk/position = Vector2( 886, 156 )
@@ -72,6 +76,6 @@ states/Land/node = SubResource( 6 )
 states/Land/position = Vector2( 329, 234 )
 states/Walk/node = SubResource( 7 )
 states/Walk/position = Vector2( 543, 61 )
-transitions = [ "Idle", "Idle2", SubResource( 8 ), "Idle2", "Idle", SubResource( 9 ), "Idle", "Walk", SubResource( 10 ), "Walk", "Idle", SubResource( 11 ), "Walk", "Charge", SubResource( 12 ), "Charge", "Walk", SubResource( 13 ), "Idle", "Charge", SubResource( 14 ), "Charge", "Idle", SubResource( 15 ), "Charge", "Bonk", SubResource( 16 ), "Bonk", "Idle", SubResource( 17 ), "Idle", "Jump", SubResource( 18 ), "Walk", "Jump", SubResource( 19 ), "Charge", "Jump", SubResource( 20 ), "Jump", "Land", SubResource( 21 ), "Land", "Idle", SubResource( 22 ) ]
+transitions = [ "Idle", "Idle2", SubResource( 8 ), "Idle2", "Idle", SubResource( 9 ), "Idle", "Walk", SubResource( 10 ), "Walk", "Idle", SubResource( 11 ), "Walk", "Charge", SubResource( 12 ), "Charge", "Walk", SubResource( 13 ), "Idle", "Charge", SubResource( 14 ), "Charge", "Idle", SubResource( 15 ), "Charge", "Bonk", SubResource( 16 ), "Bonk", "Idle", SubResource( 17 ), "Idle", "Jump", SubResource( 18 ), "Walk", "Jump", SubResource( 19 ), "Charge", "Jump", SubResource( 20 ), "Jump", "Idle", SubResource( 21 ), "Bonk", "Charge", SubResource( 22 ), "Bonk", "Walk", SubResource( 23 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -60, 15.0496 )
