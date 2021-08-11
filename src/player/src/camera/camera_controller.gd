@@ -47,10 +47,11 @@ func _process(delta):
 	rotation_degrees.y += camera_rotation.y
 	
 	# Rotate the player meshes to face the new look direction
-	var player_mesh = get_node("../DefaultCollisionShape")
+	var player_mesh = get_node("../LlamaSkin")
 	var charge_collider = get_node("../ChargeCollider")
 	player_mesh.rotation_degrees.y += camera_rotation.y
 	charge_collider.rotation_degrees.y += camera_rotation.y
+	
 
 	rotation_degrees.z += camera_rotation.z
 	rotation_degrees.z = clamp(rotation_degrees.z, min_look_angle, max_look_angle)

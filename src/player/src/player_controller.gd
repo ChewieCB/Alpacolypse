@@ -1,5 +1,6 @@
 extends KinematicBody
 
+onready var skin = $LlamaSkin
 onready var camera_pivot = $CameraPivot
 onready var camera = $CameraPivot/Camera
 onready var state_machine = $StateMachine
@@ -18,6 +19,7 @@ func _on_ChargeCollider_body_entered(body):
 		var flung_velocity = calcualate_charge_trajectory(body, 40.0)
 		body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
 	# TODO - knock the player back
+	skin.transition_to(skin.States.BONK)
 
 
 func calcualate_charge_trajectory(body, impact_force):

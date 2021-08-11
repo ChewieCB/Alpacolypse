@@ -10,15 +10,18 @@ var rotation_speed_factor := 6.0
 
 export var charge_inertia = 800
 
+var skin
 var velocity := Vector3.ZERO
 
 
 func enter(_msg: Dictionary = {}):
+	skin = _actor.skin
 	_parent.enter()
 	_parent.max_speed = max_speed
 	_parent.move_speed = move_speed
 	_parent.jump_impulse = jump_impulse
 	_parent.rotation_speed_factor = rotation_speed_factor
+	skin.transition_to(skin.States.CHARGE)
 
 
 func unhandled_input(_event: InputEvent):

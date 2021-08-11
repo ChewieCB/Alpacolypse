@@ -48,8 +48,7 @@ func physics_process(delta: float):
 	if move_direction.length() > 1.0:
 		move_direction = move_direction.normalized()
 	move_direction.y = 0
-	#	skin.move_direction = move_direction
-	
+
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)
 	velocity = _actor.move_and_slide(velocity, Vector3.UP, true, 4, 0.785398, false)
@@ -76,9 +75,3 @@ func calculate_velocity(velocity_current: Vector3, _move_direction: Vector3, del
 	
 	return velocity_new
 
-
-#func handle_rigid_collisions(_inertia):
-#	for index in player.get_slide_count():
-#		var collision = player.get_slide_collision(index)
-#		if collision.collider is RigidBody:
-#			collision.collider.apply_central_impulse(-collision.normal * _inertia)
