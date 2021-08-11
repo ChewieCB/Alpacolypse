@@ -2,12 +2,15 @@ extends State
 # State for when there is no movement input
 # Supports triggering jump after the player has started to fall
 
+var skin
 var velocity := Vector3.ZERO
 
 
 func enter(_msg: Dictionary = {}):
+	skin = _actor.skin
 	_parent.velocity = Vector3.ZERO
 	_parent.enter()
+	skin.transition_to(skin.States.IDLE)
 
 
 func unhandled_input(event: InputEvent):

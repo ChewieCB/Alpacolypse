@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/player/src/state_machine/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://src/characters/sheep/src/state_machine/states/sheep_movement.gd" type="Script" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://src/ui/debug/StatusLabels.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/characters/sheep/src/sheep.gd" type="Script" id=6]
 [ext_resource path="res://src/OLD/characters/Sheep/SheepSkin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/characters/sheep/src/state_machine/states/sheep_flung.gd" type="Script" id=8]
 
-[sub_resource type="CapsuleShape" id=1]
+[sub_resource type="BoxShape" id=1]
 
 [sub_resource type="CapsuleMesh" id=2]
 
@@ -40,6 +41,9 @@ script = ExtResource( 3 )
 
 [node name="Walking" type="Node" parent="StateMachine/Movement"]
 script = ExtResource( 4 )
+
+[node name="Flung" type="Node" parent="StateMachine/Movement"]
+script = ExtResource( 8 )
 
 [node name="StatusLabels" parent="." instance=ExtResource( 5 )]
 

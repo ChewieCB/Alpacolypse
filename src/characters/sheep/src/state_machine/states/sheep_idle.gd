@@ -26,6 +26,7 @@ func physics_process(delta: float):
 
 
 func exit():
+	idle_timer.queue_free()
 	_parent.exit()
 
 

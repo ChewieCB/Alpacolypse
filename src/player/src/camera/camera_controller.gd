@@ -45,8 +45,14 @@ func _process(delta):
 	# Rotate the camera pivot accordingly
 	var camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
 	rotation_degrees.y += camera_rotation.y
-#	rotation_degrees.y = clamp(rotation_degrees.y, min_look_angle, max_look_angle)
 	
+	# Rotate the player meshes to face the new look direction
+	var player_mesh = get_node("../LlamaSkin")
+	var charge_collider = get_node("../ChargeCollider")
+	player_mesh.rotation_degrees.y += camera_rotation.y
+	charge_collider.rotation_degrees.y += camera_rotation.y
+	
+
 	rotation_degrees.z += camera_rotation.z
 	rotation_degrees.z = clamp(rotation_degrees.z, min_look_angle, max_look_angle)
 	

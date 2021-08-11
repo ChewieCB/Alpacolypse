@@ -23,20 +23,29 @@ func enter(msg: Dictionary = {}):
 	_parent.move_speed = move_speed
 	_parent.jump_impulse = jump_impulse
 	_parent.rotation_speed_factor = rotation_speed_factor
-	# Knockback
-	if msg["collision_position"]:
-		var collision_position = msg["collision_position"]
-		var collision_direction = _actor.translation - collision_position 
-		collision_direction.y = 0
-		_parent.input_direction = collision_direction
-		_parent.velocity = collision_direction * knockback_inertia
-		# Movement timer
-		timer = Timer.new()
-		timer.set_one_shot(true)
-		timer.set_wait_time(0.2)
-		timer.connect("timeout", self, "_movement_timer_callback")
-		add_child(timer)
-		timer.start()
+	# Knockback on collision detection
+	for index in _actor.get_slide_count():
+		var collision = _actor.get_slide_collision(index)
+		if collision.collider and collision.normal.y <= 0:
+			# FIXME - Only knockback if the collision is head on
+			var actor_global_translation = _actor.to_global(_actor.translation)
+			var collision_angle = actor_global_translation.angle_to(collision.position)
+
+			# FIXME: figure out why this has a PI/16 offset?
+			var camera_rotation_offset = _actor.camera_pivot.rotation.y - 3*PI - (PI/16)
+			var collision_direction = Vector3.ONE.rotated(Vector3.UP, camera_rotation_offset)
+			collision_direction.y = 0
+			
+			_parent.input_direction = collision_direction
+			_parent.velocity = collision_direction * knockback_inertia
+		
+	# Movement timer
+	timer = Timer.new()
+	timer.set_one_shot(true)
+	timer.set_wait_time(0.2)
+	timer.connect("timeout", self, "_movement_timer_callback")
+	add_child(timer)
+	timer.start()
 
 
 func unhandled_input(_event: InputEvent):
