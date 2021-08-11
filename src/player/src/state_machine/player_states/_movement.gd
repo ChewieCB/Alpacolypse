@@ -11,7 +11,7 @@ export var max_speed = 0
 export var move_speed = 20
 export var gravity = -80.0
 export var jump_impulse = 35
-export (float, 0.1, 20.0, 0.1) var rotation_speed_factor := 10.0
+export (float, 0.1, 20.0, 0.1) var rotation_speed_factor := 2.0
 
 export (int, 0, 200) var inertia = 0
 
@@ -49,11 +49,6 @@ func physics_process(delta: float):
 		move_direction = move_direction.normalized()
 	move_direction.y = 0
 	#	skin.move_direction = move_direction
-	
-	# Rotation
-#	if move_direction:
-#		var target_direction = _actor.transform.looking_at(_actor.global_transform.origin + move_direction, Vector3.UP)
-#		_actor.transform = _actor.transform.interpolate_with(target_direction, rotation_speed_factor * delta)
 	
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)

@@ -29,10 +29,7 @@ var path_node = 1
 # Debug meshes
 var debug_spheres = []
 
-
 func physics_process(delta: float):
-	var move_direction = Vector3.ZERO
-	
 	# Move along nav path if it exists
 	if path: 
 		if path_node < path.size():
@@ -56,6 +53,8 @@ func physics_process(delta: float):
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)
 	velocity = _actor.move_and_slide(velocity, Vector3.UP, false, 4, 0.785398, false)
+	
+	move_direction = Vector3.ZERO
 
 
 func exit():
@@ -82,24 +81,26 @@ func get_random_target_in_range():
 		if vert.distance_to(_actor.global_transform.origin) <= search_range:
 			points_within_range.append(vert)
 	
-	var random_point_in_range = points_within_range[randi() % points_within_range.size()]
-	
-	return random_point_in_range
+	if points_within_range != []:
+		var random_point_in_range = points_within_range[randi() % points_within_range.size()]
+		
+		return random_point_in_range
 
 
 func move_to_point(target_position):
 	clear_debug_spheres()
 	debug_spheres = []
 	# Work out a path to the point
-	path = nav.get_simple_path(_actor.global_transform.origin, target_position)
-	path_node = 1
-	if show_debug_spheres:
-		for _point in path:
-			debug_spheres.append(
-				generate_debug_sphere(_point, 0.25)
-			)
-		if debug_spheres:
-			debug_spheres[0].queue_free()
+	if target_position:
+		path = nav.get_simple_path(_actor.global_transform.origin, target_position)
+		path_node = 1
+		if show_debug_spheres:
+			for _point in path:
+				debug_spheres.append(
+					generate_debug_sphere(_point, 0.25)
+				)
+			if debug_spheres:
+				debug_spheres[0].queue_free()
 
 
 func generate_debug_sphere(target_position, size, color=Color(1, 0, 0)):
