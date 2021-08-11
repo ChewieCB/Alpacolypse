@@ -75,6 +75,9 @@ func calcualate_charge_trajectory(body, impact_force):
 
 
 func generate_debug_trajectory(trajectory_points, size):
+	if not GlobalFlags.SHOW_DEBUG_TRAJECTORIES:
+		return
+	
 	clear_debug_trajectory()
 	# Get scene root
 	var scene_root = get_tree().root.get_children()[0]
