@@ -70,8 +70,10 @@ material/23 = null
 material/24 = null
 
 [node name="StaticBody" type="StaticBody" parent="LevelGeometry/MeshInstance"]
+visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="LevelGeometry/MeshInstance/StaticBody"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Navigation" type="Navigation" parent="."]
