@@ -47,10 +47,9 @@ func _process(delta):
 	rotation_degrees.y += camera_rotation.y
 	
 	# Rotate the player meshes to face the new look direction
-	var player_mesh = get_node("../LlamaSkin")
-	var charge_collider = get_node("../ChargeCollider")
-	player_mesh.rotation_degrees.y += camera_rotation.y
-	charge_collider.rotation_degrees.y += camera_rotation.y
+	var collision = get_node("../Collision")
+#	player_mesh.rotation_degrees.y += camera_rotation.y
+	collision.rotation_degrees.y += camera_rotation.y
 	
 
 	rotation_degrees.z += camera_rotation.z

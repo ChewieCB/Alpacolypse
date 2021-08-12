@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/meshes/characters/sheep/Mat_Goat.material" type="Material" id=1]
 [ext_resource path="res://src/OLD/characters/Sheep/sheep_skin.gd" type="Script" id=2]
@@ -855,43 +855,27 @@ animation = "Walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
 switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=37]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=38]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
-switch_mode = 1
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
-[sub_resource type="AnimationNodeStateMachine" id=40]
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=39]
 states/Bounce/node = SubResource( 15 )
 states/Bounce/position = Vector2( 459, 42 )
 states/EatEnd/node = SubResource( 16 )
@@ -901,20 +885,20 @@ states/EatIdle/position = Vector2( 877, 147 )
 states/EatStart/node = SubResource( 18 )
 states/EatStart/position = Vector2( 877, 60 )
 states/Idle/node = SubResource( 19 )
-states/Idle/position = Vector2( 639, -33 )
+states/Idle/position = Vector2( 543, -58 )
 states/Idle2/node = SubResource( 20 )
-states/Idle2/position = Vector2( 633, -167 )
+states/Idle2/position = Vector2( 620, 42 )
 states/Jump/node = SubResource( 21 )
 states/Jump/position = Vector2( 620, 169 )
 states/Roll/node = SubResource( 22 )
-states/Roll/position = Vector2( 451, 219 )
+states/Roll/position = Vector2( 313, -167 )
 states/Walk/node = SubResource( 23 )
-states/Walk/position = Vector2( 813, -44 )
-transitions = [ "Idle", "Idle2", SubResource( 24 ), "Idle2", "Idle", SubResource( 25 ), "Idle", "Walk", SubResource( 26 ), "Walk", "EatStart", SubResource( 27 ), "EatStart", "EatIdle", SubResource( 28 ), "EatIdle", "EatEnd", SubResource( 29 ), "EatEnd", "Idle", SubResource( 30 ), "Idle", "Jump", SubResource( 31 ), "Jump", "Bounce", SubResource( 32 ), "Bounce", "Idle", SubResource( 33 ), "Jump", "Roll", SubResource( 34 ), "Roll", "Bounce", SubResource( 35 ), "Idle", "EatStart", SubResource( 36 ), "Walk", "Idle", SubResource( 37 ), "Idle", "Roll", SubResource( 38 ), "Roll", "Idle", SubResource( 39 ) ]
+states/Walk/position = Vector2( 821, -82 )
+transitions = [ "Idle", "Idle2", SubResource( 24 ), "Idle2", "Idle", SubResource( 25 ), "Idle", "Walk", SubResource( 26 ), "EatStart", "EatIdle", SubResource( 28 ), "EatIdle", "EatEnd", SubResource( 29 ), "Bounce", "Idle", SubResource( 33 ), "Roll", "Bounce", SubResource( 35 ), "Walk", "Idle", SubResource( 37 ), "Idle", "Roll", SubResource( 38 ), "Walk", "Roll", SubResource( 41 ), "Bounce", "Walk", SubResource( 42 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 48, -172.1 )
+graph_offset = Vector2( 49, -256.1 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=41]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=40]
 
 [node name="SheepSkin" type="Spatial"]
 script = ExtResource( 2 )
@@ -1019,7 +1003,7 @@ anims/Swim = SubResource( 13 )
 anims/Walk = SubResource( 14 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 40 )
+tree_root = SubResource( 39 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 41 )
+parameters/playback = SubResource( 40 )
