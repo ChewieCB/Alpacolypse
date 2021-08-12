@@ -22,9 +22,9 @@ func enter(msg: Dictionary = {}):
 
 
 func physics_process(delta: float):
-	if _actor.is_on_floor():
+	if _actor.is_on_floor() and flung_velocity.y < 0:
 		_state_machine.transition_to("Movement/Idle")
-	
+#
 	flung_velocity.y += delta * gravity
 	_actor.move_and_slide(flung_velocity, Vector3.UP, false, 4, 0.785398, false)
 
