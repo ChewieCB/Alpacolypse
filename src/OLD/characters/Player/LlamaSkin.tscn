@@ -801,12 +801,6 @@ mesh = SubResource( 1 )
 skin = SubResource( 2 )
 material/0 = null
 
-[node name="Node 3" type="Spatial" parent="RootNode gltf orientation matrix/RootNode model correction matrix/226044381412411f86491817fd15986cfbx/Node/RootNode/Rig/Node 2"]
-transform = Transform( 100, -5.29395e-23, -2.18073e-29, 3.04323e-29, 1.62921e-05, 100, -5.29395e-23, -100, 1.62921e-05, 0, 0, 0 )
-
-[node name="Llama_LOD1" type="Spatial" parent="RootNode gltf orientation matrix/RootNode model correction matrix/226044381412411f86491817fd15986cfbx/Node/RootNode"]
-transform = Transform( 100, 0, 0, 0, 1.78814e-05, 100, 0, -100, 1.78814e-05, 0, 0, 0 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Bonk = SubResource( 3 )
 anims/Charge = SubResource( 4 )

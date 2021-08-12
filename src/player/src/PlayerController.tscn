@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/player/src/state_machine/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://src/player/src/state_machine/player_states/_movement.gd" type="Script" id=2]
@@ -15,16 +15,14 @@
 [ext_resource path="res://src/ui/debug/StatusLabels.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/OLD/characters/Player/LlamaSkin.tscn" type="PackedScene" id=14]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.1, 0.75, 0.495588 )
-
-[sub_resource type="CapsuleShape" id=2]
-radius = 0.5
-
-[sub_resource type="CapsuleMesh" id=3]
-radius = 0.5
+[sub_resource type="CapsuleShape" id=7]
+radius = 0.957411
+height = 1.24562
 
 [sub_resource type="RayShape" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.193627, 1.33591, 0.632451 )
 
 [sub_resource type="ViewportTexture" id=5]
 viewport_path = NodePath("StatusLabels/Viewport")
@@ -33,32 +31,29 @@ viewport_path = NodePath("StatusLabels/Viewport")
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
+collision_mask = 13
 script = ExtResource( 4 )
 
-[node name="LlamaSkin" parent="." instance=ExtResource( 14 )]
-transform = Transform( -4.37114e-10, 0, -0.01, 0, 0.01, 0, 0.01, 0, -4.37114e-10, 0, 0, 0 )
-
-[node name="ChargeCollider" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24349, 0 )
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape" type="CollisionShape" parent="ChargeCollider"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.414761, -0.12775, 0 )
-shape = SubResource( 1 )
-
 [node name="DefaultCollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
-visible = false
-shape = SubResource( 2 )
-
-[node name="ColliderMesh" type="MeshInstance" parent="DefaultCollisionShape"]
-mesh = SubResource( 3 )
-material/0 = null
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.52527, 0 )
+shape = SubResource( 7 )
 
 [node name="SlopeRayCollisionShape1" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
 shape = SubResource( 4 )
+
+[node name="Collision" type="Spatial" parent="."]
+
+[node name="LlamaSkin" parent="Collision" instance=ExtResource( 14 )]
+transform = Transform( -4.37114e-10, 0, -0.01, 0, 0.01, 0, 0.01, 0, -4.37114e-10, 0, 0, 0 )
+
+[node name="ChargeCollider" type="Area" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16487, 1.5454, 0 )
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape" type="CollisionShape" parent="Collision/ChargeCollider"]
+shape = SubResource( 1 )
 
 [node name="StateMachine" type="Node" parent="." groups=[
 "state_machine",
@@ -126,6 +121,6 @@ cast_to = Vector3( 2, 0, 0 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="body_entered" from="ChargeCollider" to="." method="_on_ChargeCollider_body_entered"]
+[connection signal="body_entered" from="Collision/ChargeCollider" to="." method="_on_ChargeCollider_body_entered"]
 
 [editable path="StatusLabels"]
