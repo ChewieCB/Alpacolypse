@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Shared_Prop_Boulder_3.obj-e642dafb56a8cafac5ef7380ccf7a0fe.mesh"
+
+[deps]
+
+files=[ "res://.import/Shared_Prop_Boulder_3.obj-e642dafb56a8cafac5ef7380ccf7a0fe.mesh" ]
+
+source_file="res://assets/meshes/environment/modular_terrain_collection/Shared_Prop_Boulder_3.obj"
+dest_files=[ "res://.import/Shared_Prop_Boulder_3.obj-e642dafb56a8cafac5ef7380ccf7a0fe.mesh", "res://.import/Shared_Prop_Boulder_3.obj-e642dafb56a8cafac5ef7380ccf7a0fe.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

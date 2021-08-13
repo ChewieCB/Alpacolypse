@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hilly_Prop_Bridge_Log_End.obj-af7ad3b49cc8a9da8cb19d3782828afd.mesh"
+
+[deps]
+
+files=[ "res://.import/Hilly_Prop_Bridge_Log_End.obj-af7ad3b49cc8a9da8cb19d3782828afd.mesh" ]
+
+source_file="res://assets/meshes/environment/modular_terrain_collection/Hilly_Prop_Bridge_Log_End.obj"
+dest_files=[ "res://.import/Hilly_Prop_Bridge_Log_End.obj-af7ad3b49cc8a9da8cb19d3782828afd.mesh", "res://.import/Hilly_Prop_Bridge_Log_End.obj-af7ad3b49cc8a9da8cb19d3782828afd.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
