@@ -1,5 +1,9 @@
 extends Spatial
 
+export (NodePath) var camera_target
+
+onready var current_target = get_node(camera_target)
+
 onready var camera = $Camera
 onready var far_camera_collider = $MaxRayCast
 onready var near_camera_collider = $MaxRayCast
@@ -9,6 +13,8 @@ var look_sensitivity = 15.0
 var min_look_angle = -40.0
 var max_look_angle = 75.0
 
+var camera_rotation = Vector3.ZERO
+
 
 var mouse_delta = Vector2.ZERO
 
@@ -17,6 +23,7 @@ onready var actor = get_parent()
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	self.rotation_degrees.y = current_target.rotation_degrees.y
 
 
 func _unhandled_input(event):
@@ -30,6 +37,7 @@ func _unhandled_input(event):
 
 
 func _physics_process(_delta):
+	self.global_transform.origin = current_target.global_transform.origin
 	if far_camera_collider.is_colliding():
 		if near_camera_collider.is_colliding():
 			camera.translation = near_camera_collider.cast_to
@@ -43,11 +51,11 @@ func _process(delta):
 	var yaw_dir = mouse_delta.x
 	var pitch_dir = mouse_delta.y
 	# Rotate the camera pivot accordingly
-	var camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
+	camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
 	rotation_degrees.y += camera_rotation.y
 	
 	# Rotate the player meshes to face the new look direction
-	var collision = get_node("../Collision")
+	var collision = current_target.collision
 #	player_mesh.rotation_degrees.y += camera_rotation.y
 	collision.rotation_degrees.y += camera_rotation.y
 	

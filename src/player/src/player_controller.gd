@@ -1,8 +1,14 @@
 extends KinematicBody
 
+onready var collision = $Collision
+onready var slope_raycast = $SlopeRayCast
+onready var impassable_raycast = $Collision/ImpassableRayCast
+
 onready var skin = $Collision/LlamaSkin
-onready var camera_pivot = $CameraPivot
-onready var camera = $CameraPivot/Camera
+
+onready var camera_pivot = get_node("../CameraPivot")
+onready var camera = get_node("../CameraPivot/Camera")
+
 onready var state_machine = $StateMachine
 onready var state_label = $StatusLabels/Viewport/StateLabel
 
@@ -13,7 +19,8 @@ var debug_trajectory_meshes = []
 
 
 func _on_ChargeCollider_body_entered(body):
-	if not state_machine.state.name == "Charging":
+	var valid_charge_states = ["Charging", "ChargeJumping", "ChargeFalling"]
+	if not state_machine.state.name in valid_charge_states:
 		return
 	if body is KinematicBody:
 		var flung_velocity = calcualate_charge_trajectory(body, 40.0)
@@ -29,7 +36,7 @@ func calcualate_charge_trajectory(body, impact_force):
 	var dt = 0.05    # time step/interval
 	var time = 0
 	#
-	var initial_velocity = global_transform.origin.direction_to(
+	var initial_velocity = self.global_transform.origin.direction_to(
 		body.global_transform.origin
 	).normalized() * impact_force
 	var initial_speed = initial_velocity.length() * 1.2
@@ -47,7 +54,7 @@ func calcualate_charge_trajectory(body, impact_force):
 	)
 	
 	# FIXME: figure out why this has a PI/16 offset?
-	var camera_rotation_offset = $CameraPivot.rotation.y - PI - (PI/16)
+	var camera_rotation_offset = camera_pivot.rotation.y - PI - (PI/16)
 	
 	flung_velocity = flung_velocity.rotated(Vector3.UP, camera_rotation_offset)
 	var mass = 1

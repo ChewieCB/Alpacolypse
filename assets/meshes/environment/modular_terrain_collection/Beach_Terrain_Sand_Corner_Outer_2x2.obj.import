@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Beach_Terrain_Sand_Corner_Outer_2x2.obj-2db4b8e956ff77f9fc62f0ba5acac6ec.mesh"
+
+[deps]
+
+files=[ "res://.import/Beach_Terrain_Sand_Corner_Outer_2x2.obj-2db4b8e956ff77f9fc62f0ba5acac6ec.mesh" ]
+
+source_file="res://assets/meshes/environment/modular_terrain_collection/Beach_Terrain_Sand_Corner_Outer_2x2.obj"
+dest_files=[ "res://.import/Beach_Terrain_Sand_Corner_Outer_2x2.obj-2db4b8e956ff77f9fc62f0ba5acac6ec.mesh", "res://.import/Beach_Terrain_Sand_Corner_Outer_2x2.obj-2db4b8e956ff77f9fc62f0ba5acac6ec.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

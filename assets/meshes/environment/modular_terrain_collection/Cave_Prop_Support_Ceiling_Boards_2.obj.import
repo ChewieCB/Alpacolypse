@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Prop_Support_Ceiling_Boards_2.obj-4a36cd5d99132730b1353d85c6d40ecb.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Prop_Support_Ceiling_Boards_2.obj-4a36cd5d99132730b1353d85c6d40ecb.mesh" ]
+
+source_file="res://assets/meshes/environment/modular_terrain_collection/Cave_Prop_Support_Ceiling_Boards_2.obj"
+dest_files=[ "res://.import/Cave_Prop_Support_Ceiling_Boards_2.obj-4a36cd5d99132730b1353d85c6d40ecb.mesh", "res://.import/Cave_Prop_Support_Ceiling_Boards_2.obj-4a36cd5d99132730b1353d85c6d40ecb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

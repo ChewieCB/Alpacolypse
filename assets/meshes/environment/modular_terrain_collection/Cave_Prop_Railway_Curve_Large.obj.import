@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Cave_Prop_Railway_Curve_Large.obj-c50f3a152247d2b89c43d976043ef64f.mesh"
+
+[deps]
+
+files=[ "res://.import/Cave_Prop_Railway_Curve_Large.obj-c50f3a152247d2b89c43d976043ef64f.mesh" ]
+
+source_file="res://assets/meshes/environment/modular_terrain_collection/Cave_Prop_Railway_Curve_Large.obj"
+dest_files=[ "res://.import/Cave_Prop_Railway_Curve_Large.obj-c50f3a152247d2b89c43d976043ef64f.mesh", "res://.import/Cave_Prop_Railway_Curve_Large.obj-c50f3a152247d2b89c43d976043ef64f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

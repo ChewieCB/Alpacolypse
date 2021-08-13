@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Archway.obj-a1a2760df2ff2c84af02f9f313037c17.mesh"
+
+[deps]
+
+files=[ "res://.import/Archway.obj-a1a2760df2ff2c84af02f9f313037c17.mesh" ]
+
+source_file="res://assets/meshes/environment/arch/Archway.obj"
+dest_files=[ "res://.import/Archway.obj-a1a2760df2ff2c84af02f9f313037c17.mesh", "res://.import/Archway.obj-a1a2760df2ff2c84af02f9f313037c17.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
