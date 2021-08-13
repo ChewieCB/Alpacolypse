@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/player/src/state_machine/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://src/player/src/state_machine/player_states/_movement.gd" type="Script" id=2]
@@ -11,36 +11,32 @@
 [ext_resource path="res://src/player/src/state_machine/player_states/charge_falling.gd" type="Script" id=9]
 [ext_resource path="res://src/player/src/state_machine/player_states/charge_jumping.gd" type="Script" id=10]
 [ext_resource path="res://src/player/src/state_machine/player_states/knockback.gd" type="Script" id=11]
-[ext_resource path="res://src/player/src/camera/camera_controller.gd" type="Script" id=12]
 [ext_resource path="res://src/ui/debug/StatusLabels.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/OLD/characters/Player/LlamaSkin.tscn" type="PackedScene" id=14]
 
-[sub_resource type="CapsuleShape" id=7]
+[sub_resource type="CapsuleShape" id=1]
 radius = 0.957411
 height = 1.24562
 
-[sub_resource type="RayShape" id=4]
-
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.193627, 1.33591, 0.632451 )
 
-[sub_resource type="ViewportTexture" id=5]
+[sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("StatusLabels/Viewport")
 
-[sub_resource type="SphereShape" id=6]
-
 [node name="Player" type="KinematicBody"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
 collision_layer = 2
 collision_mask = 13
 script = ExtResource( 4 )
 
 [node name="DefaultCollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.52527, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 1 )
 
-[node name="SlopeRayCollisionShape1" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
-shape = SubResource( 4 )
+[node name="SlopeRayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
 
 [node name="Collision" type="Spatial" parent="."]
 
@@ -53,7 +49,11 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape" type="CollisionShape" parent="Collision/ChargeCollider"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+
+[node name="ImpassableRayCast" type="RayCast" parent="Collision"]
+enabled = true
+cast_to = Vector3( -2, 0, 0 )
 
 [node name="StateMachine" type="Node" parent="." groups=[
 "state_machine",
@@ -91,33 +91,7 @@ script = ExtResource( 11 )
 [node name="StatusLabels" parent="." instance=ExtResource( 13 )]
 
 [node name="Sprite3D" parent="StatusLabels" index="1"]
-texture = SubResource( 5 )
-
-[node name="CameraPivot" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-script = ExtResource( 12 )
-
-[node name="Camera" type="ClippedCamera" parent="CameraPivot"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16, 0, 0 )
-current = true
-near = 0.01
-far = 1000.0
-margin = 2.0
-clip_to_areas = true
-
-[node name="Area" type="Area" parent="CameraPivot/Camera"]
-collision_mask = 3
-
-[node name="CollisionShape" type="CollisionShape" parent="CameraPivot/Camera/Area"]
-shape = SubResource( 6 )
-
-[node name="MaxRayCast" type="RayCast" parent="CameraPivot"]
-enabled = true
-cast_to = Vector3( 16, 0, 0 )
-
-[node name="MinRayCast" type="RayCast" parent="CameraPivot"]
-enabled = true
-cast_to = Vector3( 2, 0, 0 )
+texture = SubResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
 
