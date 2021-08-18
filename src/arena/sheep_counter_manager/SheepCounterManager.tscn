@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/arena/sheep_counter_manager/sheep_counter_manager.gd" type="Script" id=1]
+
+[node name="SheepCounterManager" type="Node"]
+script = ExtResource( 1 )
