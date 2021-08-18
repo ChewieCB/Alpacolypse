@@ -6,6 +6,7 @@
 [node name="ArenaSheepCounter" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,7 +24,7 @@ __meta__ = {
 
 [node name="SheepIconContainer" type="CenterContainer" parent="CenterContainer"]
 margin_right = 64.0
-margin_bottom = 64.0
+margin_bottom = 76.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -31,8 +32,9 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/SheepIconContainer"]
+margin_top = 6.0
 margin_right = 64.0
-margin_bottom = 64.0
+margin_bottom = 70.0
 texture = ExtResource( 2 )
 
 [node name="SacrificedContainer" type="CenterContainer" parent="CenterContainer"]
