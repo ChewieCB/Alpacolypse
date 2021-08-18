@@ -7,3 +7,5 @@ onready var collider = $CollisionShape
 
 export (int, 2, 100) var wander_range = 25
 
+signal landed
+

@@ -32,5 +32,6 @@ func physics_process(delta: float):
 func exit():
 	# Re-enable collision with player
 	_actor.set_collision_mask_bit(1, true)
+	_actor.emit_signal("landed")
 	_parent.exit()
 

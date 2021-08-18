@@ -3,6 +3,7 @@ extends KinematicBody
 onready var collision = $Collision
 onready var slope_raycast = $SlopeRayCast
 onready var impassable_raycast = $Collision/ImpassableRayCast
+onready var knockback_raycast = $Collision/KnockbackRayCast
 
 onready var skin = $Collision/LlamaSkin
 
@@ -19,18 +20,33 @@ var debug_trajectory_meshes = []
 
 
 func _on_ChargeCollider_body_entered(body):
+	# Only trigger when charging
 	var valid_charge_states = ["Charging", "ChargeJumping", "ChargeFalling"]
 	if not state_machine.state.name in valid_charge_states:
 		return
+	
 	if body is KinematicBody:
 		var flung_velocity = calcualate_charge_trajectory(body, 40.0)
 		body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
-	# TODO - knock the player back
-#	skin.transition_to(skin.States.BONK)
-	state_machine.transition_to("Movement/Knockback")
+		
+		# Remove the trajectory when the sheep lands
+		body.connect("landed", self, "clear_debug_trajectory")
+	
+		# Knock the player back
+		state_machine.transition_to(
+			"Movement/Knockback", 
+			{
+				"trajectory": calcualate_charge_trajectory(
+					body, 
+					20.0, 
+					body.state_machine.state.gravity,
+					true
+				)
+			}
+		)
 
 
-func calcualate_charge_trajectory(body, impact_force):
+func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=false):
 	# Array to store out trajectory points so we can draw a debug curve
 	var trajectory_points = [] 
 	var dt = 0.05    # time step/interval
@@ -53,10 +69,16 @@ func calcualate_charge_trajectory(body, impact_force):
 		initial_speed * cos(launch_angle_deg) * sin(approach_angle_deg)
 	)
 	
+	# Invert for knockback
+	if knockback:
+		dummy_position = self.global_transform.origin
+		flung_velocity = flung_velocity.rotated(Vector3.UP, PI)
+	
 	# FIXME: figure out why this has a PI/16 offset?
-	var camera_rotation_offset = camera_pivot.rotation.y - PI - (PI/16)
+	var camera_rotation_offset = camera_pivot.rotation.y - PI# - (PI/16)
 	
 	flung_velocity = flung_velocity.rotated(Vector3.UP, camera_rotation_offset)
+	
 	var mass = 1
 	
 	var dummy_velocity = flung_velocity
@@ -65,7 +87,7 @@ func calcualate_charge_trajectory(body, impact_force):
 		# Calculate the force
 		var gravity_force = Vector3(
 			0, 
-			body.state_machine.state._parent.gravity, 
+			-80.0,
 			0
 		)
 		var force = gravity_force
