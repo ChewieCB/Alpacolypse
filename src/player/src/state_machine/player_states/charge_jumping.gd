@@ -55,19 +55,19 @@ func physics_process(delta: float):
 			{"was_on_floor": false}
 		)
 	
-	# Knockback on collision detection
-	for index in _actor.get_slide_count():
-		var collision = _actor.get_slide_collision(index)
-		if collision.collider is CSGShape and collision.normal.y <= 0:
-			# FIXME - Only knockback if the collision is head on
-			var actor_global_translation = _actor.to_global(_actor.translation)
-			var collision_angle = actor_global_translation.angle_to(collision.position)
-			
-			if  collision_angle > deg2rad(38) and collision_angle < deg2rad(105):
-				_state_machine.transition_to(
-					"Movement/Knockback", 
-					{"collision_position": collision.position}
+	if _actor.knockback_raycast.is_colliding():
+		var body = _actor.knockback_raycast.get_collider()
+		_state_machine.transition_to(
+			"Movement/Knockback", 
+			{
+				"trajectory": _actor.calcualate_charge_trajectory(
+					body, 
+					20.0,
+					gravity,
+					true
 				)
+			}
+		)
 
 
 func exit():
