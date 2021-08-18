@@ -25,6 +25,8 @@ func _on_ChargeCollider_body_entered(body):
 	if body is KinematicBody:
 		var flung_velocity = calcualate_charge_trajectory(body, 40.0)
 		body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
+		#
+		body.connect("landed", self, "clear_debug_trajectory")
 	# TODO - knock the player back
 #	skin.transition_to(skin.States.BONK)
 	state_machine.transition_to("Movement/Knockback")
