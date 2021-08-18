@@ -1,4 +1,5 @@
 extends KinematicBody
+class_name PlayerController
 
 onready var collision = $Collision
 onready var slope_raycast = $SlopeRayCast
@@ -54,7 +55,7 @@ func calcualate_charge_trajectory(body, impact_force):
 	)
 	
 	# FIXME: figure out why this has a PI/16 offset?
-	var camera_rotation_offset = camera_pivot.rotation.y - PI - (PI/16)
+	var camera_rotation_offset = camera_pivot.rotation.y - PI# - (PI/16)
 	
 	flung_velocity = flung_velocity.rotated(Vector3.UP, camera_rotation_offset)
 	var mass = 1
