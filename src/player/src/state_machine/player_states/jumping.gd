@@ -8,11 +8,12 @@ var skin
 
 func enter(_msg: Dictionary = {}):
 	skin = _actor.skin
+	skin.transition_to(skin.States.JUMP)
+	#
 	_parent.enter()
 	_parent.velocity.x *= 2
 	_parent.velocity.z *= 2
 	_parent.velocity += Vector3(0, jump_velocity, 0)
-	skin.transition_to(skin.States.JUMP)
 
 
 func unhandled_input(_event: InputEvent):

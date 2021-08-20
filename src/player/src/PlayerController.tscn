@@ -54,6 +54,11 @@ shape = SubResource( 2 )
 enabled = true
 cast_to = Vector3( -2, 0, 0 )
 
+[node name="KnockbackRayCast" type="RayCast" parent="Collision"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+enabled = true
+cast_to = Vector3( -1.25, 0, 0 )
+
 [node name="StateMachine" type="Node" parent="." groups=[
 "state_machine",
 ]]

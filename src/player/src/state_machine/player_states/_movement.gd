@@ -60,11 +60,16 @@ func exit():
 
 
 static func get_input_direction():
-	return Vector3(
+	var input_vector =  Vector3(
 		Input.get_action_strength("p1_move_right") - Input.get_action_strength("p1_move_left"),
 		0,
 		Input.get_action_strength("p1_move_backwards") - Input.get_action_strength("p1_move_forwards")
 	)
+	# Charging always drives the player forwards
+	if Input.is_action_pressed("p1_charge"):
+		input_vector.z = -1
+		
+	return input_vector
 
 
 func calculate_velocity(velocity_current: Vector3, _move_direction: Vector3, delta: float):
