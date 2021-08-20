@@ -12,7 +12,7 @@ export var charge_inertia = 800
 var skin
 var velocity := Vector3.ZERO
 
-export var jump_velocity = 20
+export var jump_velocity = 30
 
 
 func enter(_msg: Dictionary = {}):

@@ -2,6 +2,7 @@ extends KinematicBody
 class_name PlayerController
 
 onready var collision = $Collision
+onready var default_collider = $DefaultCollisionShape
 onready var slope_raycast = $SlopeRayCast
 onready var impassable_raycast = $Collision/ImpassableRayCast
 

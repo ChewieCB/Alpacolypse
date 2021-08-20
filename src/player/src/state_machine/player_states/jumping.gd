@@ -1,7 +1,7 @@
 extends State
 # State for when the player is jumping
 
-export var jump_velocity = 20
+export var jump_velocity = 30
 
 var skin
 
