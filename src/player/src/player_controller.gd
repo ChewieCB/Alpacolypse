@@ -28,7 +28,7 @@ func _on_ChargeCollider_body_entered(body):
 		return
 	
 	if body is KinematicBody:
-		var flung_velocity = calcualate_charge_trajectory(body, 40.0)
+		var flung_velocity = calcualate_charge_trajectory(body, 40.0, -80.0, true)
 		body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
 		
 		# Remove the trajectory when the sheep lands
@@ -72,7 +72,7 @@ func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=f
 	)
 	
 	# Invert for knockback
-	if knockback:
+	if knockback == true:
 		dummy_position = self.global_transform.origin
 		flung_velocity = flung_velocity.rotated(Vector3.UP, PI)
 	
