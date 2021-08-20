@@ -1,7 +1,8 @@
 extends Node
 
+signal changed_count
 
-export (int) var total_sheep
+export (int) var total_sheep = 0
 var num_current_sheep setget set_num_current_sheep, get_num_current_sheep
 
 export (NodePath) var counter_ui_path
@@ -34,9 +35,12 @@ func set_num_current_sheep(value):
 	num_current_sheep = value
 	# Update UI
 	counter_ui.label.text = " %s / %s" % [num_current_sheep, total_sheep]
+	emit_signal("changed_count")
 
 
 func get_num_current_sheep():
+	if num_current_sheep == null:
+		num_current_sheep = 0
 	return num_current_sheep
 
 

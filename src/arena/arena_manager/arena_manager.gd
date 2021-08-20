@@ -3,6 +3,9 @@ extends Node
 export (NodePath) var arena_ui_path
 onready var arena_ui = get_node(arena_ui_path)
 
+export (NodePath) var sacrifice_counter_path
+onready var sacrifice_counter = get_node(sacrifice_counter_path)
+
 var timer
 var sheep_counter
 var popup_message
@@ -16,9 +19,18 @@ func _ready():
 	timer = arena_ui.arena_timer
 	sheep_counter = arena_ui.sheep_counter
 	popup_message = arena_ui.popup_message
+	#
+	sacrifice_counter.connect("changed_count", self, "update_counter")
+	update_counter()
+	#
 	timer.connect("timeout", self, "end_arena_mode_fail")
 	arena_ui.visible = false
 	timer.stop_timer()
+
+
+func update_counter():
+	sheep_counter.sacrificed_label.text = str(sacrifice_counter.num_current_sheep)
+	sheep_counter.total_label.text = str(sacrifice_counter.total_sheep)
 
 
 func start_arena_mode():
