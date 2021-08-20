@@ -18,6 +18,8 @@ func _ready():
 	# FIXME - size calc for non-CSG meshes
 	var mesh_aabb = spawn_mesh.mesh.get_aabb()
 	var mesh_origin = mesh_aabb.position
+	# Make sure we use the top of the mesh for the y
+	mesh_origin.y = mesh_aabb.end.y
 	var mesh_size = mesh_aabb.size
 	#
 	# Scale the points to the size of the floor mesh
