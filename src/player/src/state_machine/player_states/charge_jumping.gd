@@ -55,19 +55,21 @@ func physics_process(delta: float):
 			{"was_on_floor": false}
 		)
 	
-	if _actor.knockback_raycast.is_colliding():
-		var body = _actor.knockback_raycast.get_collider()
-		_state_machine.transition_to(
-			"Movement/Knockback", 
-			{
-				"trajectory": _actor.calcualate_charge_trajectory(
-					body, 
-					20.0,
-					gravity,
-					true
-				)
-			}
-		)
+	for _raycast in _actor.knockback_raycasts:
+		if _raycast.is_colliding():
+			var body = _raycast.get_collider()
+			_state_machine.transition_to(
+				"Movement/Knockback", 
+				{
+					"trajectory": _actor.calcualate_charge_trajectory(
+						body, 
+						20.0,
+						gravity,
+						false
+					)
+				}
+			)
+			break
 
 
 func exit():

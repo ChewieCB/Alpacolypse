@@ -5,7 +5,7 @@ onready var collision = $Collision
 onready var default_collider = $DefaultCollisionShape
 onready var slope_raycast = $SlopeRayCast
 onready var impassable_raycast = $Collision/ImpassableRayCast
-onready var knockback_raycast = $Collision/KnockbackRayCast
+onready var knockback_raycasts = $Collision/KnockbackRayCasts.get_children()
 
 onready var skin = $Collision/LlamaSkin
 
@@ -43,7 +43,7 @@ func _on_ChargeCollider_body_entered(body):
 					body, 
 					20.0, 
 					body.state_machine.state.gravity,
-					true
+					false
 				)
 			}
 		)
@@ -73,6 +73,8 @@ func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=f
 	)
 	
 	# Invert for knockback
+	# FIXME - this var is now inverted for some reason, we should probably fix
+	# this or just rename this var to something like forwards?
 	if knockback == true:
 		dummy_position = self.global_transform.origin
 		flung_velocity = flung_velocity.rotated(Vector3.UP, PI)
