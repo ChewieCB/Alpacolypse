@@ -691,7 +691,6 @@ sheep_parent_node_path = NodePath("../SheepGroup")
 [node name="SheepCounterArea" parent="LevelGeometry/SheepTargetTest/SheepCounterManager" instance=ExtResource( 33 )]
 transform = Transform( 18.3081, 0, -2.41511, 0, 2, 0, 4.90568, 0, 9.01324, -62.9565, 17, -93.031 )
 manager_path = NodePath("..")
-spawn_mesh_path = NodePath("../../FloorSpawn")
 
 [node name="SheepCounterUI" parent="LevelGeometry/SheepTargetTest/SheepCounterManager/SheepCounterArea/UI" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -62.9565, 22, -93.031 )
@@ -1413,7 +1412,6 @@ sheep_parent_node_path = NodePath("../SheepGroup")
 transform = Transform( 21.48, 0, 0, 0, 12.1875, 0, 0, 0, 21.48, -65.9502, 25, 220.011 )
 visible = true
 manager_path = NodePath("..")
-spawn_mesh_path = NodePath("../../Floors/Floor")
 
 [node name="CollisionShape" parent="LevelGeometry/ArenaTest/SheepCounterManager/SheepCounterArea" index="0"]
 shape = SubResource( 41 )

@@ -6,7 +6,7 @@ onready var state_label = $StatusLabels/Viewport/StateLabel
 onready var skin = $SheepSkin
 onready var collider = $CollisionShape
 
-export (int, 2, 100) var wander_range = 50
+export (int, 2, 100) var wander_range = 20
 
 signal landed
 

@@ -131,7 +131,8 @@ func generate_debug_trajectory(trajectory_points, size):
 		# Add to meshinstance in the right place.
 		var node = MeshInstance.new()
 		node.mesh = sphere
-		node.global_transform.origin = _point
+		if node.is_inside_tree():
+			node.global_transform.origin = _point
 		scene_root.add_child(node)
 		debug_trajectory_meshes.append(node)
 
