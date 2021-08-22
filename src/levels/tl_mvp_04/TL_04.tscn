@@ -293,13 +293,14 @@ transform = Transform( 41.4873, 0, 0, 0, 12.1259, 0, 0, 0, 41.4873, 16.2881, -7.
 manager_path = NodePath("../SheepCounterManager")
 
 [node name="SheepCounterUI" parent="ArenaZone/SheepCounter/SheepCounterArea/UI" index="0"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 16.2881, 9.72421, 89.7294 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 16.2881, -2.27579, 89.7294 )
 
 [node name="ArenaTrigger" type="Node" parent="ArenaZone"]
 
 [node name="ArenaManager" parent="ArenaZone/ArenaTrigger" instance=ExtResource( 19 )]
 arena_ui_path = NodePath("../../../UI/ArenaUI")
 sacrifice_counter_path = NodePath("../../SheepCounter/SheepCounterManager")
+timer_length = 60
 
 [node name="ArenaTrigger" parent="ArenaZone/ArenaTrigger" instance=ExtResource( 17 )]
 transform = Transform( -68.9744, 0, -9.87359e-06, 0, 18.2819, 0, 1.04148e-05, 0, -65.3898, 14.3706, 12.599, 86.9288 )

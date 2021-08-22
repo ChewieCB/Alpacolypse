@@ -1,6 +1,7 @@
 extends Node
 
 signal changed_count
+signal pit_full
 
 export (int) var total_sheep = 0
 var num_current_sheep setget set_num_current_sheep, get_num_current_sheep
@@ -23,6 +24,11 @@ func all_sheep_in_area():
 	pass
 
 
+func reset_sheep():
+	for sheep in sheep_parent_node.get_children():
+		sheep.global_transform.origin = sheep.spawn_position
+
+
 #func spawn_sheep(mesh_origin, scaled_position_array):
 #	#
 #	for point in scaled_position_array:
@@ -36,6 +42,8 @@ func set_num_current_sheep(value):
 	# Update UI
 	counter_ui.label.text = " %s / %s" % [num_current_sheep, total_sheep]
 	emit_signal("changed_count")
+	if num_current_sheep >= total_sheep:
+		emit_signal("pit_full")
 
 
 func get_num_current_sheep():

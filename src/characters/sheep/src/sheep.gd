@@ -8,5 +8,10 @@ onready var collider = $CollisionShape
 
 export (int, 2, 100) var wander_range = 20
 
+var spawn_position := Vector3.ZERO
+
 signal landed
 
+
+func _ready():
+	spawn_position = global_transform.origin

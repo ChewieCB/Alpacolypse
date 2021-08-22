@@ -4,3 +4,5 @@
 
 [node name="ArenaManager" type="Node"]
 script = ExtResource( 1 )
+
+[node name="PopupVisibleTimer" type="Timer" parent="."]
