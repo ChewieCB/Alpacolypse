@@ -32,7 +32,8 @@ func _on_ChargeCollider_body_entered(body):
 		body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
 		
 		# Remove the trajectory when the sheep lands
-		body.connect("landed", self, "clear_debug_trajectory")
+		if not body.is_connected("landed", self, "clear_debug_trajectory"):
+			body.connect("landed", self, "clear_debug_trajectory")
 	
 		# Knock the player back
 		state_machine.transition_to(
