@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/OLD/characters/Player/camera/camera_state.gd"
 }, {
+"base": "Area",
+"class": "CounterArea",
+"language": "GDScript",
+"path": "res://src/counter/counter_area.gd"
+}, {
+"base": "Node",
+"class": "CounterManager",
+"language": "GDScript",
+"path": "res://src/counter/counter_manager.gd"
+}, {
 "base": "Spatial",
 "class": "GrassTuft",
 "language": "GDScript",
@@ -72,6 +82,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CameraRig": "",
 "CameraState": "",
+"CounterArea": "",
+"CounterManager": "",
 "GrassTuft": "",
 "LlamaSkin": "",
 "Player": "",
