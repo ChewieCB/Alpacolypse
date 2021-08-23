@@ -8,6 +8,10 @@ onready var manager = get_node(manager_path)
 
 
 func _ready():
+	# Hide dev zone meshes in-game
+	if not Engine.editor_hint:
+		visible = false
+	
 	manager.connect("arena_restart", self, "reset_arena_trigger")
 
 

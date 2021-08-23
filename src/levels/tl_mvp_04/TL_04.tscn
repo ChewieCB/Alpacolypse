@@ -311,7 +311,6 @@ counter_manager_path = NodePath("../../SacrificeZone/CounterManager")
 
 [node name="ArenaTrigger" parent="ArenaZone/ArenaTrigger" instance=ExtResource( 17 )]
 transform = Transform( -68.9744, 0, -9.87359e-06, 0, 18.2819, 0, 1.04148e-05, 0, -65.3898, 14.3706, 12.599, 86.9288 )
-visible = false
 manager_path = NodePath("../ArenaManager")
 
 [node name="SacrificeZone" type="Node" parent="ArenaZone"]
@@ -321,11 +320,11 @@ is_sacrificial = true
 sheep_node_path = NodePath("../../../Sheep")
 
 [node name="CounterArea" parent="ArenaZone/SacrificeZone/CounterManager" instance=ExtResource( 15 )]
-transform = Transform( 14.96, 0, 0, 0, 8.16, 0, 0, 0, 14.96, 17, -3, 90 )
-visible = false
+transform = Transform( 14.96, 0, 0, 0, 8.16, 0, 0, 0, 14.96, 17, -4, 90 )
 
 [node name="KnockbackZone" parent="ArenaZone/SacrificeZone" instance=ExtResource( 22 )]
 transform = Transform( 13.5, 0, 0, 0, -20, 0, 0, 0, 13.5, 16.4, -16, 90.3 )
+visible = true
 collision_mask = 2
 navigation_node_path = NodePath("../../../Navigation")
 knockback_force = 40.0

@@ -7,11 +7,18 @@ var respawn_navmesh
 
 export (float) var knockback_force = 20.0
 
+
+func _ready():
+	# Hide dev zone meshes in-game
+	if not Engine.editor_hint:
+		visible = false
+
+
 func get_closest_navmesh_point(body):
 	var body_pos = body.global_transform.origin
 	#
-	var closest_navmesh = null
-	var dist_to_closest_nav = Vector3.INF
+	var _closest_navmesh = null
+	var _dist_to_closest_nav = Vector3.INF
 	var closest_vert = Vector3.INF
 	# Walk through all the navmesh verts to find the closest navmesh
 	for _navmesh in navigation_node.get_children():

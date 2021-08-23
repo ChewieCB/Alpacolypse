@@ -14,6 +14,11 @@ onready var ui = $UI/SheepCounterUI
 
 func _ready():
 	yield(owner, "ready")
+	
+	# Hide dev zone meshes in-game
+	if not Engine.editor_hint:
+		visible = false
+	
 	$UI/SheepCounterUI.global_transform.origin = global_transform.origin + Vector3(0, 10, 0)
 	current_count = get_sheep_in_area()
 
