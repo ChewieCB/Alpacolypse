@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/OLD/characters/Player/camera/camera_state.gd"
 }, {
+"base": "Area",
+"class": "CounterArea",
+"language": "GDScript",
+"path": "res://src/counter/counter_area.gd"
+}, {
+"base": "Node",
+"class": "CounterManager",
+"language": "GDScript",
+"path": "res://src/counter/counter_manager.gd"
+}, {
 "base": "Spatial",
 "class": "GrassTuft",
 "language": "GDScript",
@@ -34,15 +44,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/OLD/characters/Player/player.gd"
 }, {
+"base": "KinematicBody",
+"class": "PlayerController",
+"language": "GDScript",
+"path": "res://src/player/src/player_controller.gd"
+}, {
 "base": "State",
 "class": "PlayerState",
 "language": "GDScript",
 "path": "res://src/OLD/characters/Player/player_state.gd"
 }, {
-"base": "Reference",
+"base": "KinematicBody",
 "class": "Sheep",
 "language": "GDScript",
-"path": "res://src/OLD/characters/Sheep/sheep.gd"
+"path": "res://src/characters/sheep/src/sheep.gd"
 }, {
 "base": "Spatial",
 "class": "SheepSkin",
@@ -67,9 +82,12 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CameraRig": "",
 "CameraState": "",
+"CounterArea": "",
+"CounterManager": "",
 "GrassTuft": "",
 "LlamaSkin": "",
 "Player": "",
+"PlayerController": "",
 "PlayerState": "",
 "Sheep": "",
 "SheepSkin": "",
@@ -81,7 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Alpacolypse"
-run/main_scene="res://src/levels/ml_01/ML_01.tscn"
+run/main_scene="res://src/levels/tl_mvp_04/TL_04.tscn"
 config/icon="res://icon.png"
 
 [autoload]

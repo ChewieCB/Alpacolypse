@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/pit.obj-4d8aded75851c09bdee341bffa76f9db.mesh"
+
+[deps]
+
+files=[ "res://.import/pit.obj-4d8aded75851c09bdee341bffa76f9db.mesh" ]
+
+source_file="res://src/levels/tl_mvp_04/v4_meshes/pit.obj"
+dest_files=[ "res://.import/pit.obj-4d8aded75851c09bdee341bffa76f9db.mesh", "res://.import/pit.obj-4d8aded75851c09bdee341bffa76f9db.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

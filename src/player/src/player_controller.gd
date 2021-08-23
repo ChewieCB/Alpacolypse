@@ -1,9 +1,11 @@
 extends KinematicBody
+class_name PlayerController
 
 onready var collision = $Collision
+onready var default_collider = $DefaultCollisionShape
 onready var slope_raycast = $SlopeRayCast
 onready var impassable_raycast = $Collision/ImpassableRayCast
-onready var knockback_raycast = $Collision/KnockbackRayCast
+onready var knockback_raycasts = $Collision/KnockbackRayCasts.get_children()
 
 onready var skin = $Collision/LlamaSkin
 
@@ -26,11 +28,12 @@ func _on_ChargeCollider_body_entered(body):
 		return
 	
 	if body is KinematicBody:
-		var flung_velocity = calcualate_charge_trajectory(body, 40.0)
+		var flung_velocity = calcualate_charge_trajectory(body, 40.0, -80.0, true)
 		body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
 		
 		# Remove the trajectory when the sheep lands
-		body.connect("landed", self, "clear_debug_trajectory")
+		if not body.is_connected("landed", self, "clear_debug_trajectory"):
+			body.connect("landed", self, "clear_debug_trajectory")
 	
 		# Knock the player back
 		state_machine.transition_to(
@@ -40,7 +43,7 @@ func _on_ChargeCollider_body_entered(body):
 					body, 
 					20.0, 
 					body.state_machine.state.gravity,
-					true
+					false
 				)
 			}
 		)
@@ -70,7 +73,9 @@ func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=f
 	)
 	
 	# Invert for knockback
-	if knockback:
+	# FIXME - this var is now inverted for some reason, we should probably fix
+	# this or just rename this var to something like forwards?
+	if knockback == true:
 		dummy_position = self.global_transform.origin
 		flung_velocity = flung_velocity.rotated(Vector3.UP, PI)
 	
@@ -129,7 +134,8 @@ func generate_debug_trajectory(trajectory_points, size):
 		# Add to meshinstance in the right place.
 		var node = MeshInstance.new()
 		node.mesh = sphere
-		node.global_transform.origin = _point
+		if node.is_inside_tree():
+			node.global_transform.origin = _point
 		scene_root.add_child(node)
 		debug_trajectory_meshes.append(node)
 

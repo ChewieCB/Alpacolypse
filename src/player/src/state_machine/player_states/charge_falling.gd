@@ -30,7 +30,8 @@ func enter(msg: Dictionary = {}):
 	if was_on_floor:
 		coyote_time.one_shot = true
 		coyote_time.wait_time = 0.2
-		coyote_time.connect("timeout", self, "_on_coyote_time_timeout")
+		if not coyote_time.is_connected("timeout", self, "_on_coyote_time_timeout"):
+			coyote_time.connect("timeout", self, "_on_coyote_time_timeout")
 		add_child(coyote_time)
 		coyote_time.start()
 
@@ -66,19 +67,21 @@ func physics_process(delta: float):
 				{"was_on_floor": _actor.is_on_floor()}
 			)
 	
-	if _actor.knockback_raycast.is_colliding():
-		var body = _actor.knockback_raycast.get_collider()
-		_state_machine.transition_to(
-			"Movement/Knockback", 
-			{
-				"trajectory": _actor.calcualate_charge_trajectory(
-					body, 
-					20.0,
-					gravity,
-					true
-				)
-			}
-		)
+	for _raycast in _actor.knockback_raycasts:
+		if _raycast.is_colliding():
+			var body = _raycast.get_collider()
+			_state_machine.transition_to(
+				"Movement/Knockback", 
+				{
+					"trajectory": _actor.calcualate_charge_trajectory(
+						body, 
+						20.0,
+						gravity,
+						false
+					)
+				}
+			)
+			break
 
 
 func exit():

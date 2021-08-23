@@ -28,7 +28,8 @@ func enter(msg: Dictionary = {}):
 	if was_on_floor:
 		coyote_time.one_shot = true
 		coyote_time.wait_time = 0.2
-		coyote_time.connect("timeout", self, "_on_coyote_time_timeout")
+		if not coyote_time.is_connected("timeout", self, "_on_coyote_time_timeout"):
+			coyote_time.connect("timeout", self, "_on_coyote_time_timeout")
 		add_child(coyote_time)
 		coyote_time.start()
 

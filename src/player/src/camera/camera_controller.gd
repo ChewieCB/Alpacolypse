@@ -55,9 +55,11 @@ func _process(delta):
 	rotation_degrees.y += camera_rotation.y
 	
 	# Rotate the player meshes to face the new look direction
+	var default_collider = current_target.default_collider
 	var collision = current_target.collision
 #	player_mesh.rotation_degrees.y += camera_rotation.y
 	collision.rotation_degrees.y += camera_rotation.y
+	default_collider.rotation_degrees.y += camera_rotation.y
 	
 
 	rotation_degrees.z += camera_rotation.z
