@@ -1,10 +1,13 @@
 extends Area
+class_name CounterArea
 
 signal area_count_changed(value)
 
 var current_count := 0 setget _set_current_count, _get_current_count
 
 export (int) var max_count
+
+var is_sacrificial := false
 
 onready var ui = $UI/SheepCounterUI
 
@@ -16,7 +19,10 @@ func _ready():
 
 
 func get_sheep_in_area():
-	return get_overlapping_bodies().size()
+	var sheep_in_area = get_overlapping_bodies().size()
+	if not sheep_in_area:
+		return 0
+	return sheep_in_area
 
 
 func get_available_sheep():
@@ -31,11 +37,15 @@ func get_available_sheep():
 func _on_CounterArea_body_entered(body):
 	if body is Sheep:
 		_set_current_count(current_count + 1)
-		body.state_machine.transition_to("Movement/Contained")
+		yield(body.state_machine, "transitioned")
+		if is_sacrificial:
+			body.queue_free()
 
 
 func _on_CounterArea_body_exited(body):
 	if body is Sheep:
+		if is_sacrificial:
+			return
 		_set_current_count(current_count - 1)
 
 #

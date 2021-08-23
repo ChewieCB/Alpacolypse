@@ -1,9 +1,12 @@
 extends Node
+class_name CounterManager
 
 # Signals for various levels of fullness
 signal count_empty
 signal count_changed(value)
 signal count_full(max_value)
+
+export (bool) var is_sacrificial = false
 
 # Zones
 onready var linked_zones := get_children()
@@ -29,6 +32,7 @@ func _ready():
 		push_warning("%s has no CounterZones linked to it!" % self.name)
 	for _zone in linked_zones:
 		_zone.connect("area_count_changed", self, "_set_combined_current_count")
+		_zone.is_sacrificial = is_sacrificial
 	# Cache the origin points of each sheep so we can re-spawn them on reset
 	for _sheep in sheep_array:
 		sheep_origin_points.append(_sheep.global_transform.origin)
@@ -41,7 +45,13 @@ func reset_sheep():
 	"""
 	# Respawn the sheep in their original positions
 	for i in range(total_count):
-		var _sheep = sheep_array[i]
+		var _sheep
+		if is_sacrificial:
+			_sheep = sheep_scene.instance()
+			sheep_node.add_child(_sheep)
+		else:
+			_sheep = sheep_array[i]
+		
 		_sheep.global_transform.origin = sheep_origin_points[i]
 		_sheep.movement_state.reset_path()
 		_sheep.state_machine.transition_to("Movement/Idle")
