@@ -5,8 +5,11 @@ signal arena_restart
 export (NodePath) var arena_ui_path
 onready var arena_ui = get_node(arena_ui_path)
 
-export (NodePath) var sacrifice_counter_path
-onready var sacrifice_counter = get_node(sacrifice_counter_path)
+export (NodePath) var arena_zone_path
+onready var arena_zone = get_node(arena_zone_path)
+
+export (NodePath) var counter_manager_path
+onready var counter_manager = get_node(counter_manager_path)
 
 onready var popup_visible_timer = $PopupVisibleTimer
 
@@ -19,25 +22,27 @@ export (int) var timer_length = 90    # timer length in seconds
 
 func _ready():
 	yield(owner, "ready")
+	# Set UI vars
 	countdown_timer = arena_ui.arena_timer
 	sheep_counter = arena_ui.sheep_counter
 	popup_message = arena_ui.popup_message
-	#
-	sacrifice_counter.connect("changed_count", self, "update_counter")
-	sacrifice_counter.connect("pit_full", self, "end_arena_mode_success")
-	#
+	# Counters
+	counter_manager.connect("count_changed", self, "update_counter")
+	counter_manager.connect("count_full", self, "end_arena_mode_success")
+	update_counter(counter_manager.total_count)
+	# Arena Zone Trigger
+	arena_zone.connect("player_entered", self, "start_arena_mode")
+	arena_zone.connect("player_exited", self, "exit_arena_mode")
+	# Timer UI
 	countdown_timer.connect("timeout", self, "countdown_timer_timeout")
 	popup_visible_timer.connect("timeout", self, "hide_popup")
-	#
 	arena_ui.visible = false
 	countdown_timer.stop_timer()
-	#
-	update_counter()
 
 
-func update_counter():
-	sheep_counter.sacrificed_label.text = str(sacrifice_counter.num_current_sheep)
-	sheep_counter.total_label.text = str(sacrifice_counter.total_sheep)
+func update_counter(_value):
+	sheep_counter.sacrificed_label.text = str(counter_manager.combined_current_count)
+	sheep_counter.total_label.text = str(counter_manager.total_count)
 
 
 func start_arena_mode():
@@ -45,28 +50,35 @@ func start_arena_mode():
 	arena_ui.visible = true
 	countdown_timer.timer.set_paused(false)
 	countdown_timer.start_timer(timer_length)
-	#
-	show_popup("Begin the sacrifice!", 5)
+	
+	yield(show_popup("Begin the sacrifice!", 3), "completed")
+
+
+func exit_arena_mode():
+	countdown_timer.timer.set_paused(true)
+	yield(show_popup("A shameful retreat!", 3), "completed")
+	arena_mode_cleanup()
+	reset_sheep_positions()
 
 
 func countdown_timer_timeout():
-	if sacrifice_counter.num_current_sheep < sacrifice_counter.total_sheep:
+	if counter_manager.combined_current_count < counter_manager.total_count:
 		end_arena_mode_fail()
 	else:
-		end_arena_mode_success()
+		end_arena_mode_success(null)
 
 
-func end_arena_mode_success():
+func end_arena_mode_success(_count):
 	countdown_timer.timer.set_paused(true)
-	yield(show_popup("A successful harvest!", 5), "completed")
+	yield(show_popup("A bountiful harvest!", 3), "completed")
 	arena_mode_cleanup()
 
 
 func end_arena_mode_fail():
 	countdown_timer.timer.set_paused(true)
-	yield(show_popup("A pitiful harvest!", 5), "completed")
+	yield(show_popup("A pitiful harvest!", 3), "completed")
 	arena_mode_cleanup()
-	sacrifice_counter.reset_sheep()
+	reset_sheep_positions()
 	emit_signal("arena_restart")
 
 
@@ -76,8 +88,6 @@ func arena_mode_cleanup():
 	#
 	# Hide Arena UI
 	arena_ui.visible = false
-	# Reset the sacrificial arena
-	reset_sheep_positions()
 
 
 func show_popup(message, time):
@@ -105,5 +115,5 @@ func hide_popup():
 
 
 func reset_sheep_positions():
-	sacrifice_counter.reset_sheep()
+	counter_manager.reset_sheep()
 

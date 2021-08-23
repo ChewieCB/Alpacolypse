@@ -1,5 +1,8 @@
 extends Area
 
+signal player_entered
+signal player_exited
+
 export (NodePath) var manager_path
 onready var manager = get_node(manager_path)
 
@@ -15,13 +18,11 @@ func reset_arena_trigger():
 
 
 func _on_ArenaTrigger_body_entered(body):
-	if not body is PlayerController:
-		return
-	manager.start_arena_mode() 
+	if body is PlayerController:
+		emit_signal("player_entered")
 
 
 func _on_ArenaTrigger_body_exited(body):
-	if not body is PlayerController:
-		return
-	manager.arena_mode_cleanup()
-	manager.reset_sheep_positions()
+	if body is PlayerController:
+		emit_signal("player_exited")
+

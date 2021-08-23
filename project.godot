@@ -87,7 +87,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Alpacolypse"
-run/main_scene="res://src/levels/tl_general_03/TL_03_General.tscn"
+run/main_scene="res://src/levels/tl_mvp_04/TL_04.tscn"
 config/icon="res://icon.png"
 
 [autoload]
