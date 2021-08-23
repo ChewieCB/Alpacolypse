@@ -29,6 +29,7 @@ var path_node = 1
 # Debug meshes
 var debug_spheres = []
 
+
 func physics_process(delta: float):
 	# Move along nav path if it exists
 	if path: 
@@ -68,6 +69,11 @@ func calculate_velocity(velocity_current: Vector3, move_direction: Vector3, delt
 	velocity_new.y = velocity_current.y + gravity * delta
 	
 	return velocity_new
+
+
+func reset_path():
+	path = []
+	path_node = 1
 
 
 func get_random_target_in_range():
