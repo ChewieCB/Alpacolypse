@@ -54,9 +54,16 @@ func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=f
 	var trajectory_points = [] 
 	var dt = 0.05    # time step/interval
 	var time = 0
+	
+	# TODO - refactor this, messy!
+	var target_point
+	if body is Vector3:
+		target_point = body
+	elif body is Object:
+		target_point = body.global_transform.origin
 	#
 	var initial_velocity = self.global_transform.origin.direction_to(
-		body.global_transform.origin
+		target_point
 	).normalized() * impact_force
 	var initial_speed = initial_velocity.length() * 1.2
 	#
@@ -65,7 +72,7 @@ func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=f
 	#
 	
 	
-	var dummy_position = body.global_transform.origin
+	var dummy_position = target_point
 	var flung_velocity = Vector3(
 		initial_speed * cos(launch_angle_deg) * cos(approach_angle_deg),
 		initial_speed * sin(launch_angle_deg),
