@@ -21,34 +21,6 @@ const SNAP_LENGTH = 32
 var debug_trajectory_meshes = []
 
 
-func _on_ChargeCollider_body_entered(body):
-	# Only trigger when charging
-	var valid_charge_states = ["Charging", "ChargeJumping", "ChargeFalling"]
-	if not state_machine.state.name in valid_charge_states:
-		return
-	
-	if body is KinematicBody:
-		var flung_velocity = calcualate_charge_trajectory(body, 40.0, -80.0, true)
-		body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
-		
-		# Remove the trajectory when the sheep lands
-		if not body.is_connected("landed", self, "clear_debug_trajectory"):
-			body.connect("landed", self, "clear_debug_trajectory")
-	
-		# Knock the player back
-		state_machine.transition_to(
-			"Movement/Knockback", 
-			{
-				"trajectory": calcualate_charge_trajectory(
-					body, 
-					20.0, 
-					body.state_machine.state.gravity,
-					false
-				)
-			}
-		)
-
-
 func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=false):
 	# Array to store out trajectory points so we can draw a debug curve
 	var trajectory_points = [] 
