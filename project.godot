@@ -106,10 +106,6 @@ config/icon="res://icon.png"
 
 GlobalFlags="*res://src/global/global_flags.gd"
 
-[display]
-
-window/size/fullscreen=true
-
 [editor_plugins]
 
 enabled=PoolStringArray( "CSGExport" )

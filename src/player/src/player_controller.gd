@@ -9,6 +9,14 @@ onready var knockback_raycasts = $Collision/KnockbackRayCasts.get_children()
 
 onready var skin = $Collision/LlamaSkin
 
+# Array of all things that should rotate
+onready var rotateable = [
+	collision,
+	default_collider,
+#	slope_raycast,
+#	impassable_raycast,
+]
+
 onready var camera_pivot = get_node("../CameraPivot")
 onready var camera = get_node("../CameraPivot/Camera")
 
@@ -87,9 +95,9 @@ func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=f
 		flung_velocity = flung_velocity.rotated(Vector3.UP, PI)
 	
 	# FIXME: figure out why this has a PI/16 offset?
-	var camera_rotation_offset = camera_pivot.rotation.y - PI# - (PI/16)
-	
-	flung_velocity = flung_velocity.rotated(Vector3.UP, camera_rotation_offset)
+#	var camera_rotation_offset = camera_pivot.rotation.y - PI# - (PI/16)
+#
+#	flung_velocity = flung_velocity.rotated(Vector3.UP, camera_rotation_offset)
 	
 	var mass = 1
 	
