@@ -308,6 +308,7 @@ transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -
 arena_ui_path = NodePath("../../../UI/ArenaUI")
 arena_zone_path = NodePath("../ArenaTrigger")
 counter_manager_path = NodePath("../../SacrificeZone/CounterManager")
+timer_length = 120
 
 [node name="ArenaTrigger" parent="ArenaZone/ArenaTrigger" instance=ExtResource( 17 )]
 transform = Transform( -68.9744, 0, -9.87359e-06, 0, 18.2819, 0, 1.04148e-05, 0, -65.3898, 14.3706, 12.599, 86.9288 )

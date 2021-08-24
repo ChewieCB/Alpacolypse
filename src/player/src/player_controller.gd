@@ -77,8 +77,6 @@ func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=f
 	#
 	var launch_angle_deg = 15    # degrees, fix this for now
 	var approach_angle_deg = 0
-	#
-	
 	
 	var dummy_position = target_point
 	var flung_velocity = Vector3(
@@ -97,7 +95,10 @@ func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=f
 	# FIXME: figure out why this has a PI/16 offset?
 #	var camera_rotation_offset = camera_pivot.rotation.y - PI# - (PI/16)
 #
-#	flung_velocity = flung_velocity.rotated(Vector3.UP, camera_rotation_offset)
+	flung_velocity = flung_velocity.rotated(
+		Vector3.UP,
+		collision.rotation.y + PI/2
+	)
 	
 	var mass = 1
 	

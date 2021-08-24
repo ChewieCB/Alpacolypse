@@ -81,7 +81,11 @@ func calculate_movement_direction(delta):
 	if Input.is_action_pressed("p1_charge"):
 		# If the player is charging, we want to move forwards in the direction
 		# the skin is facing, with the camera pivot rotating to match this.
-		forwards = input_direction.z * _actor.collision.global_transform.basis.x
+		
+		forwards = Vector3.FORWARD.rotated(
+			Vector3.UP, 
+			_actor.collision.rotation.y
+		)
 		move_direction = forwards
 		#
 		if move_direction.length() > 1.0:
@@ -92,6 +96,7 @@ func calculate_movement_direction(delta):
 		if Input.is_action_pressed("p1_move_left"):
 			_actor.collision.rotate_y(turning_speed * delta)
 			_actor.camera_pivot.rotate_y(turning_speed * delta)
+			pass
 		elif Input.is_action_pressed("p1_move_right"):
 			_actor.collision.rotate_y(-turning_speed * delta)
 			_actor.camera_pivot.rotate_y(-turning_speed * delta)
