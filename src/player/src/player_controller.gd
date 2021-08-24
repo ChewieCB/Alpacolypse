@@ -123,9 +123,4 @@ func clear_debug_trajectory():
 	for mesh in debug_trajectory_meshes:
 		mesh.queue_free()
 	debug_trajectory_meshes = []
-	
-	
-
-
-
 
