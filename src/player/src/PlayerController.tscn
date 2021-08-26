@@ -11,16 +11,14 @@
 [ext_resource path="res://src/player/src/state_machine/player_states/charge_falling.gd" type="Script" id=9]
 [ext_resource path="res://src/player/src/state_machine/player_states/charge_jumping.gd" type="Script" id=10]
 [ext_resource path="res://src/player/src/state_machine/player_states/knockback.gd" type="Script" id=11]
+[ext_resource path="res://src/player/src/state_machine/player_states/drowning.gd" type="Script" id=12]
 [ext_resource path="res://src/ui/debug/StatusLabels.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/OLD/characters/Player/LlamaSkin.tscn" type="PackedScene" id=14]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.19709, 1.1634, 1.42046 )
 
-[sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.193627, 1.33591, 0.632451 )
-
-[sub_resource type="ViewportTexture" id=3]
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("StatusLabels/Viewport")
 
 [node name="Player" type="KinematicBody"]
@@ -42,14 +40,6 @@ cast_to = Vector3( 0, -2, 0 )
 [node name="LlamaSkin" parent="Collision" instance=ExtResource( 14 )]
 transform = Transform( -4.37114e-10, 0, -0.01, 0, 0.01, 0, 0.01, 0, -4.37114e-10, 0, 0, 0 )
 
-[node name="ChargeCollider" type="Area" parent="Collision"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30882, 1.5454, 6.29219e-09 )
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape" type="CollisionShape" parent="Collision/ChargeCollider"]
-shape = SubResource( 2 )
-
 [node name="ImpassableRayCast" type="RayCast" parent="Collision"]
 enabled = true
 cast_to = Vector3( -2, 0, 0 )
@@ -60,16 +50,19 @@ cast_to = Vector3( -2, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
 enabled = true
 cast_to = Vector3( -2, 0, 0 )
+collision_mask = 9
 
 [node name="KnockbackRayCast2" type="RayCast" parent="Collision/KnockbackRayCasts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
 enabled = true
 cast_to = Vector3( -2, 0, 0 )
+collision_mask = 9
 
 [node name="KnockbackRayCast3" type="RayCast" parent="Collision/KnockbackRayCasts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45, 0 )
 enabled = true
 cast_to = Vector3( -2, 0, 0 )
+collision_mask = 9
 
 [node name="StateMachine" type="Node" parent="." groups=[
 "state_machine",
@@ -104,13 +97,14 @@ script = ExtResource( 9 )
 [node name="Knockback" type="Node" parent="StateMachine/Movement"]
 script = ExtResource( 11 )
 
+[node name="Drowning" type="Node" parent="StateMachine/Movement"]
+script = ExtResource( 12 )
+
 [node name="StatusLabels" parent="." instance=ExtResource( 13 )]
 
 [node name="Sprite3D" parent="StatusLabels" index="1"]
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
-
-[connection signal="body_entered" from="Collision/ChargeCollider" to="." method="_on_ChargeCollider_body_entered"]
 
 [editable path="StatusLabels"]

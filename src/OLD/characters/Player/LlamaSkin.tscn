@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/meshes/characters/llama/Mat_Llama.material" type="Material" id=1]
 [ext_resource path="res://src/OLD/characters/Player/LlamaSkinAnimationTree.tres" type="AnimationNodeStateMachine" id=2]
@@ -176,6 +176,36 @@ tracks/8/loop_wrap = true
 tracks/8/imported = true
 tracks/8/enabled = true
 tracks/8/keys = PoolRealArray( 0, 1, 0, 0, 0, 0.0275127, -1.90675e-08, 1.00593e-07, 0.999622, 1, 1, 1, 0.0666667, 1, 0, 0, 0, -0.198039, -4.11425e-08, 9.37089e-08, 0.980194, 1, 1, 1, 0.133333, 1, 0, 0, 0, 0.0911493, -1.268e-08, 1.01579e-07, 0.995837, 1, 1, 1, 0.2, 1, 0, 0, 0, 0.0568887, -1.61053e-08, 1.01052e-07, 0.998381, 1, 1, 1, 0.266667, 1, 0, 0, 0, -0.218396, -4.31408e-08, 9.28196e-08, 0.97586, 1, 1, 1, 0.333333, 1, 0, 0, 0, 0.0704033, -1.46753e-08, 1.01285e-07, 0.997519, 1, 1, 1, 0.4, 1, 0, 0, 0, 0.0862157, -1.3067e-08, 1.01505e-07, 0.996276, 1, 1, 1, 0.416667, 1, 0, 0, 0, 0.0275127, -1.90675e-08, 1.00593e-07, 0.999622, 1, 1, 1 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "Drown"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:transform")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 3 ),
+"transitions": PoolRealArray( 1, 1, -0.108819 ),
+"update": 0,
+"values": [ Transform( -0.01, 0, -3.25841e-09, 0, 0.01, 0, 3.25841e-09, 0, -0.01, 0, 0, 0 ), Transform( -0.01, 0, -3.25841e-09, 0, 0.01, 0, 3.25841e-09, 0, -0.01, 0, -0.513127, 0 ), Transform( -0.01, 0, -3.25841e-09, 0, 0.01, 0, 3.25841e-09, 0, -0.01, 0, -3.72315, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "emit_drown_finished"
+} ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Idle"
@@ -715,11 +745,11 @@ tracks/8/imported = true
 tracks/8/enabled = true
 tracks/8/keys = PoolRealArray( 0, 1, 0, 0, 0, 0.0275127, -1.90675e-08, 1.00593e-07, 0.999622, 1, 1, 1, 0.0666667, 1, 0, 0, 0, -0.132916, -3.49298e-08, 9.62411e-08, 0.991127, 1, 1, 1, 0.133333, 1, 0, 0, 0, -0.251497, -4.62272e-08, 9.13397e-08, 0.967858, 1, 1, 1, 0.2, 1, 0, 0, 0, -0.136189, -3.52474e-08, 9.61252e-08, 0.990683, 1, 1, 1, 0.266667, 1, 0, 0, 0, 0.0711175, -1.47209e-08, 1.01275e-07, 0.997468, 1, 1, 1, 0.333333, 1, 0, 0, 0, 0.173648, -4.24595e-09, 1.02292e-07, 0.984808, 1, 1, 1, 0.416667, 1, 0, 0, 0, 0.0275127, -1.90675e-08, 1.00593e-07, 0.999622, 1, 1, 1 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 resource_local_to_scene = false
 
 [node name="Llama" type="Spatial"]
-transform = Transform( -0.01, 0, -3.25841e-09, 0, 0.01, 0, 3.25841e-09, 0, -0.01, 0, 0, 0 )
+transform = Transform( -0.01, 0, -3.25841e-09, 0, 0.01, 0, 3.25841e-09, 0, -0.01, 0, -3.72315, 0 )
 script = ExtResource( 3 )
 
 [node name="RootNode gltf orientation matrix" type="Spatial" parent="."]
@@ -804,6 +834,7 @@ material/0 = null
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Bonk = SubResource( 3 )
 anims/Charge = SubResource( 4 )
+anims/Drown = SubResource( 13 )
 anims/Idle = SubResource( 5 )
 anims/Idle2 = SubResource( 6 )
 anims/Jump = SubResource( 7 )
@@ -817,4 +848,4 @@ anims/Walk = SubResource( 12 )
 tree_root = ExtResource( 2 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 13 )
+parameters/playback = SubResource( 14 )

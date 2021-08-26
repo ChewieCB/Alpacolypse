@@ -25,7 +25,7 @@ func get_closest_navmesh_point(body):
 		for _vert in _navmesh.navmesh.get_vertices():
 			if body_pos.distance_to(_vert) < body_pos.distance_to(closest_vert):
 				closest_vert = _vert
-				closest_navmesh = _navmesh
+				_closest_navmesh = _navmesh
 	
 	return closest_vert
 

@@ -8,6 +8,7 @@ onready var impassable_raycast = $Collision/ImpassableRayCast
 onready var knockback_raycasts = $Collision/KnockbackRayCasts.get_children()
 
 onready var skin = $Collision/LlamaSkin
+onready var tween = $Tween
 
 onready var camera_pivot = get_node("../CameraPivot")
 onready var camera = get_node("../CameraPivot/Camera")
@@ -19,34 +20,6 @@ const SNAP_DIRECTION = Vector3.DOWN
 const SNAP_LENGTH = 32
 
 var debug_trajectory_meshes = []
-
-
-func _on_ChargeCollider_body_entered(body):
-	# Only trigger when charging
-	var valid_charge_states = ["Charging", "ChargeJumping", "ChargeFalling"]
-	if not state_machine.state.name in valid_charge_states:
-		return
-	
-	if body is KinematicBody:
-		var flung_velocity = calcualate_charge_trajectory(body, 40.0, -80.0, true)
-		body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
-		
-		# Remove the trajectory when the sheep lands
-		if not body.is_connected("landed", self, "clear_debug_trajectory"):
-			body.connect("landed", self, "clear_debug_trajectory")
-	
-		# Knock the player back
-		state_machine.transition_to(
-			"Movement/Knockback", 
-			{
-				"trajectory": calcualate_charge_trajectory(
-					body, 
-					20.0, 
-					body.state_machine.state.gravity,
-					false
-				)
-			}
-		)
 
 
 func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=false):
@@ -151,9 +124,4 @@ func clear_debug_trajectory():
 	for mesh in debug_trajectory_meshes:
 		mesh.queue_free()
 	debug_trajectory_meshes = []
-	
-	
-
-
-
 
