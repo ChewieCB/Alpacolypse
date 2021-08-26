@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/OLD/characters/Player/llama_skin.gd"
 }, {
-"base": "Reference",
+"base": "KinematicBody",
 "class": "Player",
 "language": "GDScript",
 "path": "res://src/OLD/characters/Player/player.gd"

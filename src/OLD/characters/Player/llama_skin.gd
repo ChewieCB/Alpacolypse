@@ -1,9 +1,8 @@
 extends Spatial
 class_name LlamaSkin
 # Controls the animation tree's transitions for this animated character
-
 # it has a signal connected to the player state machine, and uses the resulting 
-# staet names to translate them into the states for the animation tree
+# state names to translate them into the states for the animation tree
 
 enum States { IDLE, IDLE2, WALK, CHARGE, BONK, JUMP, LAND }
 

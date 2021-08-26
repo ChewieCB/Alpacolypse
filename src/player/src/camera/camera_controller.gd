@@ -48,23 +48,24 @@ func _physics_process(_delta):
 
 
 func _process(delta):
-	var yaw_dir = mouse_delta.x
-	var pitch_dir = mouse_delta.y
-	# Rotate the camera pivot accordingly
-	camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
-	rotation_degrees.y += camera_rotation.y
-	
-	# Rotate the player meshes to face the new look direction
-	var default_collider = current_target.default_collider
-	var collision = current_target.collision
-#	player_mesh.rotation_degrees.y += camera_rotation.y
-	collision.rotation_degrees.y += camera_rotation.y
-	default_collider.rotation_degrees.y += camera_rotation.y
-	
+	if GlobalFlags.CAMERA_CONTROLS_ACTIVE:
+		var yaw_dir = mouse_delta.x
+		var pitch_dir = mouse_delta.y
+		# Rotate the camera pivot accordingly
+		camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
+		rotation_degrees.y += camera_rotation.y
+		
+		# Rotate the player meshes to face the new look direction
+		var default_collider = current_target.default_collider
+		var collision = current_target.collision
+	#	player_mesh.rotation_degrees.y += camera_rotation.y
+		collision.rotation_degrees.y += camera_rotation.y
+		default_collider.rotation_degrees.y += camera_rotation.y
+		
 
-	rotation_degrees.z += camera_rotation.z
-	rotation_degrees.z = clamp(rotation_degrees.z, min_look_angle, max_look_angle)
-	
-	mouse_delta = Vector2.ZERO
+		rotation_degrees.z += camera_rotation.z
+		rotation_degrees.z = clamp(rotation_degrees.z, min_look_angle, max_look_angle)
+		
+		mouse_delta = Vector2.ZERO
 
 

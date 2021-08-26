@@ -8,6 +8,7 @@ onready var impassable_raycast = $Collision/ImpassableRayCast
 onready var knockback_raycasts = $Collision/KnockbackRayCasts.get_children()
 
 onready var skin = $Collision/LlamaSkin
+onready var tween = $Tween
 
 onready var camera_pivot = get_node("../CameraPivot")
 onready var camera = get_node("../CameraPivot/Camera")

@@ -16,3 +16,9 @@ signal landed
 
 func _ready():
 	spawn_position = global_transform.origin
+
+
+func respawn():
+	self.global_transform.origin = spawn_position
+	movement_state.reset_path()
+	state_machine.transition_to("Movement/Idle")
