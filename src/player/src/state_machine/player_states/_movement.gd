@@ -32,8 +32,8 @@ func unhandled_input(_event: InputEvent):
 func physics_process(delta: float):
 	# Debug Reset
 	if Input.is_action_pressed("reset"):
-		GlobalFlags.PLAYER_CONTROLS_ACTIVE = true
-		get_tree().reload_current_scene()
+		if GlobalFlags.PLAYER_CONTROLS_ACTIVE == true:
+			get_tree().reload_current_scene()
 	elif Input.is_action_pressed("quit"):
 		GlobalFlags.PLAYER_CONTROLS_ACTIVE = true
 		get_tree().quit()

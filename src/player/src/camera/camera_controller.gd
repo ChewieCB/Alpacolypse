@@ -48,19 +48,19 @@ func _physics_process(_delta):
 
 
 func _process(delta):
-	var yaw_dir = mouse_delta.x
-	var pitch_dir = mouse_delta.y
+	if GlobalFlags.CAMERA_CONTROLS_ACTIVE:
+	    var yaw_dir = mouse_delta.x
+	    var pitch_dir = mouse_delta.y
 	
-	# Disable player control of the camera when charging
-	if Input.is_action_pressed("p1_charge"):
-#		var test0 = current_target.collision.rotation_degrees.y
-#		rotation_degrees.y += current_target.collision.rotation_degrees.y
-		pass
-	
-	else:
-		# Rotate the camera pivot accordingly
-		camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
-		rotation_degrees.y += camera_rotation.y
+	    # Disable player control of the camera when charging
+	    if Input.is_action_pressed("p1_charge"):
+            # rotation_degrees.y += current_target.collision.rotation_degrees.y
+            # var test0 = current_target.collision.rotation_degrees.y
+		    pass
+        else:
+		    # Rotate the camera pivot accordingly
+		    camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
+            rotation_degrees.y += camera_rotation.y
 
 		rotation_degrees.z += camera_rotation.z
 		rotation_degrees.z = clamp(rotation_degrees.z, min_look_angle, max_look_angle)

@@ -6,8 +6,6 @@ var gravity = -70.0
 var jump_impulse = 140
 var rotation_speed_factor := 6.0
 
-#onready var tween := $Tween
-
 export var charge_inertia = 800
 
 var skin
