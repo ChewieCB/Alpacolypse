@@ -8,17 +8,21 @@ onready var camera = $Camera
 onready var far_camera_collider = $MaxRayCast
 onready var near_camera_collider = $MaxRayCast
 onready var camera_collision_sphere = $Camera/Area
+onready var tween = $Tween
+
+var is_using_controller = false
 
 var look_sensitivity = 15.0
 var min_look_angle = -40.0
 var max_look_angle = 75.0
 
 var camera_rotation = Vector3.ZERO
+var camera_lerp_goal = Vector3.ZERO
 
 
 var mouse_delta = Vector2.ZERO
 
-onready var actor = get_parent()
+onready var actor = get_parent().get_node("Player")
 
 
 func _ready():
@@ -27,13 +31,16 @@ func _ready():
 
 
 func _unhandled_input(event):
+	# Get pitch and yaw values from relative mouse/joystick movement
 	if event is InputEventMouseMotion:
-		# Get pitch and yaw values from relative mouse movement
+		is_using_controller = false
 		mouse_delta = event.relative
 		if not GlobalFlags.CAMERA_INVERT_X:
 			mouse_delta.x *= -1
 		if not GlobalFlags.CAMERA_INVERT_Y:
 			mouse_delta.y *= -1
+	elif event is InputEventJoypadMotion:
+		is_using_controller = true
 
 
 func _physics_process(_delta):
@@ -49,6 +56,20 @@ func _physics_process(_delta):
 
 func _process(delta):
 	if GlobalFlags.CAMERA_CONTROLS_ACTIVE:
+		#
+		if is_using_controller:
+			mouse_delta = Vector2(
+				Input.get_action_strength("p1_camera_right") - Input.get_action_strength("p1_camera_left"),
+				Input.get_action_strength("p1_camera_up") - Input.get_action_strength("p1_camera_down")
+			) * 10
+			
+			# Camera inversions
+			if not GlobalFlags.CAMERA_INVERT_X:
+				mouse_delta.x *= -1
+			if GlobalFlags.CAMERA_INVERT_Y:
+				mouse_delta.y *= -1
+		
+		#
 	    var yaw_dir = mouse_delta.x
 	    var pitch_dir = mouse_delta.y
 	
