@@ -11,6 +11,8 @@ export var charge_inertia = 800
 
 var skin
 var velocity := Vector3.ZERO
+var camera_pivot
+var goal_quaternion
 
 export var jump_velocity = 30
 
@@ -34,6 +36,7 @@ func unhandled_input(_event: InputEvent):
 
 func physics_process(delta: float):
 	_parent.physics_process(delta)
+	
 	if _actor.is_on_ceiling():
 		_parent.velocity.y = 0
 	# Transition to Falling at peak of jump

@@ -11,6 +11,7 @@ export var charge_inertia = 800
 var skin
 var velocity := Vector3.ZERO
 var camera_pivot 
+var goal_quaternion
 
 
 func enter(_msg: Dictionary = {}):
@@ -21,25 +22,10 @@ func enter(_msg: Dictionary = {}):
 	_parent.jump_impulse = jump_impulse
 	_parent.rotation_speed_factor = rotation_speed_factor
 	skin.transition_to(skin.States.CHARGE)
-	
-	camera_pivot = _actor.camera_pivot 
 
 
 func physics_process(delta: float):
 	_parent.physics_process(delta)
-	
-	# Lerp camera to collision rotation
-	var current_quaternion = Quat(camera_pivot.global_transform.basis)
-	var goal_quaternion = _actor.collision.global_transform.basis
-	var midpoint = current_quaternion.slerp(goal_quaternion, 0.5)
-	camera_pivot.global_transform.basis = Basis(midpoint)
-	camera_pivot.rotation_degrees.z = 20
-	
-#	camera_pivot.rotation = camera_pivot.rotation.linear_interpolate(
-#		Vector3(0, _actor.collision.rotation.y - PI/2, camera_pivot.rotation.z),
-#		0.2
-#	)
-#	camera_pivot.rotation
 	
 	# Idle
 	if _parent.input_direction == Vector3.ZERO:
@@ -88,5 +74,5 @@ func physics_process(delta: float):
 
 
 func exit():
-	pass
+	_parent.exit()
 

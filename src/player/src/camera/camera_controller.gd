@@ -70,22 +70,76 @@ func _process(delta):
 				mouse_delta.y *= -1
 		
 		#
-	    var yaw_dir = mouse_delta.x
-	    var pitch_dir = mouse_delta.y
+		var yaw_dir = mouse_delta.x
+		var pitch_dir = mouse_delta.y
+		
+		#
+		var is_player_moving_camera = (mouse_delta != Vector2.ZERO)
+		
+		# Let the player input override the charge cam tween when the tween
+		# is still active but the player is not charging
+		if is_player_moving_camera and tween.is_active() and not current_target.is_charging:
+			tween.stop_all()
 	
-	    # Disable player control of the camera when charging
-	    if Input.is_action_pressed("p1_charge"):
-            # rotation_degrees.y += current_target.collision.rotation_degrees.y
-            # var test0 = current_target.collision.rotation_degrees.y
-		    pass
-        else:
-		    # Rotate the camera pivot accordingly
-		    camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
-            rotation_degrees.y += camera_rotation.y
+		# Disable player control of the camera when charging
+		if Input.is_action_pressed("p1_charge") and GlobalFlags.PLAYER_CONTROLS_ACTIVE:
+			# Wait until the tween has finished
+			yield(tween, "tween_all_completed")
+			rotation.y = current_target.collision.rotation.y - PI/2
+		else:
+			# Rotate the camera pivot accordingly
+			camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
+			rotation_degrees.y += camera_rotation.y
 
 		rotation_degrees.z += camera_rotation.z
 		rotation_degrees.z = clamp(rotation_degrees.z, min_look_angle, max_look_angle)
 		
 		mouse_delta = Vector2.ZERO
 
+
+func rotate_camera(goal_point, time):
+	# Get the current state of the camera rotation as a Quat
+	var current_quaternion = self.global_transform.basis.get_rotation_quat()
+	var goal_quaternion = goal_point.get_rotation_quat()
+	var midpoint = current_quaternion.slerp(goal_quaternion, 1.0)
+	
+	# Tween Basis rotation
+	tween.interpolate_property(
+		self,
+		"global_transform:basis",
+		self.global_transform.basis,
+		Basis(midpoint),
+		time,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN
+	)
+	tween.start()
+
+
+func enter_charge():
+	# FOV
+	tween.interpolate_property(
+		camera,
+		"fov",
+		camera.fov,
+		60,
+		0.3,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	tween.start()
+
+
+func exit_charge():
+	# FOV
+	tween.interpolate_property(
+		camera,
+		"fov",
+		camera.fov,
+		70,
+		0.3,
+		Tween.TRANS_SINE,
+		Tween.EASE_IN_OUT
+	)
+	tween.start()
 

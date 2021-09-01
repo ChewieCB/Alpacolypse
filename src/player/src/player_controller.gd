@@ -20,14 +20,50 @@ onready var rotateable = [
 
 onready var camera_pivot = get_node("../CameraPivot")
 onready var camera = get_node("../CameraPivot/Camera")
+var goal_quaternion
 
 onready var state_machine = $StateMachine
 onready var state_label = $StatusLabels/Viewport/StateLabel
+onready var movement_state = $StateMachine/Movement
+onready var charge_states = [
+	$StateMachine/Movement/Charging,
+	$StateMachine/Movement/ChargeFalling,
+	$StateMachine/Movement/ChargeJumping,
+	$StateMachine/Movement/Knockback
+]
+var is_charging = false
 
 const SNAP_DIRECTION = Vector3.DOWN
 const SNAP_LENGTH = 32
 
 var debug_trajectory_meshes = []
+
+
+func _ready():
+	movement_state.connect("align_charge_cam", self, "charge_camera")
+
+
+func _physics_process(_delta):
+	is_charging = (state_machine.state in charge_states)
+
+
+func charge_camera():
+	# FIXME - we only want the camera rotating around the y-axis,
+	# clamp it in the y vector.
+	#
+	# Setup a goal quat with a 20 degree angle on the z-axis
+	camera_pivot = camera_pivot
+	goal_quaternion = collision.global_transform.basis
+	goal_quaternion *= Basis(Vector3(0, 0, 1), deg2rad(20))
+	# Determine the tween time by how big the rotation is
+	var rotation_time = 1 - goal_quaternion.y.angle_to(
+		camera_pivot.global_transform.basis.y
+	) * 0.8 + 0.1
+	# Lerp camera to collision rotation
+	if not camera_pivot.global_transform.basis == goal_quaternion:
+		if camera_pivot.tween.is_active():
+			camera_pivot.tween.stop_all()
+		camera_pivot.rotate_camera(goal_quaternion, rotation_time)
 
 
 func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=false):

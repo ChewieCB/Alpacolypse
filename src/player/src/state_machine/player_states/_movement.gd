@@ -4,6 +4,8 @@ extends State
 # Child states can override this states's functions or change its properties
 # This keeps the logic grouped in one location
 
+signal align_charge_cam
+
 # These should be fallback defaults
 # TODO: Make these null and raise an exception to indicate bad State extension
 #       to better separate movement vars.
@@ -19,10 +21,15 @@ var velocity := Vector3.ZERO
 var input_direction = Vector3.ZERO
 var move_direction = Vector3.ZERO
 
+var camera_pivot = null
+var goal_quaternion
 
-func enter(_msg: Dictionary = {}):
-	pass
-#	player.camera.connect("aim_fired", self, "_on_Camera_aim_fired")
+
+func enter(msg: Dictionary = {}):
+	# Camera Adjustments
+	if _state_machine.state in _actor.charge_states:
+		emit_signal("align_charge_cam")
+		_actor.camera_pivot.enter_charge()
 
 
 func unhandled_input(_event: InputEvent):
@@ -39,14 +46,30 @@ func physics_process(delta: float):
 		get_tree().quit()
 	
 	# Movement
-	move_direction = calculate_movement_direction(delta)
+	#
+	if GlobalFlags.PLAYER_CONTROLS_ACTIVE:
+		input_direction = get_input_direction()
+	else:
+		input_direction = Vector3.ZERO
+	
+	move_direction = calculate_movement_direction(input_direction, delta)
 	
 	velocity = calculate_velocity(velocity, move_direction, delta)
 	velocity = _actor.move_and_slide(velocity, Vector3.UP, true, 4, 0.785398, false)
+	
+	# Readjust if the player is charging and turning whilst the tween is still going
+	if _actor.camera_pivot.tween.is_active() and _actor.is_charging \
+	and Vector3(
+		Input.get_action_strength("p1_move_right") - Input.get_action_strength("p1_move_left"),
+		0,
+		Input.get_action_strength("p1_move_backwards") - Input.get_action_strength("p1_move_forwards")
+	) != Vector3.ZERO:
+		emit_signal("align_charge_cam")
 
 
 func exit():
-	pass
+	if _state_machine.state in _actor.charge_states:
+		_actor.camera_pivot.exit_charge()
 
 
 func get_input_direction():
@@ -62,18 +85,11 @@ func get_input_direction():
 #		input_vector = input_vector.rotated(
 #			Vector3.UP, _actor.collision.rotation.y
 #		)
-		
 	
 	return input_vector
 
 
-func calculate_movement_direction(delta):
-	#
-	if GlobalFlags.PLAYER_CONTROLS_ACTIVE:
-		input_direction = get_input_direction()
-	else:
-		input_direction = Vector3.ZERO
-	
+func calculate_movement_direction(input_direction, delta):
 	var forwards := Vector3.ZERO
 	var right := Vector3.ZERO
 	
