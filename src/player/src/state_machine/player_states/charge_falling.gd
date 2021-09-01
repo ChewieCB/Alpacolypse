@@ -13,6 +13,8 @@ var rotation_speed_factor := 6.0
 export var charge_inertia = 800
 
 var velocity := Vector3.ZERO
+var camera_pivot
+var goal_quaternion
 
 
 func enter(msg: Dictionary = {}):
@@ -42,6 +44,7 @@ func unhandled_input(_event: InputEvent):
 
 func physics_process(delta: float):
 	_parent.physics_process(delta)
+	
 	if _actor.is_on_floor():
 		if _parent.input_direction == Vector3.ZERO:
 			# Idle

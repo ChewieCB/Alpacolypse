@@ -10,6 +10,8 @@ export var charge_inertia = 800
 
 var skin
 var velocity := Vector3.ZERO
+var camera_pivot 
+var goal_quaternion
 
 
 func enter(_msg: Dictionary = {}):
@@ -24,6 +26,7 @@ func enter(_msg: Dictionary = {}):
 
 func physics_process(delta: float):
 	_parent.physics_process(delta)
+	
 	# Idle
 	if _parent.input_direction == Vector3.ZERO:
 		_state_machine.transition_to("Movement/Idle")
@@ -71,14 +74,5 @@ func physics_process(delta: float):
 
 
 func exit():
-	pass
-
-
-func calculate_velocity(velocity_current: Vector3, move_direction: Vector3, delta: float):
-	var velocity_new = move_direction * move_speed
-	if velocity_new.length() > max_speed:
-		velocity_new = velocity_new.normalized() * max_speed
-	velocity_new.y = velocity_current.y + gravity * delta
-	
-	return velocity_new
+	_parent.exit()
 

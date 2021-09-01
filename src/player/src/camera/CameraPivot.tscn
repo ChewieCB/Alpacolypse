@@ -28,3 +28,5 @@ cast_to = Vector3( 16, 0, 0 )
 [node name="MinRayCast" type="RayCast" parent="."]
 enabled = true
 cast_to = Vector3( 2, 0, 0 )
+
+[node name="Tween" type="Tween" parent="."]
