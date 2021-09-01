@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/player/src/state_machine/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://src/player/src/state_machine/player_states/_movement.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/player/src/state_machine/player_states/drowning.gd" type="Script" id=12]
 [ext_resource path="res://src/ui/debug/StatusLabels.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/OLD/characters/Player/LlamaSkin.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/ui/menus/fadeout/Fadeout.tscn" type="PackedScene" id=15]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1.19709, 1.1634, 1.42046 )
@@ -106,5 +107,9 @@ script = ExtResource( 12 )
 texture = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Fadeout" parent="UI" instance=ExtResource( 15 )]
 
 [editable path="StatusLabels"]

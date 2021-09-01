@@ -99,7 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Alpacolypse"
-run/main_scene="res://src/levels/tl_mvp_04/TL_04.tscn"
+run/main_scene="res://src/ui/menus/main_menu/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]

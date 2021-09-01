@@ -54,5 +54,5 @@ func exit():
 		Vector3.ZERO, 
 		Vector3.ZERO
 	)
-	get_tree().reload_current_scene()
+	_actor.reset()
 

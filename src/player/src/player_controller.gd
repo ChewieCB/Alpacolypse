@@ -1,6 +1,8 @@
 extends KinematicBody
 class_name PlayerController
 
+onready var fadeout = $UI/Fadeout
+
 onready var collision = $Collision
 onready var default_collider = $DefaultCollisionShape
 onready var slope_raycast = $SlopeRayCast
@@ -20,6 +22,14 @@ const SNAP_DIRECTION = Vector3.DOWN
 const SNAP_LENGTH = 32
 
 var debug_trajectory_meshes = []
+
+
+func _ready():
+	fadeout.fade_in()
+
+
+func reset():
+	fadeout.fade_out_reset()
 
 
 func calcualate_charge_trajectory(body, impact_force, gravity=-80.0, knockback=false):
