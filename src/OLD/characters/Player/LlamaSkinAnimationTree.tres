@@ -59,12 +59,10 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 switch_mode = 2
 auto_advance = true
-priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 switch_mode = 2
 auto_advance = true
-priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 switch_mode = 2
@@ -75,12 +73,13 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
 auto_advance = true
+priority = 3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
 [resource]
 states/Bonk/node = SubResource( 1 )
-states/Bonk/position = Vector2( 886, 156 )
+states/Bonk/position = Vector2( 1014, 149 )
 states/Charge/node = SubResource( 2 )
 states/Charge/position = Vector2( 703, 156 )
 states/Idle/node = SubResource( 3 )
@@ -97,4 +96,4 @@ states/Walk/node = SubResource( 8 )
 states/Walk/position = Vector2( 543, 61 )
 transitions = [ "Idle", "Idle2", SubResource( 9 ), "Idle2", "Idle", SubResource( 10 ), "Idle", "Walk", SubResource( 11 ), "Walk", "Idle", SubResource( 12 ), "Walk", "Charge", SubResource( 13 ), "Charge", "Walk", SubResource( 14 ), "Idle", "Charge", SubResource( 15 ), "Charge", "Idle", SubResource( 16 ), "Charge", "Bonk", SubResource( 17 ), "Bonk", "Idle", SubResource( 18 ), "Idle", "Jump", SubResource( 19 ), "Walk", "Jump", SubResource( 20 ), "Charge", "Jump", SubResource( 21 ), "Jump", "Idle", SubResource( 22 ), "Bonk", "Charge", SubResource( 23 ), "Bonk", "Walk", SubResource( 24 ), "Spin", "Idle", SubResource( 25 ), "Idle", "Spin", SubResource( 26 ), "Idle", "Bonk", SubResource( 27 ), "Bonk", "Idle2", SubResource( 28 ), "Idle2", "Bonk", SubResource( 29 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 78, 10.0496 )
+graph_offset = Vector2( 72, 36.0496 )

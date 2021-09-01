@@ -121,26 +121,45 @@ text = "Play"
 flat = true
 
 [node name="CenterContainer2" type="CenterContainer" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer"]
-visible = false
 margin_top = 86.0
 margin_right = 813.0
 margin_bottom = 168.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SettingsButton" type="Button" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2"]
-margin_left = 306.0
-margin_right = 506.0
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2"]
+margin_left = 159.0
+margin_right = 653.0
+margin_bottom = 82.0
+
+[node name="WindowedButton" type="Button" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_right = 219.0
 margin_bottom = 82.0
 custom_fonts/font = SubResource( 4 )
 disabled = true
-text = "Settings"
+text = "Windowed"
+flat = true
+
+[node name="Separator" type="Label" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 223.0
+margin_top = 3.0
+margin_right = 247.0
+margin_bottom = 79.0
+custom_fonts/font = SubResource( 4 )
+text = "/"
+
+[node name="FullscreenButton" type="Button" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer"]
+margin_left = 251.0
+margin_right = 494.0
+margin_bottom = 82.0
+custom_fonts/font = SubResource( 4 )
+text = "Fullscreen"
 flat = true
 
 [node name="CenterContainer3" type="CenterContainer" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer"]
-margin_top = 86.0
+margin_top = 172.0
 margin_right = 813.0
-margin_bottom = 168.0
+margin_bottom = 254.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -153,22 +172,25 @@ text = "Quit"
 flat = true
 
 [node name="CenterContainer4" type="CenterContainer" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer"]
-margin_top = 172.0
+margin_top = 258.0
 margin_right = 813.0
-margin_bottom = 224.0
+margin_bottom = 267.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterContainer5" type="CenterContainer" parent="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer"]
-margin_top = 228.0
+margin_top = 271.0
 margin_right = 813.0
 margin_bottom = 281.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Fadeout" parent="UI" instance=ExtResource( 5 )]
+visible = false
 
 [connection signal="pressed" from="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/WindowedButton" to="." method="_on_WindowedButton_pressed"]
+[connection signal="pressed" from="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/FullscreenButton" to="." method="_on_FullscreenButton_pressed"]
 [connection signal="pressed" from="UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer3/QuitButton" to="." method="_on_QuitButton_pressed"]
 
 [editable path="Llama"]
