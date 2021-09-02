@@ -10,6 +10,7 @@ var rotation_speed_factor := 6.0
 export var charge_inertia = 800
 
 var skin
+var audio_player
 var velocity := Vector3.ZERO
 var camera_pivot
 var goal_quaternion
@@ -18,7 +19,9 @@ export var jump_velocity = 30
 
 
 func enter(_msg: Dictionary = {}):
+	audio_player = _actor.audio_player
 	skin = _actor.skin
+	
 	_parent.enter()
 	_parent.max_speed = max_speed
 	_parent.move_speed = move_speed
@@ -27,6 +30,8 @@ func enter(_msg: Dictionary = {}):
 	_parent.velocity.x *= 4
 	_parent.velocity.z *= 4
 	_parent.velocity += Vector3(0, jump_velocity, 0)
+	#
+	audio_player.transition_to(audio_player.States.JUMP)
 	skin.transition_to(skin.States.JUMP)
 
 

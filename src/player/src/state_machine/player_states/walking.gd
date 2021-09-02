@@ -10,16 +10,21 @@ export (float, 0.1, 20.0, 0.1) var rotation_speed_factor := 10.0
 export (int, 0, 200) var inertia = 0
 
 var skin
+var audio_player
 var velocity := Vector3.ZERO
 
 
 func enter(_msg: Dictionary = {}):
+	audio_player = _actor.audio_player
 	skin = _actor.skin
+	#
 	_parent.enter()
 	_parent.max_speed = max_speed
 	_parent.move_speed = move_speed
 	_parent.jump_impulse = jump_impulse
 	_parent.rotation_speed_factor = rotation_speed_factor
+	#
+	audio_player.transition_to(audio_player.States.WALK)
 	skin.transition_to(skin.States.WALK)
 
 
@@ -49,6 +54,7 @@ func physics_process(delta: float):
 
 
 func exit():
+	audio_player.stop_audio()
 	_parent.exit()
 
 

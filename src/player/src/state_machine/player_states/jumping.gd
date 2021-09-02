@@ -3,17 +3,21 @@ extends State
 
 export var jump_velocity = 30
 
+var audio_player
 var skin
 
 
 func enter(_msg: Dictionary = {}):
+	audio_player = _actor.audio_player
 	skin = _actor.skin
-	skin.transition_to(skin.States.JUMP)
 	#
 	_parent.enter()
 	_parent.velocity.x *= 2
 	_parent.velocity.z *= 2
 	_parent.velocity += Vector3(0, jump_velocity, 0)
+	#
+	audio_player.transition_to(audio_player.States.JUMP)
+	skin.transition_to(skin.States.JUMP)
 
 
 func unhandled_input(_event: InputEvent):

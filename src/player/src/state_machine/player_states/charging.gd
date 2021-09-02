@@ -9,18 +9,21 @@ var rotation_speed_factor := 6.0
 export var charge_inertia = 800
 
 var skin
+var audio_player
 var velocity := Vector3.ZERO
 var camera_pivot 
 var goal_quaternion
 
 
 func enter(_msg: Dictionary = {}):
+	audio_player = _actor.audio_player
 	skin = _actor.skin
 	_parent.enter()
 	_parent.max_speed = max_speed
 	_parent.move_speed = move_speed
 	_parent.jump_impulse = jump_impulse
 	_parent.rotation_speed_factor = rotation_speed_factor
+	audio_player.transition_to(audio_player.States.CHARGE)
 	skin.transition_to(skin.States.CHARGE)
 
 
@@ -74,5 +77,6 @@ func physics_process(delta: float):
 
 
 func exit():
+	audio_player.stop_audio()
 	_parent.exit()
 

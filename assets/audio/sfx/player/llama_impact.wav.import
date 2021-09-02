@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/llama_impact.wav-13d49d7631aa7bcc2f7717ebe721ffcf.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/player/llama_impact.wav"
+dest_files=[ "res://.import/llama_impact.wav-13d49d7631aa7bcc2f7717ebe721ffcf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

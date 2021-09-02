@@ -16,14 +16,20 @@ var velocity := Vector3.ZERO
 var camera_pivot
 var goal_quaternion
 
+var audio_player
+
 
 func enter(msg: Dictionary = {}):
+	audio_player = _actor.audio_player
+	#
 	_parent.enter()
 	_parent.velocity.y = 0
 	_parent.max_speed = max_speed
 	_parent.move_speed = move_speed
 	_parent.jump_impulse = jump_impulse
 	_parent.rotation_speed_factor = rotation_speed_factor
+	#
+	audio_player.transition_to(audio_player.States.FALL)
 	
 	match msg:
 		{"was_on_floor": var _was_on_floor}:
@@ -88,6 +94,7 @@ func physics_process(delta: float):
 
 
 func exit():
+	audio_player.transition_to(audio_player.States.LAND)
 	_parent.exit()
 
 

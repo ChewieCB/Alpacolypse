@@ -10,6 +10,7 @@ export (float, 0.1, 20.0, 0.1) var rotation_speed_factor := 10.0
 export var knockback_inertia = 200
 
 var knockback_velocity
+var audio_player
 var skin
 
 
@@ -17,8 +18,8 @@ func enter(msg: Dictionary = {}):
 	# Disable player input
 	GlobalFlags.PLAYER_CONTROLS_ACTIVE = false
 	# 
+	audio_player = _actor.audio_player
 	skin = _actor.skin
-	skin.transition_to(skin.States.BONK)
 	#
 	_parent.enter()
 	# Zero the parent movements
@@ -28,6 +29,10 @@ func enter(msg: Dictionary = {}):
 	_parent.move_speed = move_speed
 	_parent.jump_impulse = jump_impulse
 	_parent.rotation_speed_factor = rotation_speed_factor
+	#
+	audio_player.transition_to(audio_player.States.BONK)
+	skin.transition_to(skin.States.BONK)
+	#
 	
 	knockback_velocity = msg["trajectory"]
 
