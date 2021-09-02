@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/condor_pass_v1.mp3-9dbad956a5fa271ac5c36756966e0070.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/condor_pass/condor_pass_v1.mp3"
+dest_files=[ "res://.import/condor_pass_v1.mp3-9dbad956a5fa271ac5c36756966e0070.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
