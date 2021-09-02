@@ -4,7 +4,7 @@ class_name LlamaSkin
 # it has a signal connected to the player state machine, and uses the resulting 
 # state names to translate them into the states for the animation tree
 
-enum States { IDLE, IDLE2, WALK, CHARGE, BONK, JUMP, LAND }
+enum States { IDLE, IDLE2, WALK, CHARGE, BONK, JUMP, LAND, DROWN }
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var animation_tree: AnimationTree = $AnimationTree
@@ -34,6 +34,8 @@ func transition_to(state_id: int):
 			_playback.travel("Jump")
 		States.LAND:
 			_playback.travel("Land")
+		States.DROWN:
+			_playback.travel("Drown")
 		_:
 			_playback.travel("Idle")
 

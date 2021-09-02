@@ -1,10 +1,13 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=30 format=2]
+[gd_resource type="AnimationNodeStateMachine" load_steps=38 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=1]
 animation = "Bonk"
 
 [sub_resource type="AnimationNodeAnimation" id=2]
 animation = "Charge"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "Drown"
 
 [sub_resource type="AnimationNodeAnimation" id=3]
 animation = "Idle"
@@ -77,11 +80,29 @@ priority = 3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+switch_mode = 2
+
 [resource]
 states/Bonk/node = SubResource( 1 )
 states/Bonk/position = Vector2( 1014, 149 )
 states/Charge/node = SubResource( 2 )
 states/Charge/position = Vector2( 703, 156 )
+states/Drown/node = SubResource( 30 )
+states/Drown/position = Vector2( 339, 418.05 )
 states/Idle/node = SubResource( 3 )
 states/Idle/position = Vector2( 543, 261 )
 states/Idle2/node = SubResource( 4 )
@@ -94,6 +115,6 @@ states/Spin/node = SubResource( 7 )
 states/Spin/position = Vector2( 780, 282.05 )
 states/Walk/node = SubResource( 8 )
 states/Walk/position = Vector2( 543, 61 )
-transitions = [ "Idle", "Idle2", SubResource( 9 ), "Idle2", "Idle", SubResource( 10 ), "Idle", "Walk", SubResource( 11 ), "Walk", "Idle", SubResource( 12 ), "Walk", "Charge", SubResource( 13 ), "Charge", "Walk", SubResource( 14 ), "Idle", "Charge", SubResource( 15 ), "Charge", "Idle", SubResource( 16 ), "Charge", "Bonk", SubResource( 17 ), "Bonk", "Idle", SubResource( 18 ), "Idle", "Jump", SubResource( 19 ), "Walk", "Jump", SubResource( 20 ), "Charge", "Jump", SubResource( 21 ), "Jump", "Idle", SubResource( 22 ), "Bonk", "Charge", SubResource( 23 ), "Bonk", "Walk", SubResource( 24 ), "Spin", "Idle", SubResource( 25 ), "Idle", "Spin", SubResource( 26 ), "Idle", "Bonk", SubResource( 27 ), "Bonk", "Idle2", SubResource( 28 ), "Idle2", "Bonk", SubResource( 29 ) ]
+transitions = [ "Idle", "Idle2", SubResource( 9 ), "Idle2", "Idle", SubResource( 10 ), "Idle", "Walk", SubResource( 11 ), "Walk", "Idle", SubResource( 12 ), "Walk", "Charge", SubResource( 13 ), "Charge", "Walk", SubResource( 14 ), "Idle", "Charge", SubResource( 15 ), "Charge", "Idle", SubResource( 16 ), "Charge", "Bonk", SubResource( 17 ), "Bonk", "Idle", SubResource( 18 ), "Idle", "Jump", SubResource( 19 ), "Walk", "Jump", SubResource( 20 ), "Charge", "Jump", SubResource( 21 ), "Jump", "Idle", SubResource( 22 ), "Bonk", "Charge", SubResource( 23 ), "Bonk", "Walk", SubResource( 24 ), "Spin", "Idle", SubResource( 25 ), "Idle", "Spin", SubResource( 26 ), "Idle", "Bonk", SubResource( 27 ), "Bonk", "Idle2", SubResource( 28 ), "Idle2", "Bonk", SubResource( 29 ), "Idle", "Drown", SubResource( 31 ), "Idle2", "Drown", SubResource( 32 ), "Walk", "Drown", SubResource( 33 ), "Charge", "Drown", SubResource( 34 ), "Bonk", "Drown", SubResource( 35 ), "Drown", "Idle", SubResource( 36 ), "Drown", "Idle2", SubResource( 37 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 72, 36.0496 )
+graph_offset = Vector2( 55, -49.9504 )
