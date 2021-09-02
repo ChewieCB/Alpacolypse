@@ -19,6 +19,12 @@ func _ready():
 
 
 func respawn():
+	self.visible = false
+	
+	yield(get_tree().create_timer(1.5), "timeout")
+	
 	self.global_transform.origin = spawn_position
 	movement_state.reset_path()
 	state_machine.transition_to("Movement/Idle")
+	
+	self.visible = true
