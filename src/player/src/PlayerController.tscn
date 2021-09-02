@@ -65,6 +65,42 @@ enabled = true
 cast_to = Vector3( -2, 0, 0 )
 collision_mask = 9
 
+[node name="KnockbackRayCast4" type="RayCast" parent="Collision/KnockbackRayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18557e-08, 0.25, -0.5 )
+enabled = true
+cast_to = Vector3( -1.5, 0, 0 )
+collision_mask = 9
+
+[node name="KnockbackRayCast5" type="RayCast" parent="Collision/KnockbackRayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18557e-08, 1.25, -0.5 )
+enabled = true
+cast_to = Vector3( -1.5, 0, 0 )
+collision_mask = 9
+
+[node name="KnockbackRayCast6" type="RayCast" parent="Collision/KnockbackRayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18557e-08, 2.45, -0.5 )
+enabled = true
+cast_to = Vector3( -1.5, 0, 0 )
+collision_mask = 9
+
+[node name="KnockbackRayCast7" type="RayCast" parent="Collision/KnockbackRayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18557e-08, 0.25, 0.5 )
+enabled = true
+cast_to = Vector3( -1.5, 0, 0 )
+collision_mask = 9
+
+[node name="KnockbackRayCast8" type="RayCast" parent="Collision/KnockbackRayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18557e-08, 1.25, 0.5 )
+enabled = true
+cast_to = Vector3( -1.5, 0, 0 )
+collision_mask = 9
+
+[node name="KnockbackRayCast9" type="RayCast" parent="Collision/KnockbackRayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18557e-08, 2.45, 0.5 )
+enabled = true
+cast_to = Vector3( -1.5, 0, 0 )
+collision_mask = 9
+
 [node name="StateMachine" type="Node" parent="." groups=[
 "state_machine",
 ]]
