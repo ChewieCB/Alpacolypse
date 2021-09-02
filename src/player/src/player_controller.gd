@@ -42,7 +42,7 @@ var debug_trajectory_meshes = []
 
 
 func _ready():
-  movement_state.connect("align_charge_cam", self, "charge_camera")
+	movement_state.connect("align_charge_cam", self, "charge_camera")
 	fadeout.fade_in()
 
 
