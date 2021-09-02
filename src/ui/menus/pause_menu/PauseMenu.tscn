@@ -92,14 +92,35 @@ margin_bottom = 299.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer/OptionsContainer"]
-margin_left = 167.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/OptionsContainer"]
+margin_left = 48.0
 margin_top = 17.0
-margin_right = 304.0
+margin_right = 424.0
 margin_bottom = 80.0
+
+[node name="WindowedButton" type="Button" parent="CenterContainer/VBoxContainer/OptionsContainer/HBoxContainer"]
+margin_right = 167.0
+margin_bottom = 63.0
 custom_fonts/font = SubResource( 2 )
 disabled = true
-text = "Options"
+text = "Windowed"
+flat = true
+
+[node name="Separator" type="Label" parent="CenterContainer/VBoxContainer/OptionsContainer/HBoxContainer"]
+margin_left = 171.0
+margin_top = 3.0
+margin_right = 189.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 2 )
+text = "/"
+
+[node name="FullscreenButton" type="Button" parent="CenterContainer/VBoxContainer/OptionsContainer/HBoxContainer"]
+margin_left = 193.0
+margin_right = 376.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 2 )
+disabled = true
+text = "Fullscreen"
 flat = true
 
 [node name="QuitContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
@@ -119,5 +140,6 @@ text = "Quit"
 flat = true
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ResumeContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsContainer/HBoxContainer/WindowedButton" to="." method="_on_WindowedButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsContainer/HBoxContainer/FullscreenButton" to="." method="_on_FullscreenButton_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

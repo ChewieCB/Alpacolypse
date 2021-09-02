@@ -7,3 +7,11 @@ var CAMERA_INVERT_Y = true
 var SHOW_STATE_LABELS = false
 var SHOW_DEBUG_TRAJECTORIES = false
 
+# Settings
+var FULLSCREEN = true setget set_FULLSCREEN
+
+
+func set_FULLSCREEN(value):
+	FULLSCREEN = value
+	OS.set_window_fullscreen(FULLSCREEN)
+

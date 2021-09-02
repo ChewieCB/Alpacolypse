@@ -1,6 +1,8 @@
 extends KinematicBody
 class_name PlayerController
 
+onready var fadeout = $UI/Fadeout
+
 onready var collision = $Collision
 onready var default_collider = $DefaultCollisionShape
 onready var slope_raycast = $SlopeRayCast
@@ -40,8 +42,13 @@ var debug_trajectory_meshes = []
 
 
 func _ready():
-	movement_state.connect("align_charge_cam", self, "charge_camera")
+  movement_state.connect("align_charge_cam", self, "charge_camera")
+	fadeout.fade_in()
 
+
+func reset():
+	fadeout.fade_out_reset()
+	
 
 func _physics_process(_delta):
 	is_charging = (state_machine.state in charge_states)
