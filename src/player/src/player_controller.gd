@@ -12,6 +12,8 @@ onready var knockback_raycasts = $Collision/KnockbackRayCasts.get_children()
 onready var skin = $Collision/LlamaSkin
 onready var tween = $Tween
 
+onready var audio_player = $AudioPlayer
+
 # Array of all things that should rotate
 onready var rotateable = [
 	collision,

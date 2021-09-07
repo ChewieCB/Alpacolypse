@@ -3,6 +3,7 @@ extends State
 # State for when the player collides with a drowning zone, plays the drowning
 # animation and respawns them.
 
+var audio_player
 var skin
 
 
@@ -17,12 +18,18 @@ func enter(msg: Dictionary = {}):
 	GlobalFlags.PLAYER_CONTROLS_ACTIVE = false
 	GlobalFlags.CAMERA_CONTROLS_ACTIVE = false
 	# 
+	audio_player = _actor.audio_player
 	skin = _actor.skin
-	skin.transition_to(skin.States.IDLE)
+	#
 	_parent.enter()
 	_parent.velocity = Vector3.ZERO
 	_parent.input_direction = Vector3.ZERO
 	_parent.move_direction = Vector3.ZERO
+	#
+	audio_player.transition_to(audio_player.States.DROWN)
+	skin.transition_to(skin.States.IDLE)
+	# FIXME - this animation forces a rotation we don't want
+#	skin.transition_to(skin.States.DROWN)
 	#
 	_actor.tween.interpolate_property(
 		_actor.skin,

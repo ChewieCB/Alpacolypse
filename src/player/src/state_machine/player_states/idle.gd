@@ -3,14 +3,20 @@ extends State
 # Supports triggering jump after the player has started to fall
 
 var skin
+var audio_player
 var velocity := Vector3.ZERO
 
 
 func enter(_msg: Dictionary = {}):
+	audio_player = _actor.audio_player
 	skin = _actor.skin
+	#
 	_parent.velocity = Vector3.ZERO
 	_parent.enter()
+	#
 	skin.transition_to(skin.States.IDLE)
+	yield(audio_player.audio_player, "finished")
+	audio_player.stop_audio()
 
 
 func unhandled_input(event: InputEvent):

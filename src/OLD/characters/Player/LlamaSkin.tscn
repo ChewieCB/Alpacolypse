@@ -206,6 +206,18 @@ tracks/1/keys = {
 "method": "emit_drown_finished"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -180, 0 ), Vector3( 0, -180, 18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, -18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, 18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, -18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, 18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, -18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, 18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, -18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, 18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, -18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, 18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, -18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, 18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, -18 ), Vector3( 0, -180, 0 ), Vector3( 0, -180, 18 ), Vector3( 0, -180, 0 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.402
@@ -747,7 +759,7 @@ tracks/8/keys = PoolRealArray( 0, 1, 0, 0, 0, 0.0275127, -1.90675e-08, 1.00593e-
 resource_local_to_scene = false
 
 [node name="Llama" type="Spatial"]
-transform = Transform( -0.01, 0, -3.25841e-09, 0, 0.01, 0, 3.25841e-09, 0, -0.01, 0, -3.72315, 0 )
+transform = Transform( -0.01, 0, -1.50996e-09, 0, 0.01, 0, 1.50996e-09, 0, -0.01, 0, -3.72315, 0 )
 script = ExtResource( 3 )
 
 [node name="RootNode gltf orientation matrix" type="Spatial" parent="."]
