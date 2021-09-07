@@ -3,7 +3,7 @@ extends Control
 signal timeout
 
 onready var timer = $Timer
-onready var label = $CenterContainer/Label
+onready var label = $Label
 
 
 func _process(_delta):
