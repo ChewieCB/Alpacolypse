@@ -19,7 +19,6 @@ func enter(msg: Dictionary = {}):
 	audio_player = _actor.audio_player
 	#
 	_parent.enter()
-	_parent.velocity.y = 0
 	_parent.max_speed = max_speed
 	_parent.move_speed = move_speed
 	_parent.jump_impulse = jump_impulse
