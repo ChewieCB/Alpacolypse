@@ -1,9 +1,9 @@
 extends Control
 
 
-onready var arena_timer = $MarginContainer/VBoxContainer/HBoxContainer/CenterContainer2/ArenaTimer
-onready var sheep_counter = $MarginContainer/VBoxContainer/HBoxContainer/CenterContainer3/ArenaSheepCounter
-onready var popup_message = $MarginContainer/VBoxContainer/Padding/ArenaPopupMessage
+onready var arena_timer = $MarginContainer/VBoxContainer/TopHBox/ArenaTimer
+onready var sheep_counter = $MarginContainer/VBoxContainer/TopHBox/ArenaSheepCounter
+onready var popup_message = $MarginContainer/VBoxContainer/ArenaPopupMessage
 
 
 func _ready():
