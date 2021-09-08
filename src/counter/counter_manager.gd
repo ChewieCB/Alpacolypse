@@ -57,6 +57,13 @@ func reset_sheep():
 		_sheep.state_machine.transition_to("Movement/Idle")
 
 
+func reset_count():
+	_set_combined_current_count(0)
+	# Update zones
+	for zone in linked_zones:
+		zone._set_current_count(0)
+
+
 func _set_combined_current_count(value):
 	# Pro tip - don't use this to do fucky shit, just keep base functionality
 	# and emit signals.

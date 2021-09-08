@@ -50,6 +50,7 @@ func start_arena_mode():
 	arena_ui.visible = true
 	countdown_timer.timer.set_paused(false)
 	countdown_timer.start_timer(timer_length)
+	counter_manager.reset_count()
 	
 	yield(show_popup("Begin the sacrifice!", 3), "completed")
 
@@ -84,6 +85,7 @@ func end_arena_mode_fail():
 
 func arena_mode_cleanup():
 	countdown_timer.stop_timer()
+	counter_manager.reset_count()
 	# TODO - add animation to flash final time before disappearing
 	#
 	# Hide Arena UI
