@@ -35,8 +35,9 @@ func enter(msg: Dictionary = {}):
 		coyote_time.wait_time = 0.2
 		if not coyote_time.is_connected("timeout", self, "_on_coyote_time_timeout"):
 			coyote_time.connect("timeout", self, "_on_coyote_time_timeout")
-		add_child(coyote_time)
-		coyote_time.start()
+		if not coyote_time in get_children():
+			add_child(coyote_time)
+			coyote_time.start()
 
 
 func unhandled_input(_event: InputEvent):
