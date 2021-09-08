@@ -58,8 +58,8 @@ func physics_process(delta: float):
 				body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
 				
 				# Remove the trajectory when the sheep lands
-				if not body.is_connected("landed", self, "clear_debug_trajectory"):
-					body.connect("landed", self, "clear_debug_trajectory")
+				if not body.is_connected("landed", _actor, "clear_debug_trajectory"):
+					body.connect("landed", _actor, "clear_debug_trajectory")
 			
 			# Player Knockback
 			_state_machine.transition_to(
