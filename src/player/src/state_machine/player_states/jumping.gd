@@ -1,7 +1,7 @@
 extends State
 # State for when the player is jumping
 
-export var jump_velocity = 30
+export var jump_velocity = 35
 
 var audio_player
 var skin

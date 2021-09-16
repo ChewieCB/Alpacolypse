@@ -15,7 +15,7 @@ var velocity := Vector3.ZERO
 var camera_pivot
 var goal_quaternion
 
-export var jump_velocity = 30
+export var jump_velocity = 35
 
 
 func enter(_msg: Dictionary = {}):
