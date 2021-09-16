@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/counter_zone_1.obj-fb4e5d481f169e2565368caabccfbbff.mesh"
+
+[deps]
+
+files=[ "res://.import/counter_zone_1.obj-fb4e5d481f169e2565368caabccfbbff.mesh" ]
+
+source_file="res://src/levels/tl_mvp_04/redesign/counter_zone_1.obj"
+dest_files=[ "res://.import/counter_zone_1.obj-fb4e5d481f169e2565368caabccfbbff.mesh", "res://.import/counter_zone_1.obj-fb4e5d481f169e2565368caabccfbbff.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
