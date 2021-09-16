@@ -66,6 +66,16 @@ func physics_process(delta: float):
 	for _raycast in _actor.knockback_raycasts:
 		if _raycast.is_colliding():
 			var body = _raycast.get_collider()
+			
+			# Sheep Knockback
+			if body is Sheep:
+				var flung_velocity = _actor.calcualate_charge_trajectory(body, 40.0, -80.0, true)
+				body.state_machine.transition_to("Movement/Flung", {"flung_velocity": flung_velocity})
+				
+				# Remove the trajectory when the sheep lands
+				if not body.is_connected("landed", _actor, "clear_debug_trajectory"):
+					body.connect("landed", _actor, "clear_debug_trajectory")
+			
 			_state_machine.transition_to(
 				"Movement/Knockback", 
 				{
