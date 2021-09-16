@@ -1,7 +1,6 @@
 extends Area
 
-export (NodePath) var navigation_node_path
-onready var navigation_node = get_node(navigation_node_path)
+onready var navigation_node = get_tree().current_scene.find_node("Navigation")
 
 var respawn_navmesh
 
@@ -57,5 +56,6 @@ func reset_body(body):
 
 
 func _on_ResetZone_body_entered(body):
-	reset_body(body)
+	if body is PlayerController:
+		reset_body(body)
 

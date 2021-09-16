@@ -30,6 +30,7 @@ func _ready():
 	counter_manager.connect("count_changed", self, "update_counter")
 	counter_manager.connect("count_full", self, "end_arena_mode_success")
 	update_counter(counter_manager.total_count)
+	update_counter(counter_manager.total_count)
 	# Arena Zone Trigger
 	arena_zone.connect("player_entered", self, "start_arena_mode")
 	arena_zone.connect("player_exited", self, "exit_arena_mode")
@@ -93,7 +94,10 @@ func arena_mode_cleanup():
 
 
 func show_popup(message, time):
-	yield(get_tree(), "idle_frame")
+	# Add this catch so this method doesn't fall over if the player tries
+	# to quit whilst a popup is open.
+	if get_tree():
+		yield(get_tree(), "idle_frame")
 #	arena_ui.visible = true
 	popup_message.label.text = str(message)
 	popup_message.visible = true
