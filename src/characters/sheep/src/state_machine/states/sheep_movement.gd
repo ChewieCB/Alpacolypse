@@ -48,8 +48,8 @@ func physics_process(delta: float):
 	
 	# Rotation
 	if move_direction:
-		var target_direction = _actor.transform.looking_at(_actor.global_transform.origin + move_direction, Vector3.UP)
-		_actor.transform = _actor.transform.interpolate_with(target_direction, rotation_speed_factor * delta)
+		var target_direction = _actor.global_transform.looking_at(_actor.global_transform.origin + move_direction, Vector3.UP)
+		_actor.global_transform = _actor.global_transform.interpolate_with(target_direction, rotation_speed_factor * delta)
 
 	# Movement
 	velocity = calculate_velocity(velocity, move_direction, delta)
