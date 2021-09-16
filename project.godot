@@ -64,11 +64,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/OLD/characters/Sheep/sheep_skin.gd"
 }, {
-"base": "State",
-"class": "SheepState",
-"language": "GDScript",
-"path": "res://src/OLD/characters/Sheep/sheep_state.gd"
-}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -91,7 +86,6 @@ _global_script_class_icons={
 "PlayerState": "",
 "Sheep": "",
 "SheepSkin": "",
-"SheepState": "",
 "State": "",
 "StateMachine": ""
 }
