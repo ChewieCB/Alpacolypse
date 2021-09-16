@@ -132,7 +132,7 @@ visible = false
 shape = SubResource( 2 )
 
 [node name="PlayerRig" type="Spatial" parent="."]
-transform = Transform( -0.941265, 0, 0.33767, 0, 1, 0, -0.33767, 0, -0.941265, 88.5042, -1.93178, -139.687 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 88.5042, -1.93178, -139.687 )
 
 [node name="Player" parent="PlayerRig" instance=ExtResource( 2 )]
 
@@ -140,7 +140,6 @@ transform = Transform( -0.941265, 0, 0.33767, 0, 1, 0, -0.33767, 0, -0.941265, 8
 camera_target = NodePath("../Player")
 
 [node name="Navigation" type="Navigation" parent="."]
-visible = false
 
 [node name="Island_02_A_NAV" type="NavigationMeshInstance" parent="Navigation"]
 navmesh = SubResource( 3 )

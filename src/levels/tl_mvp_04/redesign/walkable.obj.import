@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/walkable.obj-ba0419129ef84865bff3834e02640fcc.mesh"
+
+[deps]
+
+files=[ "res://.import/walkable.obj-ba0419129ef84865bff3834e02640fcc.mesh" ]
+
+source_file="res://src/levels/tl_mvp_04/redesign/walkable.obj"
+dest_files=[ "res://.import/walkable.obj-ba0419129ef84865bff3834e02640fcc.mesh", "res://.import/walkable.obj-ba0419129ef84865bff3834e02640fcc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/counter_nav_03.obj-f2dbeecc8d49d917819649ba02ee928a.mesh"
+
+[deps]
+
+files=[ "res://.import/counter_nav_03.obj-f2dbeecc8d49d917819649ba02ee928a.mesh" ]
+
+source_file="res://src/levels/tl_mvp_04/redesign/counter_nav_03.obj"
+dest_files=[ "res://.import/counter_nav_03.obj-f2dbeecc8d49d917819649ba02ee928a.mesh", "res://.import/counter_nav_03.obj-f2dbeecc8d49d917819649ba02ee928a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
