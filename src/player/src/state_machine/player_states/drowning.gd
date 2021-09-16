@@ -44,7 +44,8 @@ func enter(msg: Dictionary = {}):
 
 
 func physics_process(delta: float):
-	_parent.physics_process(delta)
+	pass
+#	_parent.physics_process(delta)
 
 
 func exit():
