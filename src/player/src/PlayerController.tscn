@@ -54,6 +54,7 @@ enabled = true
 cast_to = Vector3( -2, 0, 0 )
 
 [node name="KnockbackRayCasts" type="Spatial" parent="Collision"]
+visible = false
 
 [node name="KnockbackRayCast1" type="RayCast" parent="Collision/KnockbackRayCasts"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )

@@ -2,9 +2,11 @@ extends State
 # Basic state when the sheep is moving around until jumping or lack of input
 
 onready var skin
+var audio_player
 
 
 func enter(msg: Dictionary = {}):
+	audio_player = _actor.audio_player
 	skin = _actor.skin
 	# Get random point and set a path to it
 	var target_point = _parent.get_random_target_in_range()
@@ -14,6 +16,7 @@ func enter(msg: Dictionary = {}):
 		_parent.move_to_point(target_point)
 		_parent.enter(msg)
 		skin.transition_to(skin.States.WALK)
+		audio_player.transition_to(audio_player.States.WALK)
 
 
 func physics_process(delta: float):

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sheep_impact.wav-46159b3b6be4c17b8dbd88b8af976a65.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/sheep/sheep_impact.wav"
+dest_files=[ "res://.import/sheep_impact.wav-46159b3b6be4c17b8dbd88b8af976a65.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop=false
+compress/mode=0

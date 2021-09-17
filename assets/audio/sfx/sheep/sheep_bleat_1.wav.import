@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sheep_bleat_1.wav-ba241fd7706cae38cd0e7ea49dcf1fdd.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/sheep/sheep_bleat_1.wav"
+dest_files=[ "res://.import/sheep_bleat_1.wav-ba241fd7706cae38cd0e7ea49dcf1fdd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop=false
+compress/mode=0

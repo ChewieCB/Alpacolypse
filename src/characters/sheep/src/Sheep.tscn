@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/player/src/state_machine/state_machine.gd" type="Script" id=1]
 [ext_resource path="res://src/characters/sheep/src/state_machine/states/sheep_movement.gd" type="Script" id=2]
@@ -9,6 +9,15 @@
 [ext_resource path="res://src/OLD/characters/Sheep/SheepSkin.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/characters/sheep/src/state_machine/states/sheep_flung.gd" type="Script" id=8]
 [ext_resource path="res://src/characters/sheep/src/state_machine/states/sheep_contained.gd" type="Script" id=9]
+[ext_resource path="res://src/characters/sheep/src/audio_manager.gd" type="Script" id=10]
+[ext_resource path="res://assets/audio/sfx/sheep/sheep_flung.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/audio/sfx/sheep/sheep_splash_bleat.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/audio/sfx/sheep/sheep_bleat_1.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/audio/sfx/sheep/sheep_run.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/audio/sfx/sheep/sheep_impact.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/audio/sfx/sheep/sheep_respawn.wav" type="AudioStream" id=16]
+[ext_resource path="res://assets/audio/sfx/sheep/sheep_walk.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/audio/sfx/sheep/sheep-bleat_2.wav" type="AudioStream" id=18]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -57,3 +66,16 @@ visible = false
 
 [node name="SheepSkin" parent="." instance=ExtResource( 7 )]
 transform = Transform( -0.01, 0, -1.50996e-09, 0, 0.01, 0, 1.50996e-09, 0, -0.01, 0, 0, 0 )
+
+[node name="AudioManager" type="Spatial" parent="."]
+script = ExtResource( 10 )
+walk_sfx = ExtResource( 17 )
+run_sfx = ExtResource( 14 )
+land_sfx = ExtResource( 15 )
+bleat_sfx_array = [ ExtResource( 13 ), ExtResource( 18 ), ExtResource( 11 ) ]
+drown_sfx = ExtResource( 12 )
+respawn_sfx = ExtResource( 16 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AudioManager"]
+unit_db = 1.0
+unit_size = 3.0
