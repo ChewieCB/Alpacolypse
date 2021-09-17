@@ -7,6 +7,8 @@ onready var movement_state = $StateMachine/Movement
 onready var skin = $SheepSkin
 onready var collider = $CollisionShape
 
+onready var audio_player = $AudioManager
+
 export (int, 2, 100) var wander_range = 20
 
 var spawn_position := Vector3.ZERO
@@ -19,6 +21,7 @@ func _ready():
 
 
 func respawn():
+	audio_player.transition_to(audio_player.States.DROWN)
 	self.visible = false
 	
 	yield(get_tree().create_timer(1.5), "timeout")
@@ -27,4 +30,7 @@ func respawn():
 	movement_state.reset_path()
 	state_machine.transition_to("Movement/Idle")
 	
+	if audio_player.audio_player.playing:
+		yield(audio_player.audio_player, "finished")
 	self.visible = true
+	audio_player.transition_to(audio_player.States.RESPAWN)

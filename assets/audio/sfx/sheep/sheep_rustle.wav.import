@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sheep_rustle.wav-ecddbed0aa2c3aa0dc253a59409cff27.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/sheep/sheep_rustle.wav"
+dest_files=[ "res://.import/sheep_rustle.wav-ecddbed0aa2c3aa0dc253a59409cff27.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop=false
+compress/mode=0

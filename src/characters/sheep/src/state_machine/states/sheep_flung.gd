@@ -3,12 +3,14 @@ extends State
 # Supports triggering jump after the Sheep has started to fall
 
 var skin
+var audio_player
 var flung_velocity
 
 export var gravity = -80.0
 
 
 func enter(msg: Dictionary = {}):
+	audio_player = _actor.audio_player
 	skin = _actor.skin
 	skin.transition_to(skin.States.ROLL)
 	_parent.path = null
@@ -18,6 +20,7 @@ func enter(msg: Dictionary = {}):
 	#
 	if msg["flung_velocity"]:
 		flung_velocity = msg["flung_velocity"]
+	audio_player.transition_to(audio_player.States.FLUNG)
 	
 
 

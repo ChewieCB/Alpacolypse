@@ -91,6 +91,9 @@ shape = SubResource( 5 )
 [node name="CollisionShape" type="CollisionShape" parent="DoorGemRed/StaticBody" index="0"]
 shape = SubResource( 6 )
 
+[node name="DoorGemGreen" parent="." index="7"]
+visible = false
+
 [node name="StaticBody" type="StaticBody" parent="DoorGemGreen" index="0"]
 
 [node name="CollisionShape" type="CollisionShape" parent="DoorGemGreen/StaticBody" index="0"]

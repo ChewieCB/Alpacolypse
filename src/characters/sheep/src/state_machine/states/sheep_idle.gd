@@ -4,9 +4,11 @@ extends State
 
 var idle_timer = null
 var skin
+var audio_player
 
 
 func enter(_msg: Dictionary = {}):
+	audio_player = _actor.audio_player
 	skin = _actor.skin
 	_parent.velocity = Vector3.ZERO
 	_parent.path = null
@@ -19,6 +21,9 @@ func enter(_msg: Dictionary = {}):
 	idle_timer.connect("timeout", self, "_on_idle_timer_timeout")
 	add_child(idle_timer)
 	idle_timer.start()
+	if audio_player.audio_player.playing:
+		yield(audio_player.audio_player, "finished")
+		audio_player.stop_audio()
 
 
 func physics_process(delta: float):
