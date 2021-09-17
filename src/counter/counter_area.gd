@@ -2,6 +2,7 @@ extends Area
 class_name CounterArea
 
 signal area_count_changed(value)
+signal sheep_sacrificed(body)
 
 var current_count := 0 setget _set_current_count, _get_current_count
 
@@ -43,6 +44,7 @@ func _on_CounterArea_body_entered(body):
 		_set_current_count(current_count + 1)
 		yield(body.state_machine, "transitioned")
 		if is_sacrificial:
+			emit_signal("sheep_sacrificed", body)
 			body.queue_free()
 
 
