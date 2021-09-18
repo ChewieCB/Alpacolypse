@@ -47,6 +47,8 @@ func update_counter(_value):
 
 
 func start_arena_mode():
+	if not popup_visible_timer.is_stopped():
+		yield(popup_visible_timer, "timeout")
 	# Show Arena UI
 	arena_ui.visible = true
 	countdown_timer.timer.set_paused(false)

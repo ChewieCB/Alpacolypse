@@ -33,6 +33,7 @@ func _ready():
 	for _zone in linked_zones:
 		_zone.connect("area_count_changed", self, "_set_combined_current_count")
 		_zone.is_sacrificial = is_sacrificial
+		_zone.connect("sheep_sacrificed", self, "_remove_sheep_from_array")
 	# Cache the origin points of each sheep so we can re-spawn them on reset
 	for _sheep in sheep_array:
 		sheep_origin_points.append(_sheep.global_transform.origin)
@@ -43,18 +44,22 @@ func reset_sheep():
 	This is method will need to be extended for the specific use
 	case.
 	"""
-	# Respawn the sheep in their original positions
-	for i in range(total_count):
-		var _sheep
-		if is_sacrificial:
+	# If we are sacrificing the sheep, some sheep will have been removed from
+	# the array, so we re-instance them here
+	for i in range(sheep_array.size()):
+		var _sheep = sheep_array[i]
+		if _sheep == null:
 			_sheep = sheep_scene.instance()
 			sheep_node.add_child(_sheep)
-		else:
-			_sheep = sheep_array[i]
+			sheep_array[i] = _sheep
 		
 		_sheep.global_transform.origin = sheep_origin_points[i]
 		_sheep.movement_state.reset_path()
 		_sheep.state_machine.transition_to("Movement/Idle")
+	
+	# If the array size is now different from the total count (derived from
+	# the original count) we have fucked up
+	assert(sheep_array.size() == total_count)
 
 
 func reset_count():
@@ -62,6 +67,13 @@ func reset_count():
 	# Update zones
 	for zone in linked_zones:
 		zone._set_current_count(0)
+
+
+func _remove_sheep_from_array(body):
+	var sheep_index = sheep_array.find(body)
+	if sheep_index != -1:
+		# Set it to null so we can keep the indices in order for respawning
+		sheep_array[sheep_index] = null
 
 
 func _set_combined_current_count(value):
