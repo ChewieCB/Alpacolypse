@@ -18,7 +18,7 @@ func _ready():
 	
 	# Set all buttons to have an initial focus mode of FOCUS_ALL
 	play_button.focus_mode = 2
-	fullscreen_button.focus_mode = 2
+	quit_button.focus_mode = 2
 	
 	# Windowed/fullscreen set
 	if GlobalFlags.FULLSCREEN:
@@ -35,6 +35,9 @@ func _ready():
 		fullscreen_button.focus_mode = 2
 	
 	Input.connect("joy_connection_changed", self, "controller_ui_focus")
+	# If a joypad is connected, grab focus
+	if Input.get_connected_joypads():
+		play_button.grab_focus()
 
 
 func _input(_event):
