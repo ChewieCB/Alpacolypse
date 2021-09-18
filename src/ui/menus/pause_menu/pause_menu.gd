@@ -102,10 +102,22 @@ func _on_WindowedButton_pressed():
 	audio_player.cursor()
 	GlobalFlags.set_FULLSCREEN(false)
 
+	# For windowed/fullscreen we disable focus on whichever is active
+	windowed_button.focus_mode = 0
+	fullscreen_button.focus_mode = 2
+	# Grab focus of the active button so we don't lose focus
+	fullscreen_button.grab_focus()
+
 
 func _on_FullscreenButton_pressed():
 	windowed_button.disabled = false
 	fullscreen_button.disabled = true
 	audio_player.cursor()
 	GlobalFlags.set_FULLSCREEN(true)
+
+	# For windowed/fullscreen we disable focus on whichever is active
+	windowed_button.focus_mode = 2
+	fullscreen_button.focus_mode = 0
+	# Grab focus of the active button so we don't lose focus
+	windowed_button.grab_focus()
 
