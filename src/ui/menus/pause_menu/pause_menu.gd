@@ -1,5 +1,7 @@
 extends Control
 
+onready var audio_player = $MenuAudioPlayer
+
 onready var resume_button = $CenterContainer/VBoxContainer/ResumeContainer/ResumeButton
 onready var windowed_button = $CenterContainer/VBoxContainer/OptionsContainer/HBoxContainer/WindowedButton
 onready var fullscreen_button = $CenterContainer/VBoxContainer/OptionsContainer/HBoxContainer/FullscreenButton
@@ -26,13 +28,18 @@ func _ready():
 		windowed_button.focus_mode = 0
 		fullscreen_button.focus_mode = 2
 	
+	# Connect the focus_enter signal for each button to the sfx player
+	for _button in buttons:
+		_button.connect("focus_entered", audio_player, "cursor")
+	
 	Input.connect("joy_connection_changed", self, "controller_ui_focus")
 
 
 func _input(_event):
 	if Input.is_action_just_pressed("pause"):
 		toggle_pause_menu()
-	
+
+func _input_event(_event):
 	if Input.is_action_just_released("ui_down") or \
 	Input.is_action_just_released("ui_up"):
 		# We only want this to grab focus on the FIRST pressing when 
@@ -49,6 +56,7 @@ func toggle_pause_menu():
 	self.visible = !self.visible
 	
 	if self.visible and get_tree().paused:
+		audio_player.pause()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		# If a joypad is connected, grab focus
 		if Input.get_connected_joypads():
@@ -75,21 +83,25 @@ func controller_ui_focus(device, connected):
 
 
 func _on_ResumeButton_pressed():
+	audio_player.confirm()
 	toggle_pause_menu()
 
 
 func _on_QuitButton_pressed():
+	audio_player.back()
 	get_tree().change_scene("res://src/ui/menus/main_menu/MainMenu.tscn")
 
 
 func _on_WindowedButton_pressed():
 	windowed_button.disabled = true
 	fullscreen_button.disabled = false
+	audio_player.cursor()
 	GlobalFlags.set_FULLSCREEN(false)
 
 
 func _on_FullscreenButton_pressed():
 	windowed_button.disabled = false
 	fullscreen_button.disabled = true
+	audio_player.cursor()
 	GlobalFlags.set_FULLSCREEN(true)
 
