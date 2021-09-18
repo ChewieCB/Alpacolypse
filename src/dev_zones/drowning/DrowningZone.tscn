@@ -23,3 +23,4 @@ material/0 = SubResource( 2 )
 shape = SubResource( 3 )
 
 [connection signal="body_entered" from="." to="." method="_on_DrowningZone_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_DrowningZone_body_exited"]
