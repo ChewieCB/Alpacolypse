@@ -35,11 +35,11 @@ func _ready():
 		windowed_button.focus_mode = 0
 		fullscreen_button.focus_mode = 2
 	
+	Input.connect("joy_connection_changed", self, "controller_ui_focus")
+	
 	# Connect the focus_enter signal for each button to the sfx player
 	for _button in buttons:
 		_button.connect("focus_entered", audio_player, "cursor")
-	
-	Input.connect("joy_connection_changed", self, "controller_ui_focus")
 
 
 func _input(_event):

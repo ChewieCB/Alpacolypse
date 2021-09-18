@@ -28,39 +28,43 @@ func _ready():
 		windowed_button.focus_mode = 0
 		fullscreen_button.focus_mode = 2
 	
+	Input.connect("joy_connection_changed", self, "controller_ui_focus")
+	
 	# Connect the focus_enter signal for each button to the sfx player
 	for _button in buttons:
 		_button.connect("focus_entered", audio_player, "cursor")
-	
-	Input.connect("joy_connection_changed", self, "controller_ui_focus")
 
 
-func _input(_event):
+func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		toggle_pause_menu()
 
-func _input_event(_event):
-	if Input.is_action_just_released("ui_down") or \
-	Input.is_action_just_released("ui_up"):
-		# We only want this to grab focus on the FIRST pressing when 
-		# no buttons have focus, so if any buttons currently have focus, exit.
-		for _button in buttons:
-			if _button.has_focus():
-				return
-		
-		resume_button.grab_focus()
+
+func _input(_event):
+	if get_tree().paused:
+		if Input.is_action_just_released("ui_down") or \
+		Input.is_action_just_released("ui_up"):
+			# We only want this to grab focus on the FIRST pressing when 
+			# no buttons have focus, so if any buttons currently have focus, exit.
+			for _button in buttons:
+				if _button.has_focus():
+					return
+			
+			resume_button.grab_focus()
 
 
 func toggle_pause_menu():
+	audio_player.pause_sfx()
 	get_tree().paused = !get_tree().paused
 	self.visible = !self.visible
 	
 	if self.visible and get_tree().paused:
-		audio_player.pause()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		# If a joypad is connected, grab focus
 		if Input.get_connected_joypads():
+			audio_player.suppress_click = true
 			resume_button.grab_focus()
+			audio_player.suppress_click = false
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
