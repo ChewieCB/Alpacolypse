@@ -65,6 +65,5 @@ func get_bleat_sfx():
 	randomize()
 	audio_player.pitch_scale = rand_range(0.8, 1.2)
 	var random_sample = bleat_sfx_array[randi() % bleat_sfx_array.size()]
-	print(random_sample)
 	return random_sample
 

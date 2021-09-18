@@ -11,6 +11,7 @@ export (int) var max_count
 var is_sacrificial := false
 
 onready var ui = $UI/SheepCounterUI
+onready var audio_player = $AudioPlayer
 
 
 func _ready():
@@ -41,6 +42,7 @@ func get_available_sheep():
 
 func _on_CounterArea_body_entered(body):
 	if body is Sheep:
+		audio_player.enter_area()
 		_set_current_count(current_count + 1)
 		yield(body.state_machine, "transitioned")
 		if is_sacrificial:
@@ -52,6 +54,7 @@ func _on_CounterArea_body_exited(body):
 	if body is Sheep:
 		if is_sacrificial:
 			return
+		audio_player.exit_area()
 		_set_current_count(current_count - 1)
 
 #
