@@ -12,7 +12,6 @@ onready var tween = $Tween
 
 var is_using_controller = false
 
-var look_sensitivity = 15.0
 var min_look_angle = -40.0
 var max_look_angle = 75.0
 
@@ -88,7 +87,7 @@ func _process(delta):
 			rotation.y = current_target.collision.rotation.y - PI/2
 		else:
 			# Rotate the camera pivot accordingly
-			camera_rotation = Vector3(0, yaw_dir, pitch_dir) * look_sensitivity * delta
+			camera_rotation = Vector3(0, yaw_dir, pitch_dir) * GlobalFlags.LOOK_SENSITIVITY * delta
 			rotation_degrees.y += camera_rotation.y
 
 		rotation_degrees.z += camera_rotation.z

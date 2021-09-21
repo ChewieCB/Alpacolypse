@@ -4,12 +4,29 @@ onready var camera = $Camera
 onready var llama = $Llama
 onready var fadeout = $UI/Fadeout
 onready var audio_player = $MenuAudioPlayer
+onready var animation_player = $AnimationPlayer
 
-onready var play_button = $UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer/PlayButton
-onready var windowed_button = $UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/WindowedButton
-onready var fullscreen_button = $UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer2/HBoxContainer/FullscreenButton
-onready var quit_button = $UI/Control/VBoxContainer2/HBoxContainer/VBoxContainer/CenterContainer3/QuitButton
-onready var buttons = [play_button, windowed_button, fullscreen_button, quit_button]
+# Main
+onready var play_button = $UI/Control/VBoxContainer2/MainScreen/VBoxContainer/PlayContainer/PlayButton
+onready var options_button = $UI/Control/VBoxContainer2/MainScreen/VBoxContainer/OptionsContainer/OptionsButton
+onready var quit_button = $UI/Control/VBoxContainer2/MainScreen/VBoxContainer/QuitContainer/QuitButton
+# Options
+onready var windowed_button = $UI/Control/VBoxContainer2/OptionsScreen/VBoxContainer/DisplayContainer/HBoxContainer/WindowedButton
+onready var fullscreen_button = $UI/Control/VBoxContainer2/OptionsScreen/VBoxContainer/DisplayContainer/HBoxContainer/FullscreenButton
+onready var look_sensitivity_slider = $UI/Control/VBoxContainer2/OptionsScreen/VBoxContainer/LookSensitivityContainer/HBoxContainer/HBoxContainer/CenterContainer/LookSensitivitySlider
+onready var look_sensitivity_label = $UI/Control/VBoxContainer2/OptionsScreen/VBoxContainer/LookSensitivityContainer/HBoxContainer/HBoxContainer/CenterContainer2/SliderLabel
+onready var music_volume_slider = $UI/Control/VBoxContainer2/OptionsScreen/VBoxContainer/MusicVolumeContainer/HBoxContainer/HBoxContainer/CenterContainer/MusicVolumeSlider
+onready var music_volume_label = $UI/Control/VBoxContainer2/OptionsScreen/VBoxContainer/MusicVolumeContainer/HBoxContainer/HBoxContainer/CenterContainer2/SliderLabel
+onready var back_button = $UI/Control/VBoxContainer2/OptionsScreen/VBoxContainer/BackContainer/BackButton
+
+onready var buttons = [
+	play_button, options_button, quit_button,
+	windowed_button, fullscreen_button,
+	look_sensitivity_slider, music_volume_slider,
+	back_button
+]
+
+var active_slider = null
 
 
 func _ready():
@@ -17,9 +34,17 @@ func _ready():
 	fadeout.fade_in()
 	llama.transition_to(llama.States.IDLE2)
 	
+	look_sensitivity_slider.value = GlobalFlags.LOOK_SENSITIVITY
+	look_sensitivity_label.text = str(look_sensitivity_slider.value)
+	music_volume_slider.value = GlobalFlags.MUSIC_VOLUME
+	music_volume_label.text = str(music_volume_slider.value)
+	
 	# Set all buttons to have an initial focus mode of FOCUS_ALL
 	play_button.focus_mode = 2
+	options_button.focus_mode = 2
 	quit_button.focus_mode = 2
+	look_sensitivity_slider.focus_mode = 2
+	music_volume_slider.focus_mode = 2
 	
 	# Windowed/fullscreen set
 	if GlobalFlags.FULLSCREEN:
@@ -51,7 +76,16 @@ func _input(_event):
 			if _button.has_focus():
 				return
 		
-		play_button.grab_focus()
+		if play_button.visible:
+			play_button.grab_focus()
+		elif back_button.visible:
+			back_button.grab_focus()
+	else:
+		if active_slider:
+			if Input.is_action_pressed("ui_left"):
+				active_slider.value -= 1
+			elif Input.is_action_pressed("ui_right"):
+				active_slider.value += 1
 
 
 func controller_ui_focus(device, connected):
@@ -71,6 +105,18 @@ func controller_ui_focus(device, connected):
 		button_with_focus.release_focus()
 
 
+func get_options_menu_focus():
+	# Windowed/fullscreen set
+	if GlobalFlags.FULLSCREEN:
+		windowed_button.grab_focus()
+	else:
+		fullscreen_button.grab_focus()
+
+
+func lose_options_menu_focus():
+	options_button.grab_focus()
+
+
 func transition_to_game():
 	yield(fadeout.fade_out(), "completed")
 	get_tree().change_scene("res://src/levels/tl_mvp_04/TL_04.tscn")
@@ -82,6 +128,11 @@ func _on_PlayButton_pressed():
 	transition_to_game()
 
 
+func _on_OptionsButton_pressed():
+	animation_player.play("main_to_options_transition")
+	yield(animation_player, "animation_finished")
+
+
 func _on_QuitButton_pressed():
 	llama.transition_to(llama.States.BONK)
 #	yield(llama.animation_player, "animation_changed")
@@ -90,11 +141,13 @@ func _on_QuitButton_pressed():
 	get_tree().quit()
 
 
+# OPTIONS MENU
+
 func _on_WindowedButton_pressed():
 	windowed_button.disabled = true
 	fullscreen_button.disabled = false
 	GlobalFlags.set_FULLSCREEN(false)
-	
+
 	# For windowed/fullscreen we disable focus on whichever is active
 	windowed_button.focus_mode = 0
 	fullscreen_button.focus_mode = 2
@@ -106,9 +159,42 @@ func _on_FullscreenButton_pressed():
 	windowed_button.disabled = false
 	fullscreen_button.disabled = true
 	GlobalFlags.set_FULLSCREEN(true)
-	
+
 	# For windowed/fullscreen we disable focus on whichever is active
 	windowed_button.focus_mode = 2
 	fullscreen_button.focus_mode = 0
 	# Grab focus of the active button so we don't lose focus
 	windowed_button.grab_focus()
+
+
+func _on_BackButton_pressed():
+	animation_player.play("options_to_main_transition")
+	yield(animation_player, "animation_finished")
+
+
+func _on_LookSensitivitySlider_value_changed(value):
+	# Update label value
+	look_sensitivity_label.text = str(look_sensitivity_slider.value)
+	GlobalFlags.set_LOOK_SENSITIVITY(value)
+
+
+func _on_LookSensitivitySlider_focus_entered():
+	active_slider = look_sensitivity_slider
+
+
+func _on_LookSensitivitySlider_focus_exited():
+	active_slider = null
+
+
+func _on_MusicVolumeSlider_value_changed(value):
+	music_volume_label.text = str(music_volume_slider.value)
+	GlobalFlags.set_MUSIC_VOLUME(value)
+
+
+func _on_MusicVolumeSlider_focus_entered():
+	active_slider = music_volume_slider
+
+
+func _on_MusicVolumeSlider_focus_exited():
+	active_slider = null
+
