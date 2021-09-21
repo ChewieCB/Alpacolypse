@@ -127,7 +127,7 @@ __meta__ = {
 transform = Transform( 1000, 0, 0, 0, 45.5, 0, 0, 0, 1000, 159, -82.579, -217 )
 
 [node name="KnockbackZone" parent="LevelGeometry" instance=ExtResource( 23 )]
-transform = Transform( 28.5, 0, 0, 0, 3.8, 0, 0, 0, 28.5, 652.887, -15, -382.658 )
+transform = Transform( 28.5, 0, 0, 0, 3.8, 0, 0, 0, 28.5, 451.411, -15, -123.618 )
 visible = true
 knockback_force = 35.0
 
@@ -225,26 +225,14 @@ enter_area_sfx = ExtResource( 6 )
 exit_area_sfx = ExtResource( 2 )
 
 [node name="ArenaTrigger" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 311.544, -15, -72.5146 )
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 115.825, -15, 176.164 )
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 12 )
 manager_path = NodePath("../ArenaManager")
 
 [node name="CollisionShape" type="CollisionShape" parent="ArenaTrigger"]
-transform = Transform( 65.2429, 0, -77.7535, 0, 31.9, 0, 77.7535, 0, 65.2429, 333.454, 18.6667, -285.852 )
-shape = SubResource( 8 )
-
-[node name="CollisionShape2" type="CollisionShape" parent="ArenaTrigger"]
-transform = Transform( 45.7818, 0, -16.6632, 0, 31.9, 0, 16.6632, 0, 45.7818, 216.661, 18.6667, -287.961 )
-shape = SubResource( 8 )
-
-[node name="CollisionShape4" type="CollisionShape" parent="ArenaTrigger"]
-transform = Transform( -2.12962e-06, 0, -48.72, 0, 31.9, 0, 48.72, 0, -2.12962e-06, 309.29, 18.6667, -156.41 )
-shape = SubResource( 8 )
-
-[node name="CollisionShape3" type="CollisionShape" parent="ArenaTrigger"]
-transform = Transform( 65.2429, 0, -77.7535, 0, 31.9, 0, 77.7535, 0, 65.2429, 333.454, 18.6667, -285.852 )
+transform = Transform( 42.4296, 0, -107.054, 0, 31.9, 0, 92.2062, 0, 49.2619, 311.77, 18.6667, -285.321 )
 shape = SubResource( 8 )
 
 [node name="ArenaManager" parent="." instance=ExtResource( 15 )]
